@@ -1,5 +1,5 @@
 from ast_lib import *
-from sklearn import preprocessing, model_selection, svm, metrics
+from sklearn import preprocessing, model_selection, svm, metrics, ensemble, linear_model
 import pandas as pd
 import random
 import os
@@ -9,7 +9,7 @@ def do_vars(filenames, files):
   dictionary = set()
 
   for fn, fl in zip(filenames, files):
-    words = get_kmers("dataset/" + fn)
+    words = get_full_names("dataset/" + fn)
     fl.words = words 
     dictionary.update(words)
 
@@ -21,8 +21,8 @@ def do_vars(filenames, files):
     l = len(f.words)
     f.vars_vec = [x/float(l) for x in f.tf.values()]
 
-if __name__ == "__main__":
-  filenames = os.listdir("../googlecodejam/dataset")
+def run_main():
+  filenames = os.listdir("dataset")
   files = []
 
   # 1) Populate dictionary and make file objects
@@ -53,19 +53,21 @@ if __name__ == "__main__":
   random.shuffle(tmpdata)
   data += tmpdata[0:same]
 
-  #print(data)
   df = pd.DataFrame(data)
   df.to_csv("out.txt")
   y = df.iloc[:,-1]
   X = preprocessing.scale(df.ix[:, :len(data[0])-2])
   X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y)
 
-  classifier = svm.SVC()
+  classifier = linear_model.LinearRegression()
+  #classifier = svm.SVC()
+  #classifier = ensemble.RandomForestClassifier()
   classifier.fit(X_train, y_train)
 
-  print(X_test)
-
-  y_pred = classifier.predict(X_test)
+  prediction = classifier.predict(X_test)
+  y_pred = []
+  for entry in prediction:
+    y_pred.append(1 if entry > 0.5 else 0)
   print("same: " + str(same))
   print("not same: " + str(notsame))
   print("prediction:\n" + str(y_pred))
@@ -73,11 +75,19 @@ if __name__ == "__main__":
   print("accuracy: " + str(metrics.accuracy_score(y_test, y_pred)))
   print("confusion matrix: " + str(metrics.confusion_matrix(y_test, y_pred)))
 
-  # 5) Train the model on unmodified data
-  # 6) Later: Run it on modified data
-  """
-  for f in files:
-    print(f.name)
-    print(f.author)
-    print(f.words)
-  """
+  return metrics.precision_recall_fscore_support(y_test, y_pred)
+
+if __name__ == "__main__":
+
+  prec = 0
+  rec = 0
+  fscore = 0
+  for i in range(5):
+    p, r, f, s = run_main()
+    prec += p[0]
+    rec += r[0]
+    fscore += f[0]
+  print("precision: " + str(prec/5))
+  print("recall: " + str(rec/5))
+  print("fscore: " + str(fscore/5))
+ 

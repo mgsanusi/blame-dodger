@@ -19,6 +19,7 @@ class File():
     self.vars_vec = []
     self.fc_vec = []
     self.lib_vec = []
+    self.ws_vec = []
 
 class FuncCallVisitor(c_ast.NodeVisitor):
   def __init__(self):
@@ -42,10 +43,12 @@ class IDVisitor(c_ast.NodeVisitor):
   def __init__(self):
     self.tokens = []
     self.kmers = []
+    self.var_names = []
 
   def visit_ID(self, node):
-    for i in range(0, len(node.name)-2):
-      self.kmers.append(node.name[i:i+2])
+    self.var_names.append(node.name)
+    for i in range(0, len(node.name)-3):
+      self.kmers.append(node.name[i:i+3])
     if "_" in node.name:
       self.tokens += node.name.split("_")
     else:
@@ -149,6 +152,13 @@ def get_kmers(filename):
   idv.visit(ast)
   return idv.kmers
 
+def get_full_names(filename):
+  ast = parse_file(filename, use_cpp=True, cpp_path='gcc', 
+                    cpp_args=['-E', '-std=c99',  r'-I/usr/bin/pycparser/utils/fake_libc_include'])
+  idv = IDVisitor()
+  idv.visit(ast)
+  return idv.var_names
+
 def get_tokens(filename):
   ast = parse_file(filename, use_cpp=True, cpp_path='gcc', 
                     cpp_args=['-E', '-std=c99',  r'-I/usr/bin/pycparser/utils/fake_libc_include'])
@@ -157,18 +167,17 @@ def get_tokens(filename):
   return idv.tokens
 
 def get_ws(fname):
-  basename = fname.strip(".c")
-
-  gnu_name= basename + "_gnu.c"
-  kr_name = basename + "_kr.c"
-  lx_name = basename + "_lx.c"
-  s1_name = basename + "_s1.c"
-  s2_name = basename + "_s2.c"
-  s3_name = basename + "_s3.c"
-  s4_name = basename + "_s4.c"
-  s5_name = basename + "_s5.c"
-  s6_name = basename + "_s6.c"
-  norm_name = basename + "_norm.c"
+  basename = fname.strip(".c").split("/")[-1]
+  gnu_name= "temp/" + basename + "_gnu.c"
+  kr_name = "temp/" + basename + "_kr.c"
+  lx_name = "temp/" + basename + "_lx.c"
+  s1_name = "temp/" + basename + "_s1.c"
+  s2_name = "temp/" + basename + "_s2.c"
+  s3_name = "temp/" + basename + "_s3.c"
+  s4_name = "temp/" + basename + "_s4.c"
+  s5_name = "temp/" + basename + "_s5.c"
+  s6_name = "temp/" + basename + "_s6.c"
+  norm_name = "temp/" + basename + "_norm.c"
 
   os.system("gindent -linux " + fname + " -o " + norm_name)
   os.system("gindent -kr " + norm_name)
