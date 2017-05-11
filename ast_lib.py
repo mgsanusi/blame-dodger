@@ -34,8 +34,10 @@ class FuncCallVisitor(c_ast.NodeVisitor):
 class FuncDefVisitor(c_ast.NodeVisitor):
   def __init__(self):
     self.names = []
+    self.main = 0
 
   def visit_FuncDef(self, node):
+    print(type(node.coord))
     self.names.append(node.decl.name) 
     self.generic_visit(node)
 

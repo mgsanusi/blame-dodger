@@ -9,7 +9,7 @@ def do_vars(filenames, files):
   dictionary = set()
 
   for fn, fl in zip(filenames, files):
-    words = get_full_names("dataset/" + fn)
+    words = get_kmers("dataset/" + fn)
     fl.words = words 
     dictionary.update(words)
 

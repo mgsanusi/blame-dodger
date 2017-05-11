@@ -21,14 +21,14 @@ def run_main():
   print("getting variable names...")
   do_vars(filenames, files)
   print("getting functional features...")
-  #do_functional(filenames, files)
+  do_functional(filenames, files)
   print("getting library features...")
-  #do_lib(filenames, files)
+  do_lib(filenames, files)
   print("getting whitespace features...")
-  do_whitespace(filenames, files)
+  whitespace = do_whitespace(filenames, files)
 
-  for f in files:
-    f.vec = f.vars_vec + f.ws_vec
+  for f, ws in zip(files, whitespace):
+    f.vec = ws.ws_vec + f.vars_vec + f.fc_vec + f.lib_vec
 
   data = []
   tmpdata = []
@@ -38,7 +38,6 @@ def run_main():
     for f2 in files:
       if f1 is f2 : break
       result = [(a-b)**2 for a, b in zip(f1.vec, f2.vec)]
-      #result = [random.randint(0, 100)/float(100) for a, b in zip(f1.vec, f2.vec)]
       if f1.author == f2.author:
         same += 1
         result.append(1)
@@ -57,8 +56,8 @@ def run_main():
   X = preprocessing.scale(df.ix[:, :len(data[0])-2])
   X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y)
 
-  classifier = linear_model.LinearRegression()
-  #classifier = ensemble.RandomForestClassifier()
+  #classifier = linear_model.LinearRegression()
+  classifier = ensemble.RandomForestClassifier()
   #classifier = svm.SVC()
   classifier.fit(X_train, y_train)
 
