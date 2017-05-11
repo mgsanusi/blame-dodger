@@ -25,8 +25,10 @@ class FuncCallVisitor(c_ast.NodeVisitor):
   def __init__(self):
     self.names = []
     self.total = 0
+    self.nested = 0
 
   def visit_FuncCall(self, node):
+    self.nested += 1
     self.names.append(node.name.name)
     self.total += 1
     self.generic_visit(node)
@@ -35,11 +37,21 @@ class FuncDefVisitor(c_ast.NodeVisitor):
   def __init__(self):
     self.names = []
     self.main = 0
+    self.coords = []
 
   def visit_FuncDef(self, node):
-    print(type(node.coord))
     self.names.append(node.decl.name) 
+    self.coords.append((node.name, node.coord.line))
     self.generic_visit(node)
+
+"""
+class FuncDeclVisitor(c_ast.NodeVisitor):
+  def __init__(self):
+    coords = {}
+
+  def visit_FuncDecl(self, node):
+    self.generic_visit(node)
+"""
 
 class IDVisitor(c_ast.NodeVisitor):
   def __init__(self):
@@ -62,14 +74,6 @@ class IDVisitor(c_ast.NodeVisitor):
         else:
           substr += c
       if substr != "" : self.tokens.append(substr)
-
-class FuncDeclVisitor(c_ast.NodeVisitor):
-  def __init__(self):
-    self.nested = 0
-
-  def visit_FuncDecl(self, node):
-    self.nested += 1
-    self.generic_visit(node)
 
 class DeclVisitor(c_ast.NodeVisitor):
   def __init__(self):
@@ -134,17 +138,31 @@ def get_functional(filename):
                     cpp_args=['-E', '-std=c99',  r'-I/usr/bin/pycparser/utils/fake_libc_include'])
   av = AssignmentVisitor()
   dv = DeclVisitor()
-  fdv = FuncDeclVisitor()
+  fdv = FuncDefVisitor()
   av.visit(ast)
   dv.visit(ast)
   fdv.visit(ast)
 
+  sorted_coords = sorted(fdv.coords, key=lambda x: x[1])
+
   ret = [float(len(av.assignments))/len(dv.declarations) if len(dv.declarations) != 0 else 0]
 
   proc = subprocess.Popen(["wc","-l", os.path.abspath(filename)], stdout=subprocess.PIPE)
-  output = proc.stdout.read().split()[0]
-  ret.append(float(dv.methods)/int(output))
+  file_len = int(proc.stdout.read().split()[0])
+
+  main_len = 0
+  for i, pair in enumerate(sorted_coords): # name, lineno
+    if pair[0] == "main":
+      if i == len(sorted_coords)-1: # if no methods after main
+        main_len = file_len - pair[1]
+      else:
+        main_len = sorted_coords[i+1][1] - pair[1]
+      break
+      
+  avg_meth = float(dv.methods)/file_len
+  ret.append(avg_meth)
   ret.append(fdv.nested)
+  ret.append(float(main_len)/avg_meth)
   return ret
 
 def get_kmers(filename):

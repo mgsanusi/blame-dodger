@@ -62,20 +62,20 @@ def run_main():
   print("prediction:\n" + str(y_pred))
   print("actual:\n" + str(y_test.values.ravel()))
   print("accuracy: " + str(metrics.accuracy_score(y_test, y_pred)))
-"""
-  fps = []
-  fns = []
-  for yp, yt, i in zip(y_pred, y_test, itest):
-    if yp == 1 and yt == 0: 
-      #print("False Positive: " + str(yp) + ", " + str(yt) + ": " + str(pairs[i])
-      fps.append(pairs[i])
-    elif yp == 0 and yt == 1:
-      fns.append(pairs[i])
-  print("False Positives:")
-  print("\n".join([x + ", " + y for x, y in fps]) + "\n")
-  print("False Negatives:")
-  print("\n".join([x + ", " + y for x, y in fns]))
-"""
+
+#  fps = []
+#  fns = []
+#  for yp, yt, i in zip(y_pred, y_test, itest):
+#    if yp == 1 and yt == 0: 
+#      #print("False Positive: " + str(yp) + ", " + str(yt) + ": " + str(pairs[i])
+#      fps.append(pairs[i])
+#    elif yp == 0 and yt == 1:
+#      fns.append(pairs[i])
+#  print("False Positives:")
+#  print("\n".join([x + ", " + y for x, y in fps]) + "\n")
+#  print("False Negatives:")
+#  print("\n".join([x + ", " + y for x, y in fns]))
+
   return metrics.precision_recall_fscore_support(y_test, y_pred)
 
 if __name__ == "__main__":
