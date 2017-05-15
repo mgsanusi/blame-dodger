@@ -79,10 +79,16 @@ def run_main(folder):
 
   y_pred = classifier.predict(X_test)
 
+  labels = ["assign to decl", "avg meth length", "number nested func calls", "ratio main len to method", "avg num params", "struct", "if", "for", "dowhile", "while", "case", "ternary", "avg line length", "percent empty lines"]
+
   print("prediction:\n" + str(y_pred))
   print("actual:\n" + str(y_test.values.ravel()))
   print("accuracy: " + str(metrics.accuracy_score(y_test, y_pred)))
-  print(classifier.feature_importances_)
+
+  importances = classifier.feature_importances_
+  label_power = [(label, power) for label, power in zip(labels, importances)]
+  label_power = sorted(label_power, key=lambda x: x[1])
+  print("\n".join([str(x) for x in label_power[-8:]]))
 
 #  fps = []
 #  fns = []

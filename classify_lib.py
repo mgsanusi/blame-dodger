@@ -26,7 +26,7 @@ def run_main():
     fl = File(f, f.split("_")[0])
     files.append(fl)
 
-  do_lib(filenames, files)
+  do_lib(filenames, files, "dataset")
 
   # 4) For each pair of vectors, take the dot product
   data = []

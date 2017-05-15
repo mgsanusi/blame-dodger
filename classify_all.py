@@ -10,6 +10,9 @@ import os
 import numpy as np
 
 def run_main():
+  f_labels = ["assign to decl", "avg meth length", "number nested func calls", "ratio main len to method", "avg num params", "struct", "if", "for", "dowhile", "while", "case", "ternary", "avg line length", "percent empty lines"]
+  l_labels = ["abs", "strtol", "qsort", "bzero", "strncmp", "strncpy", "strerror", "read", "memcmp", "free", "snprintf", "realloc", "atoi", "strtoll", "exit", "fgets", "sscanf", "memcpy", "strtok_r", "atof", "atol", "puts", "srand", "fgetc", "sqrtl", "powl", "getline", "assert", "getchar", "putchar", "printf", "fprintf", "scanf", "fscanf", "strcat", "strcmp", "strcpy", "isdigit", "isalpha", "isalnum", "isspace", "toupper", "tolower", "errno", "islower", "isupper", "fabs", "pow", "sqrt", "time", "malloc", "calloc", "rand", "strlen", "freopen", "fopen", "strchr", "sprintf", "getc", "fclose", "memset"] 
+
   folder = "dataset"
   filenames = os.listdir("dataset")
   files = []
@@ -20,18 +23,29 @@ def run_main():
     files.append(f)
 
   print("getting variable names...")
-  #do_vars(filenames, files, folder)
+  do_vars(filenames, files, folder)
   print("getting functional features...")
   do_functional(filenames, files, folder)
   print("getting library features...")
-  #do_lib(filenames, files, folder)
+  do_lib(filenames, files, folder)
   print("getting whitespace features...")
-  #whitespace = do_whitespace(filenames, files, folder)
+  whitespace = do_whitespace(filenames, files, folder)
 
-  #for f, ws in zip(files, whitespace):
-  #  f.vec = ws.ws_vec + f.vars_vec + f.fc_vec + f.lib_vec
-  for f in files:
-    f.vec = f.fc_vec
+  var_len = len(files[0].vars_vec)
+  fc_len = len(files[0].fc_vec)
+  lib_len = len(files[0].lib_vec)
+  ws_len = len(whitespace[0].ws_vec)
+  labels = ["var kmer" for x in range(0, var_len)]
+  if len(f_labels) != fc_len:
+    print("STOP NOW")
+  if len(l_labels) != lib_len:
+    print("STOP IMMEDIATELY")
+  labels += f_labels
+  labels += l_labels
+  labels += ["gnu", "kr", "lx", "s1", "s2", "s3", "s4", "s5", "s6"]
+
+  for f, ws in zip(files, whitespace):
+    f.vec = ws.ws_vec + f.vars_vec + f.fc_vec + f.lib_vec
 
   data = []
   tmpdata = []
@@ -51,7 +65,7 @@ def run_main():
         tmpdata.append(result)
 
   random.shuffle(tmpdata)
-  data += tmpdata[0:min(same, notsame)]
+  data += tmpdata[0:same]
 
   #print(data)
   df = pd.DataFrame(data)
@@ -75,7 +89,12 @@ def run_main():
   print("prediction:\n" + str(y_pred))
   print("actual:\n" + str(y_test.values.ravel()))
   print("accuracy: " + str(metrics.accuracy_score(y_test, y_pred)))
-  print(classifier.feature_importances_)
+
+  importances = classifier.feature_importances_
+  label_power = [(label, power) for label, power in zip(labels, importances)]
+  label_power = sorted(label_power, key=lambda x: x[1])
+  print("\n".join([str(x) for x in label_power[-30:]]))
+
   return metrics.precision_recall_fscore_support(y_test, y_pred)
 
 if __name__ == "__main__":

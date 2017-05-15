@@ -207,7 +207,8 @@ def get_lib(filename):
 
 def get_functional(filename):
   ast = parse_file(filename, use_cpp=True, cpp_path='gcc', 
-                    cpp_args=['-E', '-std=c99',  r'-I/usr/bin/pycparser/utils/fake_libc_include'])
+                    cpp_args=['-E', '-c', 
+                    '-std=c99',  r'-I/usr/bin/pycparser/utils/fake_libc_include'])
   av = AssignmentVisitor()
   dv = DeclVisitor()
   fdv = FuncDefVisitor()
