@@ -12,32 +12,39 @@ import numpy
 def one_pair(f):
   print(f.name)
   f.ws_vec = get_ws("dataset/" + f.name)
+  print("returning...")
   return f
   
-def do_whitespace(filenames, files):
+def do_whitespace(filenames, files, folder):
   os.system("mkdir temp")
 
   with closing(Pool(processes=8)) as p:
     results = p.map(one_pair, files)
     p.terminate()
 
+  #with closing(Pool(processes=8)) as p:
+  #  results = p.map(partial(one_pair, folder=folder), files)
+  #  p.terminate()
+
   os.system("rm -r temp")
   return results
 
 def run_main():
-  filenames = os.listdir("dataset")
+  filenames = os.listdir(sys.argv[1])
   files = []
   random.shuffle(filenames)
   # 1) Populate dictionary and make file objects
-  for f in filenames:
+  for f in filenames[0:8]:
     fl = File(f, f.split("_")[0])
     files.append(fl)
 
-  files = do_whitespace(filenames, files)
+  files = do_whitespace(filenames[0:8], files, sys.argv[1])
 
   data = []
-  tmpdata = []
+  leftdata = []
+  rightdata = []
   same = 0
+  notsame = 0
   for f1 in files:
     for f2 in files:
       if f1 is f2 : break
@@ -45,13 +52,16 @@ def run_main():
       if f1.author == f2.author:
         same += 1
         result.append(1)
-        data.append(result)
+        leftdata.append(result)
       else:
+        notsame += 1
         result.append(0)
-        tmpdata.append(result)
+        rightdata.append(result)
 
-  random.shuffle(tmpdata)
-  data += tmpdata[0:same]
+  random.shuffle(leftdata)
+  random.shuffle(rightdata)
+  data += leftdata[0:min(same, notsame)]
+  data += rightdata[0:min(same, notsame)]
 
   df = pd.DataFrame(data)
   print(df)
@@ -59,9 +69,7 @@ def run_main():
   X = preprocessing.scale(df.ix[:, :len(data[0])-2])
   X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y)
 
-  classifier = linear_model.LinearRegression()
-  #classifier = ensemble.RandomForestClassifier()
-  #classifier = svm.SVC()
+  classifier = ensemble.RandomForestClassifier()
   classifier.fit(X_train, y_train)
 
   prediction = classifier.predict(X_test)

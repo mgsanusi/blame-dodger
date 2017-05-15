@@ -5,11 +5,11 @@ import random
 import os
 import numpy as np
 
-def do_vars(filenames, files):
+def do_vars(filenames, files, folder):
   dictionary = set()
 
   for fn, fl in zip(filenames, files):
-    words = get_kmers("dataset/" + fn)
+    words = get_kmers(folder + "/" + fn)
     fl.words = words 
     dictionary.update(words)
 

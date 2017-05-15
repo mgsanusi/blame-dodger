@@ -5,26 +5,43 @@ import pandas as pd
 import os
 import numpy
 
-def do_functional(filenames, files):
+def do_functional(filenames, files, folder):
   for fname, fl in zip(filenames, files):
-    fl.fc_vec = get_functional("dataset/" + fname)
+    fl.fc_vec = get_functional(folder + "/" + fname)
+    total_line = 0
+    empty = 0
+    num_line = 0
+    with open(folder + "/" + fname) as f:
+      content = f.readlines()
+      for line in content:
+        total_line += len(line)
+        num_line += 1
+        if len(line.strip()) == 0:
+          empty += 1
+    fl.fc_vec.append(float(total_line)/num_line)
+    fl.fc_vec.append(float(empty)/num_line)
 
-def run_main():
-  filenames = os.listdir("dataset")
+def run_main(folder):
+  allnames = os.listdir(folder)
+  filenames = []
   files = []
-  N = len(filenames)
 
   # 1) Populate dictionary and make file objects
-  for f in filenames:
+  for f in allnames:
+    if f.split(".")[-1] != "c": 
+      continue
+    filenames.append(f)
     fl = File(f, f.split("_")[0].strip())
     files.append(fl)
 
-  do_functional(filenames, files)
+  do_functional(filenames, files, folder)
 
   # 2) For each pair of vectors, take the dot product
   data = []
-  tmpdata = []
+  leftdata = []
+  rightdata = []
   same = 0
+  notsame = 0
   for f1 in files:
     for f2 in files:
       if f1 is f2 : break
@@ -33,14 +50,17 @@ def run_main():
         same += 1
         result.append(1)
         result.append((f1.name, f2.name))
-        data.append(result)
+        leftdata.append(result)
       else:
+        notsame += 1
         result.append(0)
         result.append((f1.name, f2.name))
-        tmpdata.append(result)
+        rightdata.append(result)
 
-  random.shuffle(tmpdata)
-  data += tmpdata[0:same]
+  random.shuffle(leftdata)
+  random.shuffle(rightdata)
+  data += leftdata[0:min(notsame, same)]
+  data += rightdata[0:min(notsame, same)]
   pairs = [x[-1] for x in data]
   indices = [i for i, x in enumerate(data)]
 
@@ -62,6 +82,7 @@ def run_main():
   print("prediction:\n" + str(y_pred))
   print("actual:\n" + str(y_test.values.ravel()))
   print("accuracy: " + str(metrics.accuracy_score(y_test, y_pred)))
+  print(classifier.feature_importances_)
 
 #  fps = []
 #  fns = []
@@ -83,7 +104,7 @@ if __name__ == "__main__":
   rec = 0
   fscore = 0
   for i in range(1):
-    p, r, f, s = run_main()
+    p, r, f, s = run_main(sys.argv[1])
     prec += p[0]
     rec += r[0]
     fscore += f[0]

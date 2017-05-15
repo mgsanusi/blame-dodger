@@ -5,10 +5,10 @@ import pandas as pd
 import os
 import numpy
 
-def do_lib(filenames, files):
+def do_lib(filenames, files, folder):
   dictionary = set()
   for fname, f in zip(filenames, files):
-    f.words = get_lib("dataset/" + fname)
+    f.words = get_lib(folder + "/" + fname)
     dictionary.update(f.words)
 
   for f in files:
@@ -68,6 +68,8 @@ def run_main():
   print("prediction:\n" + str(y_pred))
   print("actual:\n" + str(y_test.values.ravel()))
   print("accuracy: " + str(metrics.accuracy_score(y_test, y_pred)))
+  print(classifier.feature_importances_)
+  """
 
   fps = []
   fns = []
@@ -80,6 +82,7 @@ def run_main():
   print("\n".join([x + ", " + y for x, y in fps]) + "\n")
   print("False Negatives:")
   print("\n".join([x + ", " + y for x, y in fns]))
+  """
 
   return metrics.precision_recall_fscore_support(y_test, y_pred)
 

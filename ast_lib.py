@@ -38,20 +38,28 @@ class FuncDefVisitor(c_ast.NodeVisitor):
     self.names = []
     self.main = 0
     self.coords = []
+    self.num_params = 0
+    self.num_methods = 0
 
   def visit_FuncDef(self, node):
     self.names.append(node.decl.name) 
-    self.coords.append((node.name, node.coord.line))
+    self.coords.append((node.decl.name, node.coord.line))
+    self.num_methods += 1
+    self.num_params += 0 #len(node.decl.args) #if node.param_decls is not None else 0
     self.generic_visit(node)
 
-"""
 class FuncDeclVisitor(c_ast.NodeVisitor):
   def __init__(self):
-    coords = {}
+    self.num_params = 0
+    self.num_methods = 0
 
   def visit_FuncDecl(self, node):
+    self.num_methods += 1
+    if node.args:
+      self.num_params += len(node.args.params) 
+    else:
+      self.num_params += 0
     self.generic_visit(node)
-"""
 
 class IDVisitor(c_ast.NodeVisitor):
   def __init__(self):
@@ -85,6 +93,70 @@ class DeclVisitor(c_ast.NodeVisitor):
       self.declarations.append(node.name) 
     elif isinstance(node.type, c_ast.FuncDecl):
       self.methods += 1
+    self.generic_visit(node)
+
+class StructVisitor(c_ast.NodeVisitor):
+  def __init__(self):
+    self.count = 0
+
+  def visit_Struct(self, node):
+    self.count += 1
+    self.generic_visit(node)
+
+class TernaryOpVisitor(c_ast.NodeVisitor):
+  def __init__(self):
+    self.count = 0
+
+  def visit_TernaryOp(self, node):
+    self.count += 1
+    self.generic_visit(node)
+
+class CaseVisitor(c_ast.NodeVisitor):
+  def __init__(self):
+    self.count = 0
+
+  def visit_Case(self, node):
+    self.count += 1
+    self.generic_visit(node)
+
+class SwitchVisitor(c_ast.NodeVisitor):
+  def __init__(self):
+    self.count = 0
+
+  def visit_Switch(self, node):
+    self.count += 1
+    self.generic_visit(node)
+
+class DoWhileVisitor(c_ast.NodeVisitor):
+  def __init__(self):
+    self.count = 0
+
+  def visit_DoWhile(self, node):
+    self.count += 1
+    self.generic_visit(node)
+
+class WhileVisitor(c_ast.NodeVisitor):
+  def __init__(self):
+    self.count = 0
+
+  def visit_While(self, node):
+    self.count += 1
+    self.generic_visit(node)
+
+class IfVisitor(c_ast.NodeVisitor):
+  def __init__(self):
+    self.count = 0
+
+  def visit_If(self, node):
+    self.count += 1
+    self.generic_visit(node)
+
+class ForVisitor(c_ast.NodeVisitor):
+  def __init__(self):
+    self.count = 0
+
+  def visit_For(self, node):
+    self.count += 1
     self.generic_visit(node)
 
 class AssignmentVisitor(c_ast.NodeVisitor):
@@ -139,9 +211,29 @@ def get_functional(filename):
   av = AssignmentVisitor()
   dv = DeclVisitor()
   fdv = FuncDefVisitor()
+  fcv = FuncCallVisitor()
+  fdcv = FuncDeclVisitor()
+  sv = StructVisitor()
+  iv = IfVisitor()
+  fv = ForVisitor()
+  dwv = DoWhileVisitor()
+  wv = WhileVisitor()
+  cv = CaseVisitor()
+  swv = SwitchVisitor()
+  tv = TernaryOpVisitor()
   av.visit(ast)
   dv.visit(ast)
   fdv.visit(ast)
+  fcv.visit(ast)
+  fdcv.visit(ast)
+  sv.visit(ast)
+  iv.visit(ast)
+  fv.visit(ast)
+  dwv.visit(ast)
+  wv.visit(ast)
+  cv.visit(ast)
+  swv.visit(ast)
+  tv.visit(ast)
 
   sorted_coords = sorted(fdv.coords, key=lambda x: x[1])
 
@@ -159,10 +251,20 @@ def get_functional(filename):
         main_len = sorted_coords[i+1][1] - pair[1]
       break
       
-  avg_meth = float(dv.methods)/file_len
+  avg_meth = float(fdcv.num_methods)/file_len
+  main_to_method = float(main_len)/avg_meth if avg_meth != 0 else 0
+  params_to_methods = float(fdcv.num_params)/fdcv.num_methods if fdcv.num_methods != 0 else 0
   ret.append(avg_meth)
-  ret.append(fdv.nested)
-  ret.append(float(main_len)/avg_meth)
+  ret.append(fcv.nested)
+  #ret.append(main_to_method)
+  #ret.append(params_to_methods)
+  #ret.append(sv.count/float(file_len))
+  #ret.append(iv.count/float(file_len))
+  #ret.append(fv.count/float(file_len))
+  #ret.append(wv.count/float(file_len))
+  #ret.append(cv.count/float(file_len))
+  #ret.append(tv.count/float(file_len))
+  #ret.append(float(fdv.num_params)/fdv.num_methods) # average num params
   return ret
 
 def get_kmers(filename):
@@ -234,17 +336,17 @@ def get_ws(fname):
   s5 = float(lcs(orig, s5_content))/max(orig_size, os.path.getsize(s5_name))
   s6 = float(lcs(orig, s6_content))/max(orig_size, os.path.getsize(s6_name))
 
-  norm = open(norm_name, 'r').read()
-  norm_size = os.path.getsize(norm_name)
-  gnu_norm = float(lcs(norm, gnu_content))/max(norm_size, os.path.getsize(gnu_name))
-  kr_norm = float(lcs(norm, kr_content))/max(norm_size, os.path.getsize(kr_name))
-  lx_norm = float(lcs(norm, lx_content))/max(norm_size, os.path.getsize(lx_name))
-  s1_norm = float(lcs(norm, s1_content))/max(norm_size, os.path.getsize(s1_name))
-  s2_norm = float(lcs(norm, s2_content))/max(norm_size, os.path.getsize(s2_name))
-  s3_norm = float(lcs(norm, s3_content))/max(norm_size, os.path.getsize(s3_name))
-  s4_norm = float(lcs(norm, s4_content))/max(norm_size, os.path.getsize(s4_name))
-  s5_norm = float(lcs(norm, s5_content))/max(norm_size, os.path.getsize(s5_name))
-  s6_norm = float(lcs(norm, s6_content))/max(norm_size, os.path.getsize(s6_name))
+  #norm = open(norm_name, 'r').read()
+  #norm_size = os.path.getsize(norm_name)
+  #gnu_norm = float(lcs(norm, gnu_content))/max(norm_size, os.path.getsize(gnu_name))
+  #kr_norm = float(lcs(norm, kr_content))/max(norm_size, os.path.getsize(kr_name))
+  #lx_norm = float(lcs(norm, lx_content))/max(norm_size, os.path.getsize(lx_name))
+  #s1_norm = float(lcs(norm, s1_content))/max(norm_size, os.path.getsize(s1_name))
+  #s2_norm = float(lcs(norm, s2_content))/max(norm_size, os.path.getsize(s2_name))
+  #s3_norm = float(lcs(norm, s3_content))/max(norm_size, os.path.getsize(s3_name))
+  #s4_norm = float(lcs(norm, s4_content))/max(norm_size, os.path.getsize(s4_name))
+  #s5_norm = float(lcs(norm, s5_content))/max(norm_size, os.path.getsize(s5_name))
+  #s6_norm = float(lcs(norm, s6_content))/max(norm_size, os.path.getsize(s6_name))
 
   return [gnu, kr, lx, s1, s2, s3, s4, s5, s6]
 

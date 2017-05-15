@@ -10,6 +10,7 @@ import os
 import numpy as np
 
 def run_main():
+  folder = "dataset"
   filenames = os.listdir("dataset")
   files = []
   dictionary = set()
@@ -19,13 +20,13 @@ def run_main():
     files.append(f)
 
   print("getting variable names...")
-  do_vars(filenames, files)
+  do_vars(filenames, files, folder)
   print("getting functional features...")
-  do_functional(filenames, files)
+  do_functional(filenames, files, folder)
   print("getting library features...")
-  do_lib(filenames, files)
+  do_lib(filenames, files, folder)
   print("getting whitespace features...")
-  whitespace = do_whitespace(filenames, files)
+  whitespace = do_whitespace(filenames, files, folder)
 
   for f, ws in zip(files, whitespace):
     f.vec = ws.ws_vec + f.vars_vec + f.fc_vec + f.lib_vec
@@ -48,7 +49,7 @@ def run_main():
         tmpdata.append(result)
 
   random.shuffle(tmpdata)
-  data += tmpdata[0:same]
+  data += tmpdata[0:min(same, notsame)]
 
   #print(data)
   df = pd.DataFrame(data)
@@ -72,6 +73,7 @@ def run_main():
   print("prediction:\n" + str(y_pred))
   print("actual:\n" + str(y_test.values.ravel()))
   print("accuracy: " + str(metrics.accuracy_score(y_test, y_pred)))
+  print(classifier.feature_importances_)
   return metrics.precision_recall_fscore_support(y_test, y_pred)
 
 if __name__ == "__main__":
