@@ -20,16 +20,18 @@ def run_main():
     files.append(f)
 
   print("getting variable names...")
-  do_vars(filenames, files, folder)
+  #do_vars(filenames, files, folder)
   print("getting functional features...")
   do_functional(filenames, files, folder)
   print("getting library features...")
-  do_lib(filenames, files, folder)
+  #do_lib(filenames, files, folder)
   print("getting whitespace features...")
-  whitespace = do_whitespace(filenames, files, folder)
+  #whitespace = do_whitespace(filenames, files, folder)
 
-  for f, ws in zip(files, whitespace):
-    f.vec = ws.ws_vec + f.vars_vec + f.fc_vec + f.lib_vec
+  #for f, ws in zip(files, whitespace):
+  #  f.vec = ws.ws_vec + f.vars_vec + f.fc_vec + f.lib_vec
+  for f in files:
+    f.vec = f.fc_vec
 
   data = []
   tmpdata = []

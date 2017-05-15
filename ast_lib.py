@@ -256,15 +256,15 @@ def get_functional(filename):
   params_to_methods = float(fdcv.num_params)/fdcv.num_methods if fdcv.num_methods != 0 else 0
   ret.append(avg_meth)
   ret.append(fcv.nested)
-  #ret.append(main_to_method)
-  #ret.append(params_to_methods)
-  #ret.append(sv.count/float(file_len))
-  #ret.append(iv.count/float(file_len))
-  #ret.append(fv.count/float(file_len))
-  #ret.append(wv.count/float(file_len))
-  #ret.append(cv.count/float(file_len))
-  #ret.append(tv.count/float(file_len))
-  #ret.append(float(fdv.num_params)/fdv.num_methods) # average num params
+  ret.append(main_to_method)
+  ret.append(params_to_methods) # average num params
+  ret.append(sv.count/float(file_len))
+  ret.append(iv.count/float(file_len))
+  ret.append(fv.count/float(file_len))
+  ret.append(dwv.count/float(file_len))
+  ret.append(wv.count/float(file_len))
+  ret.append(cv.count/float(file_len))
+  ret.append(tv.count/float(file_len))
   return ret
 
 def get_kmers(filename):
