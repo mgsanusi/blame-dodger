@@ -2,29 +2,23 @@ from ast_lib import *
 import random
 from sklearn import preprocessing, model_selection, svm, metrics, ensemble, linear_model
 import pandas as pd
-import sys
 import os
 import numpy
 
-def do_lib(filenames, files, folder):
-  #for fname, f in zip(filenames, files):
-  #  f.lib_vec = get_lib(folder + "/" + fname)
-  get_lib_tf_idf(files, filenames, folder)
+def do_comments(filenames, files, folder):
+  for fname, f in zip(filenames, files):
+    get_comments(folder + "/" + fname, f)
 
-def run_main(folder):
-  allfiles = os.listdir(folder)
+def run_main():
+  filenames = os.listdir("dataset")
   files = []
-  filenames = []
 
   # 1) Populate dictionary and make file objects
-  for f in allfiles:
-    if not f.endswith(".c"): continue
+  for f in filenames:
     fl = File(f, f.split("_")[0])
     files.append(fl)
-    filenames.append(f)
 
-  #do_lib(filenames, files, folder)
-  get_lib_tf_idf(files, filenames, "dataset")
+  do_comments(filenames, files, "dataset")
 
   # 4) For each pair of vectors, take the dot product
   data = []
@@ -33,7 +27,7 @@ def run_main(folder):
   for f1 in files:
     for f2 in files:
       if f1 is f2 : break
-      result = [(a-b)**2 for a, b in zip(f1.lib_vec, f2.lib_vec)]
+      result = [(a-b)**2 for a, b in zip(f1.com_vec, f2.com_vec)]
       if f1.author == f2.author:
         same += 1
         result.append(1)
@@ -58,8 +52,6 @@ def run_main(folder):
   X_train, X_test, y_train, y_test, itrain, itest  = model_selection.train_test_split(X, y, indices)
 
   classifier = ensemble.RandomForestClassifier()
-  #classifier = linear_model.LinearRegression()
-  #classifier = svm.SVC()
   classifier.fit(X_train, y_train)
 
   y_pred = classifier.predict(X_test)
@@ -89,12 +81,13 @@ if __name__ == "__main__":
   rec = 0
   fscore = 0
   for i in range(1):
-    p, r, f, s = run_main(sys.argv[1])
+    p, r, f, s = run_main()
     prec += p[0]
     rec += r[0]
     fscore += f[0]
   print("precision: " + str(prec/1))
   print("recall: " + str(rec/1))
   print("fscore: " + str(fscore/1))
+
 
 

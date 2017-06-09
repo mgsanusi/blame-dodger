@@ -18,8 +18,8 @@ def do_functional(filenames, files, folder):
         num_line += 1
         if len(line.strip()) == 0:
           empty += 1
-    fl.fc_vec.append(float(total_line)/num_line)
-    fl.fc_vec.append(float(empty)/num_line)
+    fl.fc_vec.append(float(total_line)/num_line) # avg line length
+    fl.fc_vec.append(float(empty)/num_line) # % empty lines
 
 def run_main(folder):
   allnames = os.listdir(folder)
@@ -59,8 +59,7 @@ def run_main(folder):
 
   random.shuffle(leftdata)
   random.shuffle(rightdata)
-  data += leftdata[0:min(notsame, same)]
-  data += rightdata[0:min(notsame, same)]
+  data += rightdata[0:same] + leftdata[0:same]
   pairs = [x[-1] for x in data]
   indices = [i for i, x in enumerate(data)]
 

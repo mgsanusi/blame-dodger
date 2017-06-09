@@ -11,8 +11,7 @@ import numpy
 
 def one_pair(f):
   print(f.name)
-  f.ws_vec = get_ws("dataset/" + f.name)
-  print("returning...")
+  f.ws_vec = get_ws("gcj/" + f.name) #gcj
   return f
   
 def do_whitespace(filenames, files, folder):
