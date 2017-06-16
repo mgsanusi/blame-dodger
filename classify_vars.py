@@ -1,21 +1,28 @@
 from ast_lib import *
 from sklearn.feature_selection import VarianceThreshold, SelectPercentile, SelectKBest, f_classif
+from sklearn.externals import joblib
 from sklearn import preprocessing, model_selection, svm, metrics, ensemble, linear_model
 import pandas as pd
-import random
-import os
 import numpy as np
+import random
+import math
+import os
 
 def do_vars(filenames, files, folder):
-  dictionary = set()
+  dictionary = set() #
 
   for fn, fl in zip(filenames, files):
     words = get_kmers(fn, folder)
     fl.words = words  # contains kmers
-    dictionary.update(words)
+    dictionary.update(words) #
 
   for f in files:
-    f.tf = {name:0 for name in dictionary}
+    f.tf = {name:0 for name in dictionary} #
+    #for word in f.words:
+    #  if word in f.bag:
+    #    f.bag[word] += 1
+    #  else:
+    #    f.bag[word] = 1
     for word in f.words:
       f.tf[word] += 1
 
@@ -41,6 +48,31 @@ def run_main():
     for f2 in files:
       if f1 is f2 : break
       result = [(a-b)**2 for a, b in zip(f1.vars_vec, f2.vars_vec)]
+      #dot = 0
+      #bag1 = f1.bag
+      #bag2 = f2.bag
+      #len1 = len(f1.words)
+      #len2 = len(f2.words)
+      #mag1 = 0
+      #mag2 = 0
+      #for word in set(bag1.keys() + bag2.keys()):
+      #  if word in bag1 and word in bag2:
+      #    dot += (bag1[word]/float(len1))*(bag2[word]/float(len2))
+      #    mag1 += (bag1[word]/float(len1))**2
+      #    mag2 += (bag2[word]/float(len2))**2
+      #  elif word in bag1:
+      #    mag1 += (bag1[word]/float(len1))**2
+      #  elif word in bag2:
+      #    mag2 += (bag2[word]/float(len2))**2
+      #  else:
+      #    dot += 0
+      #cos_sim = dot/(math.sqrt(mag1)*math.sqrt(mag2))
+      #print("For authors " + f1.author + " and " + f2.author)
+      #print("vector 1 is " + str(f1.bag))
+      #print("vector 2 is " + str(f2.bag))
+      #print("Cos sim: " + str(cos_sim))
+      #result = [cos_sim]
+
       if f1.author == f2.author:
         same += 1
         result.append(1)
@@ -68,6 +100,9 @@ def run_main():
   #classifier = svm.SVC()
   classifier = ensemble.RandomForestClassifier()
   classifier.fit(X_train, y_train)
+
+  #classifier = joblib.load("my_model.pkl")
+  #joblib.dump(classifier, "my_model.pkl", compress=9)
 
   prediction = classifier.predict(X_test)
   y_pred = []

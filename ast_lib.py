@@ -17,6 +17,7 @@ class File():
     self.author = author
     self.words = words
     self.tf = {}
+    self.bag = {}
     self.lib_tf = {}
     self.vec = []
     self.vars_vec = []
@@ -73,6 +74,7 @@ class IDVisitor(c_ast.NodeVisitor):
     self.var_names = []
 
   def visit_ID(self, node):
+    #if not node.name in funcs:
     self.var_names.append(node.name) # can I append just var names?
     for i in range(0, len(node.name)-3):
       self.kmers.append(node.name[i:i+3])
@@ -299,28 +301,28 @@ def get_functional(filename):
   ast = parse_file(filename, use_cpp=True, cpp_path='gcc', 
                     cpp_args=['-E', '-c', 
                     '-std=c99',  r'-I/usr/bin/pycparser/utils/fake_libc_include'])
-  #av = AssignmentVisitor()
-  #dv = DeclVisitor()
+  av = AssignmentVisitor() #
+  dv = DeclVisitor() #
   fdv = FuncDefVisitor()
-  #fcv = FuncCallVisitor()
+  fcv = FuncCallVisitor() #
   tdv = TypedefVisitor()
-  #fdcv = FuncDeclVisitor()
-  #sv = StructVisitor()
-  #iv = IfVisitor()
+  fdcv = FuncDeclVisitor() #
+  sv = StructVisitor() #
+  iv = IfVisitor() #
   fv = ForVisitor()
   dwv = DoWhileVisitor()
   wv = WhileVisitor()
   cv = CaseVisitor()
   swv = SwitchVisitor()
   tv = TernaryOpVisitor()
-  #av.visit(ast)
-  #dv.visit(ast)
+  av.visit(ast) #
+  dv.visit(ast) #
   fdv.visit(ast)
-  #fcv.visit(ast)
+  fcv.visit(ast) #
   tdv.visit(ast)
-  #fdcv.visit(ast)
-  #sv.visit(ast)
-  #iv.visit(ast)
+  fdcv.visit(ast) #
+  sv.visit(ast) #
+  iv.visit(ast) #
   fv.visit(ast)
   dwv.visit(ast)
   wv.visit(ast)
@@ -330,30 +332,35 @@ def get_functional(filename):
 
   sorted_coords = sorted(fdv.coords, key=lambda x: x[1])
 
-  #ret = [float(len(av.assignments))/len(dv.declarations) if len(dv.declarations) != 0 else 0]
+  # below
+  ret = [float(len(av.assignments))/len(dv.declarations) if len(dv.declarations) != 0 else 0]
 
   file_len = len(open(os.path.abspath(filename), 'r').readlines())
 
-  #main_len = 0
-  #for i, pair in enumerate(sorted_coords): # name, lineno
-  #  if pair[0] == "main":
-  #    if i == len(sorted_coords)-1: # if no methods after main
-  #      main_len = file_len - pair[1]
-  #    else:
-  #      main_len = sorted_coords[i+1][1] - pair[1]
-  #    break
+  # start
+  main_len = 0
+  for i, pair in enumerate(sorted_coords): # name, lineno
+    if pair[0] == "main":
+      if i == len(sorted_coords)-1: # if no methods after main
+        main_len = file_len - pair[1]
+      else:
+        main_len = sorted_coords[i+1][1] - pair[1]
+      break
 
-  #avg_meth = float(fdcv.num_methods)/file_len if file_len != 0 else 0
-  #main_to_method = float(main_len)/avg_meth if avg_meth != 0 else 0
-  #params_to_methods = float(fdcv.num_params)/fdcv.num_methods if fdcv.num_methods != 0 else 0
+  avg_meth = float(fdcv.num_methods)/file_len if file_len != 0 else 0
+  main_to_method = float(main_len)/avg_meth if avg_meth != 0 else 0
+  params_to_methods = float(fdcv.num_params)/fdcv.num_methods if fdcv.num_methods != 0 else 0
+  #end
       
-  ret = []
-  #ret.append(avg_meth)
-  #ret.append(fcv.nested)
-  #ret.append(main_to_method)
-  #ret.append(params_to_methods) # average num params
-  #ret.append(sv.count/float(file_len)) # struct
-  #ret.append(iv.count/float(file_len))
+  #ret = []
+  # start
+  ret.append(avg_meth)
+  ret.append(fcv.nested)
+  ret.append(main_to_method)
+  ret.append(params_to_methods) # average num params
+  ret.append(sv.count/float(file_len)) # struct
+  ret.append(iv.count/float(file_len))
+  # end
   ret.append(fv.count/float(file_len))
   ret.append(tdv.count/float(file_len))
   ret.append(dwv.count/float(file_len))
@@ -376,12 +383,12 @@ def get_id_names(filename, folder):
 def get_kmers(filename, folder):
   ast = parse_file(folder + "/" + filename, use_cpp=True, cpp_path='gcc', 
                     cpp_args=['-E', '-c', '-std=c99',  r'-I/usr/bin/pycparser/utils/fake_libc_include'])
-  #idv = IDVisitor()
-  #idv.visit(ast)
-  #return idv.kmers
+  idv = IDVisitor()
+  idv.visit(ast)
+  #return idv.var_names#var_names
   dv = DeclVisitor()
   dv.visit(ast)
-  return dv.names
+  return dv.names + idv.kmers
 
 def get_full_names(filename):
   ast = parse_file(filename, use_cpp=True, cpp_path='gcc', 
@@ -390,8 +397,8 @@ def get_full_names(filename):
   idv.visit(ast)
   return idv.var_names
 
-def get_tokens(filename):
-  ast = parse_file(filename, use_cpp=True, cpp_path='gcc', 
+def get_tokens(filename, folder):
+  ast = parse_file(folder + "/" + filename, use_cpp=True, cpp_path='gcc', 
                     cpp_args=['-E', '-std=c99',  r'-I/usr/bin/pycparser/utils/fake_libc_include'])
   idv = IDVisitor()
   idv.visit(ast)

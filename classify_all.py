@@ -1,5 +1,6 @@
 from ast_lib import *
 from sklearn import preprocessing, model_selection, svm, metrics, ensemble, linear_model
+from sklearn.externals import joblib
 from sklearn.feature_selection import SelectPercentile, mutual_info_classif, f_classif
 from classify_vars import do_vars
 from classify_fc import do_functional
@@ -8,11 +9,12 @@ from classify_ws import do_whitespace
 from classify_com import do_comments
 import pandas as pd
 import random
+import math
 import sys
 import os
 import numpy as np
 
-def run_main(folder):
+def run_from_csv(folder):
   np.seterr(divide='ignore', invalid='ignore')
 
   f_labels = ["for", "typedef", "dowhile", "while", "case", "ternary", "avg line length", "percent empty lines"]
@@ -25,44 +27,95 @@ def run_main(folder):
   fileappend = files.append
   filenameappend = filenames.append
 
-  for fname in allfiles: 
-    if not fname.endswith(".c"): continue
-    f = File(fname, fname.split("_")[0])
-    #files.append(f)
-    #filenames.append(fname)
+  feature_csv = open("feature_vectors.csv", "r").read().split("\n")
+  for line in feature_csv:
+    split_line = line.split(",")
+    f = File(split_line[0], split_line[1])
+    f.vec = [float(x) for x in split_line[2:]]
     fileappend(f)
-    filenameappend(fname)
+    filenameappend(split_line[0])
 
   print("getting variable names...")
   do_vars(filenames, files, folder) # 1 feature
+
+  var_len = len(files[0].vars_vec)
+  labels = ["s4", "s6"]
+  labels += f_labels
+  labels += l_labels
+  labels += ["var kmer" for x in range(0, var_len)]
+
+  for f in files:
+    f.vec += f.vars_vec
+
+# now its: ws, fc, lib, vars
+  if len(labels) != len(files[0].vec): # +1
+    print("HOUSTON WE HAVE A PROBLEM")
+  return process_data(files, labels)
+
+def run_main(folder, write_csv=False):
+  np.seterr(divide='ignore', invalid='ignore')
+
+  #f_labels = ["for", "typedef", "dowhile", "while", "case", "ternary", "avg line length", "percent empty lines"]
+  f_labels = ["assign to decl", "avg meth length", "nested", "main to method", "avg num params", "struct", "if", "for", "typedef", "dowhile", "while", "case", "ternary", "avg line length", "percent empty lines"]
+  l_labels = ["abs", "strtol", "qsort", "bzero", "strncmp", "strncpy", "strerror", "read", "memcmp", "free", "snprintf", "realloc", "atoi", "strtoll", "exit", "fgets", "sscanf", "memcpy", "atof", "atol", "puts", "srand", "fgetc", "sqrtl", "powl", "getline", "assert", "getchar", "putchar", "printf", "fprintf", "scanf", "fscanf", "strcat", "strcmp", "strcpy", "isdigit", "isalpha", "isalnum", "isspace", "toupper", "tolower", "errno", "islower", "isupper", "fabs", "pow", "sqrt", "time", "malloc", "calloc", "rand", "strlen", "freopen", "fopen", "strchr", "sprintf", "getc", "fclose", "memset"] 
+
+  allfiles = os.listdir(folder)
+  files = []
+  filenames = []
+  fileappend = files.append
+  filenameappend = filenames.append
+
+  for fname in allfiles: 
+    if not fname.endswith(".c"): continue
+    f = File(fname, fname.split("_")[0])
+    fileappend(f)
+    filenameappend(fname)
+
+  if not write_csv:
+    print("getting variable names...")
+    do_vars(filenames, files, folder) # 1 feature
   print("getting functional features...")
   do_functional(filenames, files, folder) # 12 features
   print("getting library features...")
   do_lib(filenames, files, folder) # 1 feature
-  #print("getting comments features...")
-  #do_comments(filenames, files, folder)
+
+  print("getting comments features...")
+  do_comments(filenames, files, folder)
+
   print("getting whitespace features...")
   whitespace = do_whitespace(filenames, files, folder) # 5 features? 1 feature?
 
   var_len = len(files[0].vars_vec)
   fc_len = len(files[0].fc_vec)
   lib_len = len(files[0].lib_vec)
-  labels = ["var kmer" for x in range(0, var_len)]
+  #labels = ["variable names"]
+  labels = ["s4", "s6"]
+  labels += f_labels
+  labels += l_labels
+  labels += ["var kmer" for x in range(0, var_len)]
   if len(f_labels) != fc_len:
     print("STOP NOW")
   if len(l_labels) != lib_len:
     print("STOP IMMEDIATELY")
-  labels += f_labels
-  labels += l_labels
-  #labels += ["avg comment length", "num comments"]
-  labels += ["s4", "s6"]
+  labels += ["avg comment length", "num comments"]
 
+  feature_vectors = []
 
   for f, ws in zip(files, whitespace):
-    f.vec = ws.ws_vec + f.vars_vec + f.fc_vec + f.com_vec + f.lib_vec
+    f.vec = ws.ws_vec + f.fc_vec + f.lib_vec + f.vars_vec + f.com_vec
+    feature_vectors.append(",".join([str(x) for x in [f.name, f.author] + f.vec]))
 
-  if len(labels) != len(files[0].vec):
+  if write_csv:
+    with open("feature_vectors.csv", "a+") as f:
+      f.write("\n".join(run_main(sys.argv[1])))
+    exit(0)
+
+# now its: ws, fc, lib, vars
+  if len(labels) != len(files[0].vec): # +1
     print("HOUSTON WE HAVE A PROBLEM")
+  return process_data(files, labels)
+
+def process_data(files, labels):
 
   data = []
   tmpdata = []
@@ -73,6 +126,27 @@ def run_main(folder):
   for f1 in files:
     for f2 in files:
       if f1 is f2 : break
+      #dot = 0
+      #bag1 = f1.bag
+      #bag2 = f2.bag
+      #len1 = len(f1.words)
+      #len2 = len(f2.words)
+      #mag1 = 0
+      #mag2 = 0
+      #for word in set(bag1.keys() + bag2.keys()):
+      #  if word in bag1 and word in bag2:
+      #    dot += (bag1[word]/float(len1))*(bag2[word]/float(len2))
+      #    mag1 += (bag1[word]/float(len1))**2
+      #    mag2 += (bag2[word]/float(len2))**2
+      #  elif word in bag1:
+      #    mag1 += (bag1[word]/float(len1))**2
+      #  elif word in bag2:
+      #    mag2 += (bag2[word]/float(len2))**2
+      #  else:
+      #    dot += 0
+      #cos_sim = dot/(math.sqrt(mag1)*math.sqrt(mag2))
+      #result = [cos_sim]
+      #result += [(a-b)**2 for a, b in zip(f1.vec, f2.vec)]
       result = [(a-b)**2 for a, b in zip(f1.vec, f2.vec)]
       resultappend = result.append
       if f1.author == f2.author:
@@ -104,8 +178,8 @@ def run_main(folder):
 
   classifier = ensemble.RandomForestClassifier()
   classifier.fit(X_train, y_train)
+  #joblib.dump(classifier, "my_model.pkl", compress=9)
 
-  print(X_test)
   prediction = classifier.predict(X_test)
 
   y_pred = []
@@ -130,6 +204,7 @@ if __name__ == "__main__":
   fscore = 0
   for i in range(1):
     p, r, f, s = run_main(sys.argv[1])
+    #p, r, f, s = run_from_csv(sys.argv[1])
     prec += p[0]
     rec += r[0]
     fscore += f[0]
