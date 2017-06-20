@@ -16,6 +16,8 @@ class File():
     self.name = name
     self.author = author
     self.words = words
+    self.folder = ""
+    self.camel_case = True
     self.tf = {}
     self.bag = {}
     self.lib_tf = {}
@@ -236,7 +238,7 @@ def get_lib_tf_idf(files, filenames, folder):
     dom = f.name.split("_")[-1].strip(".c")
     vec = {name:0 for name in funcs} # funcs is global set of all possible functions
     ast = parse_file(filename, use_cpp=True, cpp_path='gcc', 
-                      cpp_args=['-E', '-std=c99',  r'-I/usr/bin/pycparser/utils/fake_libc_include'])
+                      cpp_args=['-E', '-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
     fcv = FuncCallVisitor()
     fdv = FuncDefVisitor()
     fcv.visit(ast)
@@ -254,7 +256,7 @@ def get_lib_tf_idf(files, filenames, folder):
     dom = f.name.split("_")[-1].strip(".c")
     vec = {name:0 for name in funcs} # funcs is global set of all possible functions
     ast = parse_file(filename, use_cpp=True, cpp_path='gcc', 
-                      cpp_args=['-E', '-std=c99',  r'-I/usr/bin/pycparser/utils/fake_libc_include'])
+                      cpp_args=['-E', '-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
     fcv = FuncCallVisitor()
     fdv = FuncDefVisitor()
     fcv.visit(ast)
@@ -280,7 +282,7 @@ def get_lib(filename):
   vec = {name:0 for name in funcs}
   tf = {}
   ast = parse_file(filename, use_cpp=True, cpp_path='gcc', 
-                    cpp_args=['-E', '-c', '-std=c99',  r'-I/usr/bin/pycparser/utils/fake_libc_include'])
+                    cpp_args=['-E', '-c', '-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
   fcv = FuncCallVisitor()
   fdv = FuncDefVisitor()
   fcv.visit(ast)
@@ -300,7 +302,7 @@ def get_lib(filename):
 def get_functional(filename):
   ast = parse_file(filename, use_cpp=True, cpp_path='gcc', 
                     cpp_args=['-E', '-c', 
-                    '-std=c99',  r'-I/usr/bin/pycparser/utils/fake_libc_include'])
+                    '-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
   av = AssignmentVisitor() #
   dv = DeclVisitor() #
   fdv = FuncDefVisitor()
@@ -333,33 +335,35 @@ def get_functional(filename):
   sorted_coords = sorted(fdv.coords, key=lambda x: x[1])
 
   # below
-  ret = [float(len(av.assignments))/len(dv.declarations) if len(dv.declarations) != 0 else 0]
+ # ret = [float(len(av.assignments))/len(dv.declarations) if len(dv.declarations) != 0 else 0]
 
-  file_len = len(open(os.path.abspath(filename), 'r').readlines())
+  file_len = 0
+  with open(os.path.abspath(filename, 'r')) as len_file:
+    file_len = len(len_file.readlines())
 
   # start
-  main_len = 0
-  for i, pair in enumerate(sorted_coords): # name, lineno
-    if pair[0] == "main":
-      if i == len(sorted_coords)-1: # if no methods after main
-        main_len = file_len - pair[1]
-      else:
-        main_len = sorted_coords[i+1][1] - pair[1]
-      break
+  #main_len = 0
+  #for i, pair in enumerate(sorted_coords): # name, lineno
+  #  if pair[0] == "main":
+  #    if i == len(sorted_coords)-1: # if no methods after main
+  #      main_len = file_len - pair[1]
+  #    else:
+  #      main_len = sorted_coords[i+1][1] - pair[1]
+  #    break
 
-  avg_meth = float(fdcv.num_methods)/file_len if file_len != 0 else 0
-  main_to_method = float(main_len)/avg_meth if avg_meth != 0 else 0
-  params_to_methods = float(fdcv.num_params)/fdcv.num_methods if fdcv.num_methods != 0 else 0
+  #avg_meth = float(fdcv.num_methods)/file_len if file_len != 0 else 0
+  #main_to_method = float(main_len)/avg_meth if avg_meth != 0 else 0
+  #params_to_methods = float(fdcv.num_params)/fdcv.num_methods if fdcv.num_methods != 0 else 0
   #end
       
-  #ret = []
+  ret = []
   # start
-  ret.append(avg_meth)
-  ret.append(fcv.nested)
-  ret.append(main_to_method)
-  ret.append(params_to_methods) # average num params
-  ret.append(sv.count/float(file_len)) # struct
-  ret.append(iv.count/float(file_len))
+  #ret.append(avg_meth)
+  #ret.append(fcv.nested)
+  #ret.append(main_to_method)
+  #ret.append(params_to_methods) # average num params
+  #ret.append(sv.count/float(file_len)) # struct
+  #ret.append(iv.count/float(file_len))
   # end
   ret.append(fv.count/float(file_len))
   ret.append(tdv.count/float(file_len))
@@ -372,7 +376,7 @@ def get_functional(filename):
 
 def get_id_names(filename, folder):
   ast = parse_file(folder + "/" + filename, use_cpp=True, cpp_path='gcc', 
-                    cpp_args=['-E', '-std=c99',  r'-I/usr/bin/pycparser/utils/fake_libc_include'])
+                    cpp_args=['-E', '-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
   #av = AssignmentVisitor()
   #av.visit(ast)
   dv = DeclVisitor()
@@ -382,24 +386,24 @@ def get_id_names(filename, folder):
 
 def get_kmers(filename, folder):
   ast = parse_file(folder + "/" + filename, use_cpp=True, cpp_path='gcc', 
-                    cpp_args=['-E', '-c', '-std=c99',  r'-I/usr/bin/pycparser/utils/fake_libc_include'])
-  idv = IDVisitor()
-  idv.visit(ast)
+                    cpp_args=['-E', '-c', '-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
+  #idv = IDVisitor()
+  #idv.visit(ast)
   #return idv.var_names#var_names
   dv = DeclVisitor()
   dv.visit(ast)
-  return dv.names + idv.kmers
+  return dv.names #+ idv.kmers
 
 def get_full_names(filename):
   ast = parse_file(filename, use_cpp=True, cpp_path='gcc', 
-                    cpp_args=['-E', '-std=c99',  r'-I/usr/bin/pycparser/utils/fake_libc_include'])
+                    cpp_args=['-E', '-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
   idv = IDVisitor()
   idv.visit(ast)
   return idv.var_names
 
 def get_tokens(filename, folder):
   ast = parse_file(folder + "/" + filename, use_cpp=True, cpp_path='gcc', 
-                    cpp_args=['-E', '-std=c99',  r'-I/usr/bin/pycparser/utils/fake_libc_include'])
+                    cpp_args=['-E', '-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
   idv = IDVisitor()
   idv.visit(ast)
   return idv.tokens
@@ -440,15 +444,21 @@ def get_ws(fname):
   #os.system("gindent -gnu " + fname + " -o " + gnu_name)
   #os.system("gindent -kr " + fname + " -o " + kr_name)
   #os.system("gindent -i2 -c2 -cd2 -nbap -cli2 " + fname + " -o " + s3_name) # indent twice
-  os.system("gindent -nsaf -nsai -nsaw -nlps -nprs -nbfda -nbc -ncs " + fname + " -o " + s4_name) # everything tight
-  os.system("gindent -br -brf -brs -l50 -lps -nce -ncdw " + fname + " -o " + s6_name) #braces on same line, short lines, no cuddle
+  os.system("indent -nsaf -nsai -nsaw -nlps -nprs -nbfda -nbc -ncs " + fname + " -o " + s4_name) # everything tight
+  os.system("indent -br -brf -brs -l50 -lps -nce -ncdw " + fname + " -o " + s6_name) #braces on same line, short lines, no cuddle
 
-  orig = open(fname, 'r').read()
+  orig_file = open(fname, 'r')
+  orig = orig_file.read()
+  orig_file.close()
   #gnu_content = open(gnu_name, 'r').read()
   #kr_content = open(kr_name, 'r').read()
   #s3_content = open(s3_name, 'r').read()
-  s4_content = open(s4_name, 'r').read()
-  s6_content = open(s6_name, 'r').read()
+  s4_file = open(s4_name, 'r')
+  s6_file = open(s6_name, 'r')
+  s4_content = s4_file.read()
+  s6_content = s6_file.read()
+  s4_file.close()
+  s6_file.close()
 
   orig_size = os.path.getsize(fname)
   #gnu = float(lcs(orig, gnu_content))/max(orig_size, os.path.getsize(gnu_name))
