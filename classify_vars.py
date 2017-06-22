@@ -2,32 +2,47 @@ from ast_lib import *
 from sklearn.feature_selection import VarianceThreshold, SelectPercentile, SelectKBest, f_classif
 from sklearn.externals import joblib
 from sklearn import preprocessing, model_selection, svm, metrics, ensemble, linear_model
+from nltk.stem.wordnet import WordNetLemmatizer
 import pandas as pd
 import numpy as np
 import random
 import math
 import os
 
+def split_string(name):
+  if "_" in name:
+    return [x.lower() for x in name.split("_")]
+  else:
+    return [x.lower() for x in re.sub('([a-z])([A-Z])', r'\1 \2', name).split()]
+
 def do_vars(filenames, files, folder):
-  dictionary = set() #
+  #dictionary = set() #
+  lmtzr = WordNetLemmatizer()
 
   for fn, fl in zip(filenames, files):
     words = get_kmers(fn, folder)
     fl.words = words  # contains kmers
-    dictionary.update(words) #
+    #dictionary.update(words) #
 
   for f in files:
-    f.tf = {name:0 for name in dictionary} #
-    #for word in f.words:
-    #  if word in f.bag:
-    #    f.bag[word] += 1
-    #  else:
-    #    f.bag[word] = 1
+    underscores = 0
+    #f.tf = {name:0 for name in dictionary} #
     for word in f.words:
-      f.tf[word] += 1
+      if "_" in word:
+        underscores += 1
+      split_name = [lmtzr.lemmatize(x) for x in split_string(word)] # remove case, split into subtokens, stem
+      for subtoken in split_name:
+        if subtoken in f.bag:
+          f.bag[subtoken] += 1
+        else:
+          f.bag[subtoken] = 1
+      if underscores > 2:
+        f.camel_case = False 
+    #for word in f.words:
+    #  f.tf[word] += 1
 
-    l = len(f.words)
-    f.vars_vec = [x/float(l) for x in f.tf.values()] if l != 0 else [0 for x in f.tf.values()]
+    #l = len(f.words)
+    #f.vars_vec = [x/float(l) for x in f.tf.values()] if l != 0 else [0 for x in f.tf.values()]
 
 def run_main():
   filenames = os.listdir(sys.argv[1])
@@ -47,31 +62,34 @@ def run_main():
   for f1 in files:
     for f2 in files:
       if f1 is f2 : break
-      result = [(a-b)**2 for a, b in zip(f1.vars_vec, f2.vars_vec)]
-      #dot = 0
-      #bag1 = f1.bag
-      #bag2 = f2.bag
-      #len1 = len(f1.words)
-      #len2 = len(f2.words)
-      #mag1 = 0
-      #mag2 = 0
-      #for word in set(bag1.keys() + bag2.keys()):
-      #  if word in bag1 and word in bag2:
-      #    dot += (bag1[word]/float(len1))*(bag2[word]/float(len2))
-      #    mag1 += (bag1[word]/float(len1))**2
-      #    mag2 += (bag2[word]/float(len2))**2
-      #  elif word in bag1:
-      #    mag1 += (bag1[word]/float(len1))**2
-      #  elif word in bag2:
-      #    mag2 += (bag2[word]/float(len2))**2
-      #  else:
-      #    dot += 0
-      #cos_sim = dot/(math.sqrt(mag1)*math.sqrt(mag2))
-      #print("For authors " + f1.author + " and " + f2.author)
-      #print("vector 1 is " + str(f1.bag))
-      #print("vector 2 is " + str(f2.bag))
-      #print("Cos sim: " + str(cos_sim))
-      #result = [cos_sim]
+      #result = [(a-b)**2 for a, b in zip(f1.vars_vec, f2.vars_vec)]
+      dot = 0
+      bag1 = f1.bag
+      bag2 = f2.bag
+      len1 = len(f1.words)
+      len2 = len(f2.words)
+      mag1 = 0
+      mag2 = 0
+      for word in set(bag1.keys() + bag2.keys()):
+        if word in bag1 and word in bag2:
+          dot += (bag1[word]/float(len1))*(bag2[word]/float(len2))
+          mag1 += (bag1[word]/float(len1))**2
+          mag2 += (bag2[word]/float(len2))**2
+        elif word in bag1:
+          mag1 += (bag1[word]/float(len1))**2
+        elif word in bag2:
+          mag2 += (bag2[word]/float(len2))**2
+        else:
+          dot += 0
+      cos_sim = 0
+      if mag1 != 0 and mag2 != 0:
+        cos_sim = dot/(math.sqrt(mag1)*math.sqrt(mag2))
+      print("For authors " + f1.author + " and " + f2.author)
+      print("vector 1 is " + str(f1.bag))
+      print("vector 2 is " + str(f2.bag))
+      print("Cos sim: " + str(cos_sim))
+      casing = 1 if f1.camel_case == f2.camel_case else 0
+      result = [cos_sim, casing]
 
       if f1.author == f2.author:
         same += 1

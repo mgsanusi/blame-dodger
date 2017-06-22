@@ -10,7 +10,7 @@ import numpy
 
 def one_pair(f):
   print(f.name)
-  f.ws_vec = get_ws("dataset/" + f.name) #gcj
+  f.ws_vec = get_ws(f.folder + "/" + f.name) #gcj
   return f
   
 def do_whitespace(filenames, files, folder):
