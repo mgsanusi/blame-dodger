@@ -125,19 +125,21 @@ class TypeDeclVisitor(c_ast.NodeVisitor):
         if camel_case:
           new_name = "".join(x.capitalize() for x in split_name)
           name_list = list(new_name)
-          name_list[0] = name_list[0].lower()
+          if len(name_list) > 0:
+            name_list[0] = name_list[0].lower()
           new_name = "".join(name_list)
         else:
           new_name = "_".join(split_name)
 
-        if new_name in file_varnames[current_filename] or len(new_name) == 0 or new_name in keywords: # if it's already being used, switch it back
-          if camel_case:
+        if current_filename not in file_varnames or new_name in file_varnames[current_filename] or len(new_name) == 0 or new_name in keywords: # if it's already being used, switch it back
+          if camel_case and len(split_name) > 0:
             new_name = "".join(x.capitalize() for x in split_string(node.declname))
             name_list = list(new_name)
-            name_list[0] = name_list[0].lower()
+            if len(name_list) > 0:
+              name_list[0] = name_list[0].lower()
             new_name = "".join(name_list)
           else:
-            new_name = "_".join(x for x in split_string(node.declname))
+            new_name = "_".join([x for x in split_string(node.declname)])
           kept += 1
         elif "".join(split_name) == "".join(split_string(node.declname)):
           kept += 1
@@ -188,6 +190,7 @@ class AssignmentVisitor(c_ast.NodeVisitor):
       node.lvalue.name = "changed"
     self.generic_visit(node)
 
+# changes var names
 def populate_and_transform(filenames, folder):
   global dictionary
   global current_filename
@@ -197,8 +200,9 @@ def populate_and_transform(filenames, folder):
   global file_varnames
 
   for f in filenames:
+    print(f)
     ast = parse_file(folder + "/" + f, use_cpp=True, cpp_path='gcc', 
-                      cpp_args=['-E', '-c', '-std=c99',  r'-I/usr/bin/pycparser/utils/fake_libc_include'])
+                      cpp_args=['-E', '-c', '-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
 
     # make dictionary of global/local and ptr/non-ptr
     global_vars = [x[1] for x in ast.children() if isinstance(x[1], c_ast.Decl)]
@@ -260,8 +264,9 @@ def transform(filename):
 
     # parse file
     #t0 = time.time()
+    print(filename)
     ast = parse_file(filename, use_cpp=True, cpp_path='gcc', 
-                      cpp_args=['-E', '-c', '-std=c99',  r'-I/usr/bin/pycparser/utils/fake_libc_include'])
+                      cpp_args=['-E', '-c', '-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
     # make changes to ast
 
     # type decl visitor to generate new ones
@@ -280,7 +285,7 @@ def transform(filename):
     for line in output.split("\n"):
       if line[0:7] == "typedef" and beginning:
         continue
-      elif line[0:7] == "typedef" and not beginning:
+      elif line[0:7] == "typedef" and not beginning and "struct" not in line.split():
         mod_output += line + "\n"
       else: # line not typedef
         beginning = False
@@ -294,16 +299,11 @@ if __name__ == "__main__":
   with open("universe.txt", "r") as f:
     universe = f.read().split("\n")
   if len(sys.argv) > 1:
-    #translate_to_c(sys.argv[1])
     os.system("mkdir modified_vars")
     folder_contents = os.listdir(sys.argv[1])
 
     # for each file
     populate_and_transform(folder_contents, sys.argv[1])
     print(str(transformed) + " variable names transformed. " + str(kept) + " variables kept.")
- #   for f in folder_contents:
- #     with open("modified_vars/" + f, 'w') as write_file:
- #       write_file.write(transform(sys.argv[1] + "/" + f))
- #       transform(sys.argv[1] + "/" + f)
   else:
     print("please provide a filename as argument")

@@ -9,8 +9,9 @@ import os
 import numpy
 
 def one_pair(f):
-  print(f.name)
-  f.ws_vec = get_ws(f.folder + "/" + f.name) #gcj
+  print f.name + "...",
+  f.ws_vec = get_ws(f.folder + "/" + f.name, gnu=True) #gcj
+  print "finished" 
   return f
   
 def do_whitespace(filenames, files, folder):
@@ -24,7 +25,7 @@ def do_whitespace(filenames, files, folder):
   #  results = p.map(partial(one_pair, folder=folder), files)
   #  p.terminate()
 
-  os.system("rm -r temp")
+  #os.system("rm -r temp")
   return results
 
 def run_main():

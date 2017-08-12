@@ -7,9 +7,9 @@ import os
 import numpy
 
 def do_lib(filenames, files, folder):
-  #for fname, f in zip(filenames, files):
-  #  f.lib_vec = get_lib(folder + "/" + fname)
-  get_lib_tf_idf(files, filenames, folder)
+  for fname, f in zip(filenames, files):
+    f.lib_vec = get_lib(folder + "/" + fname)
+  #get_lib_tf_idf(files, filenames, folder)
 
 def run_main(folder):
   allfiles = os.listdir(folder)

@@ -3,6 +3,7 @@ import sys
 import subprocess
 import math
 import re
+import scipy
 from pycparser import preprocess_file, parse_file, c_ast, c_parser, c_generator
 
 funcs = ["abs", "strtol", "qsort", "bzero", "strncmp", "strncpy", "strerror", "read", "memcmp", "free", "snprintf", "realloc", "atoi", "strtoll", "exit", "fgets", "sscanf", "memcpy", "atof", "atol", "puts", "srand", "fgetc", "sqrtl", "powl", "getline", "assert", "getchar", "putchar", "printf", "fprintf", "scanf", "fscanf", "strcat", "strcmp", "strcpy", "isdigit", "isalpha", "isalnum", "isspace", "toupper", "tolower", "errno", "islower", "isupper", "fabs", "pow", "sqrt", "time", "malloc", "calloc", "rand", "strlen", "freopen", "fopen", "strchr", "sprintf", "getc", "fclose", "memset"] 
@@ -213,8 +214,46 @@ def lcs(X, Y):
 
   return L[m][n]
 
-def tf(word, tf_vec):
-  return tf_vec[word]
+def cos_jaccard(bag1, bag2, len1, len2):
+  dot = 0
+  mag1 = 0
+  mag2 = 0
+  intersection = 0
+  for word in set(bag1.keys() + bag2.keys()):
+    if word in bag1 and word in bag2:
+      intersection += 1
+      dot += (bag1[word]/float(len1))*(bag2[word]/float(len2))
+      mag1 += (bag1[word]/float(len1))**2
+      mag2 += (bag2[word]/float(len2))**2
+    elif word in bag1:
+      mag1 += (bag1[word]/float(len1))**2
+    elif word in bag2:
+      mag2 += (bag2[word]/float(len2))**2
+    else:
+      dot += 0
+  cos_sim = 0
+  if mag1 != 0 and mag2 != 0:
+    cos_sim = dot/(math.sqrt(mag1)*math.sqrt(mag2))
+  jaccard = float(intersection)/(len(bag1) + len(bag2) - intersection) if len(bag1) > 0 and len(bag2) > 0 else 1
+  return cos_sim, jaccard
+
+def kl_divergence(bag1, bag2):
+  both_bags = set(bag1.values() + bag2.values())
+  pk = []
+  qk = []
+  for word in both_bags:
+    if word in bag2:
+      qk.append(bag2[word]/float(len(bag2)))
+    else:
+      qk.append(0.000001)
+    if word in bag1:
+      pk.append(bag1[word]/float(len(bag1)))
+    else:
+      pk.append(0.000001)
+  return scipy.stats.entropy(pk, qk)
+
+def tf(word, tf_vec, num_words):
+  return float(tf_vec[word])/num_words
 
 def n_containing(word, tf_list):
   return sum(1 for tf in tf_list if word in tf)
@@ -222,8 +261,8 @@ def n_containing(word, tf_list):
 def idf(word, tf_list):
   return math.log(len(tf_list)/1+n_containing(word, tf_list))
 
-def tf_idf(word, tf_vec, tf_list):
-  return tf(word, tf_vec)*idf(word, tf_list)
+def tf_idf(word, tf_vec, num_words, tf_list):
+  return tf(word, tf_vec, num_words)*idf(word, tf_list)
 
 def get_lib_tf_idf(files, filenames, folder):
   exts = [f.split("_")[-1].strip(".c") for f in filenames] # get domain categories
@@ -276,13 +315,13 @@ def get_lib_tf_idf(files, filenames, folder):
   for f in files:
     dom = f.name.split("_")[-1].strip(".c")
     for word in funcs:
-      f.lib_vec.append(tf_idf(word, f.lib_tf, tf_dom[dom]))
+      f.lib_vec.append(tf_idf(word, f.lib_tf, len(funcs), tf_dom[dom]))
 
-def get_lib(filename):
+def get_lib(filename, ast):
   vec = {name:0 for name in funcs}
   tf = {}
-  ast = parse_file(filename, use_cpp=True, cpp_path='gcc', 
-                    cpp_args=['-E', '-c', '-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
+  #ast = parse_file(filename, use_cpp=True, cpp_path='gcc', 
+  #                  cpp_args=['-E', '-c', '-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
   fcv = FuncCallVisitor()
   fdv = FuncDefVisitor()
   fcv.visit(ast)
@@ -299,32 +338,32 @@ def get_lib(filename):
       
   return tf.values()
 
-def get_functional(filename):
-  ast = parse_file(filename, use_cpp=True, cpp_path='gcc', 
-                    cpp_args=['-E', '-c', 
-                    '-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
-  av = AssignmentVisitor() #
-  dv = DeclVisitor() #
+def get_functional(filename, ast):
+  #ast = parse_file(filename, use_cpp=True, cpp_path='gcc', 
+  #                  cpp_args=['-E', '-c', 
+                    #'-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
+  #av = AssignmentVisitor() #
+  #dv = DeclVisitor() #
   fdv = FuncDefVisitor()
-  fcv = FuncCallVisitor() #
+  #fcv = FuncCallVisitor() #
   tdv = TypedefVisitor()
-  fdcv = FuncDeclVisitor() #
-  sv = StructVisitor() #
-  iv = IfVisitor() #
+  #fdcv = FuncDeclVisitor() #
+  #sv = StructVisitor() #
+  #iv = IfVisitor() #
   fv = ForVisitor()
   dwv = DoWhileVisitor()
   wv = WhileVisitor()
   cv = CaseVisitor()
   swv = SwitchVisitor()
   tv = TernaryOpVisitor()
-  av.visit(ast) #
-  dv.visit(ast) #
+  #av.visit(ast) #
+  #dv.visit(ast) #
   fdv.visit(ast)
-  fcv.visit(ast) #
+  #fcv.visit(ast) #
   tdv.visit(ast)
-  fdcv.visit(ast) #
-  sv.visit(ast) #
-  iv.visit(ast) #
+  #fdcv.visit(ast) #
+  #sv.visit(ast) #
+  #iv.visit(ast) #
   fv.visit(ast)
   dwv.visit(ast)
   wv.visit(ast)
@@ -338,8 +377,8 @@ def get_functional(filename):
  # ret = [float(len(av.assignments))/len(dv.declarations) if len(dv.declarations) != 0 else 0]
 
   file_len = 0
-  with open(os.path.abspath(filename, 'r')) as len_file:
-    file_len = len(len_file.readlines())
+  with open(os.path.abspath(filename), 'r') as len_file:
+    file_len = len(re.findall('[\w\d]+|[\[\]\(\){};,.+-=><!\*&]', len_file.read()))
 
   # start
   #main_len = 0
@@ -384,9 +423,9 @@ def get_id_names(filename, folder):
   #return av.var_names
   return dv.declarations
 
-def get_kmers(filename, folder):
-  ast = parse_file(folder + "/" + filename, use_cpp=True, cpp_path='gcc', 
-                    cpp_args=['-E', '-c', '-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
+def get_kmers(filename, folder, ast):
+  #ast = parse_file(folder + "/" + filename, use_cpp=True, cpp_path='gcc', 
+  #                  cpp_args=['-E', '-c', '-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
   #idv = IDVisitor()
   #idv.visit(ast)
   #return idv.var_names#var_names
@@ -432,43 +471,63 @@ def get_comments(filename, file_obj):
   #file_obj.com_vec = [avg_len, ratio_s_to_m, num_comments]
   file_obj.com_vec = [avg_len, num_comments]
   
+def row_major_labels(labels):
+  result = []
+  for feat1 in labels:
+    for feat2 in labels:
+      result.append(feat1 + "*" + feat2)
+  return result
 
-def get_ws(fname):
+def get_ws(fname, gnu=False):
+  temp_contents = os.listdir("temp")
   basename = fname.strip(".c").split("/")[-1]
-  #gnu_name= "temp/" + basename + "_gnu.c"
   #kr_name = "temp/" + basename + "_kr.c"
   #s3_name = "temp/" + basename + "_s3.c"
-  s4_name = "temp/" + basename + "_s4.c"
-  s6_name = "temp/" + basename + "_s6.c"
-
-  #os.system("gindent -gnu " + fname + " -o " + gnu_name)
-  #os.system("gindent -kr " + fname + " -o " + kr_name)
-  #os.system("gindent -i2 -c2 -cd2 -nbap -cli2 " + fname + " -o " + s3_name) # indent twice
-  os.system("indent -nsaf -nsai -nsaw -nlps -nprs -nbfda -nbc -ncs " + fname + " -o " + s4_name) # everything tight
-  os.system("indent -br -brf -brs -l50 -lps -nce -ncdw " + fname + " -o " + s6_name) #braces on same line, short lines, no cuddle
 
   orig_file = open(fname, 'r')
   orig = orig_file.read()
   orig_file.close()
-  #gnu_content = open(gnu_name, 'r').read()
-  #kr_content = open(kr_name, 'r').read()
-  #s3_content = open(s3_name, 'r').read()
-  s4_file = open(s4_name, 'r')
-  s6_file = open(s6_name, 'r')
-  s4_content = s4_file.read()
-  s6_content = s6_file.read()
-  s4_file.close()
-  s6_file.close()
-
   orig_size = os.path.getsize(fname)
+
+  if gnu:
+    gnu_name= "temp/" + basename + "_gnu.c"
+    if not gnu_name in temp_contents:
+      os.system("indent -gnu " + fname + " -o " + gnu_name)
+    gnu_content = open(gnu_name, 'r').read()
+
+    gnu = float(lcs(orig, gnu_content))/orig_size
+    return [gnu]
+  else:
+    s4_name = "temp/" + basename + "_s4.c"
+    s6_name = "temp/" + basename + "_s6.c"
+
+    if not s4_name in temp_contents or not s6_name in temp_contents:
+      #os.system("gindent -kr " + fname + " -o " + kr_name)
+      #os.system("gindent -i2 -c2 -cd2 -nbap -cli2 " + fname + " -o " + s3_name) # indent twice
+      os.system("indent -nsaf -nsai -nsaw -nlps -nprs -nbfda -nbc -ncs " + fname + " -o " + s4_name) # everything tight
+      os.system("indent -br -brf -brs -l50 -lps -nce -ncdw " + fname + " -o " + s6_name) #braces on same line, short lines, no cuddle
+
+    #kr_content = open(kr_name, 'r').read()
+    #s3_content = open(s3_name, 'r').read()
+    s4_file = open(s4_name, 'r')
+    s6_file = open(s6_name, 'r')
+    s4_content = s4_file.read()
+    s6_content = s6_file.read()
+    s4_file.close()
+    s6_file.close()
+    
+    s4 = float(lcs(orig, s4_content))/orig_size
+    s6 = float(lcs(orig, s6_content))/orig_size
+    return [s4, s6]
+
+  #orig_len = len(re.findall('[\w\d]+|[\[\]\(\){};,.+-=><!\*&]', orig))
   #gnu = float(lcs(orig, gnu_content))/max(orig_size, os.path.getsize(gnu_name))
   #kr = float(lcs(orig, kr_content))/max(orig_size, os.path.getsize(kr_name))
   #s3 = float(lcs(orig, s3_content))/max(orig_size, os.path.getsize(s3_name))
-  s4 = float(lcs(orig, s4_content))/max(orig_size, os.path.getsize(s4_name))
-  s6 = float(lcs(orig, s6_content))/max(orig_size, os.path.getsize(s6_name))
+  #s4 = float(lcs(orig, s4_content))/max(orig_size, os.path.getsize(s4_name))
+  #s6 = float(lcs(orig, s6_content))/max(orig_size, os.path.getsize(s6_name))
 
   #return [gnu, kr, s3, s4, s6]
-  return [s4, s6]
 
 #------------------------------------------------------------------------------
 if __name__ == "__main__":

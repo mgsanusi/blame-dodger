@@ -4,29 +4,45 @@ from sklearn.externals import joblib
 from sklearn import preprocessing, model_selection, svm, metrics, ensemble, linear_model
 from nltk.stem.wordnet import WordNetLemmatizer
 import pandas as pd
+from collections import OrderedDict
 import numpy as np
 import random
 import math
+import re
 import os
 
-def split_string(name):
-  if "_" in name:
-    return [x.lower() for x in name.split("_")]
-  else:
-    return [x.lower() for x in re.sub('([a-z])([A-Z])', r'\1 \2', name).split()]
-
-def do_vars(filenames, files, folder):
-  #dictionary = set() #
+def do_all(filenames, files, folder):
   lmtzr = WordNetLemmatizer()
-
   for fn, fl in zip(filenames, files):
-    words = get_kmers(fn, folder)
+  ## functional
+    ast = parse_file(folder + "/" + fn, use_cpp=True, cpp_path='gcc', 
+                      cpp_args=['-E', '-c', '-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
+    fl.fc_vec = get_functional(folder + "/" + fn, ast)
+    total_line = 0
+    empty = 0
+    num_line = 0
+    with open(folder + "/" + fn) as f:
+      content = f.readlines()
+      for line in content:
+        total_line += len(line)
+        num_line += 1
+        if len(line.strip()) == 0:
+          empty += 1
+    fl.fc_vec.append(float(total_line)/num_line) # avg line length
+    fl.fc_vec.append(float(empty)/num_line) # % empty lines
+  ## lib
+    fl.lib_vec = get_lib(folder + "/" + fn, ast)
+  ## varnames
+    varnames = get_kmers(fn, folder, ast)
+    words = []
+    for varname in varnames:
+      split_name = re.split('(\d+)', varname)
+      for subt in split_name:
+        words += split_string(subt)
     fl.words = words  # contains kmers
-    #dictionary.update(words) #
 
   for f in files:
     underscores = 0
-    #f.tf = {name:0 for name in dictionary} #
     for word in f.words:
       if "_" in word:
         underscores += 1
@@ -38,11 +54,89 @@ def do_vars(filenames, files, folder):
           f.bag[subtoken] = 1
       if underscores > 2:
         f.camel_case = False 
-    #for word in f.words:
-    #  f.tf[word] += 1
 
-    #l = len(f.words)
+def split_string(name):
+  if "_" in name:
+    return [x.lower() for x in name.split("_")]
+  else:
+    return [x.lower() for x in re.sub('([a-z])([A-Z])', r'\1 \2', name).split()]
+
+def do_cos_vars(filenames, files, folder):
+  lmtzr = WordNetLemmatizer()
+
+  for fn, fl in zip(filenames, files):
+    print(fn)
+    ast = parse_file(folder + "/" + fn, use_cpp=True, cpp_path='gcc', 
+                      cpp_args=['-E', '-c', '-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
+    varnames = get_kmers(fn, folder, ast)
+    words = []
+    for varname in varnames:
+      split_name = re.split('(\d+)', varname)
+      for subt in split_name:
+        words += split_string(subt)
+    fl.words = words  # contains kmers
+
+  for f in files:
+    underscores = 0
+    for word in f.words:
+      if "_" in word:
+        underscores += 1
+      split_name = [lmtzr.lemmatize(x) for x in split_string(word)] # remove case, split into subtokens, stem
+      for subtoken in split_name:
+        if subtoken in f.bag:
+          f.bag[subtoken] += 1
+        else:
+          f.bag[subtoken] = 1
+      if underscores > 2:
+        f.camel_case = False 
+
+def do_tf_vars(filenames, files, folder):
+  dictionary = set() #
+  tf_list = {}
+  lmtzr = WordNetLemmatizer()
+
+  for fn, fl in zip(filenames, files):
+    #words = get_kmers(fn, folder)
+    varnames = get_kmers(fn, folder)
+    words = []
+    for varname in varnames:
+      split_name = re.split('(\d+)', varname)
+      for subt in split_name:
+        words += split_string(subt)
+    for word in words:
+      if word in tf_list:
+        tf_list[word] += 1
+      else:
+        tf_list[word] = 1
+    fl.words = words  # contains kmers
+    dictionary.update(words) #
+
+  ordered_dict = list(dictionary)
+
+  # memory starts increasing here
+  for f in files:
+    underscores = 0
+    f.tf = OrderedDict([(name, 0) for name in ordered_dict])
+    #f.tf = {name:0 for name in ordered_dict} #
+    #for word in f.words:
+    #  if "_" in word:
+    #    underscores += 1
+    #  split_name = [lmtzr.lemmatize(x) for x in split_string(word)] # remove case, split into subtokens, stem
+    #  for subtoken in split_name:
+    #    if subtoken in f.bag:
+    #      f.bag[subtoken] += 1
+    #    else:
+    #      f.bag[subtoken] = 1
+    #  if underscores > 2:
+    #    f.camel_case = False 
+    for word in f.words:
+      f.tf[word] += 1
+
+    l = len(f.words)
     #f.vars_vec = [x/float(l) for x in f.tf.values()] if l != 0 else [0 for x in f.tf.values()]
+    f.vars_vec = [tf_idf(x, f.tf, len(f.words), tf_list) for x in f.tf.keys()] if len(f.words) != 0 else [0 for x in f.tf.keys()]
+    f.tf.clear()
+  return ordered_dict
 
 def run_main():
   filenames = os.listdir(sys.argv[1])
@@ -61,7 +155,7 @@ def run_main():
   notsame = 0
   for f1 in files:
     for f2 in files:
-      if f1 is f2 : break
+      if f1 is f2 : continue
       #result = [(a-b)**2 for a, b in zip(f1.vars_vec, f2.vars_vec)]
       dot = 0
       bag1 = f1.bag
