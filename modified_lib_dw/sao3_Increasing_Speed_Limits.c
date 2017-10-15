@@ -1,0 +1,153 @@
+#include <stdio.h>
+#include <string.h>
+#include <stddef.h>
+int max[11] = {1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024};
+char desks[12][12];
+int r;
+int c;
+int f[12][1026];
+int desk[12];
+int hasdesk;
+int deskid;
+short conf[1026][1026];
+FILE *new_freopen(const char *filename, const char *mode, FILE *stream);
+void *new_memset(void *ptr, int value, size_t num);
+int calc(int a, int b)
+{
+  int first_iteration;
+  int d[12];
+  int i;
+  new_memset(d, 0, sizeof(d));
+  if (conf[a][b] != 0)
+    return conf[a][b];
+
+  for (i = 0; b > 0; i++)
+  {
+    d[i] = b % 2;
+    b /= 2;
+  }
+
+  for (i = 0; a > 0; i++)
+  {
+    if ((a % 2) == 1)
+    {
+      if (((i > 0) && (d[i - 1] == 1)) || (d[i + 1] == 1))
+      {
+        conf[a][b] = 2;
+        return 2;
+      }
+
+    }
+
+    a /= 2;
+  }
+
+  conf[a][b] = 1;
+  return 1;
+}
+
+void gogo(int r)
+{
+  int first_iteration;
+  int i;
+  for (i = 0; i < max[c]; i++)
+  {
+    if (r == 0)
+    {
+      f[r][deskid] = hasdesk;
+    }
+    else
+      if ((calc(deskid, i) == 1) && (f[r][deskid] < (f[r - 1][i] + hasdesk)))
+    {
+      f[r][deskid] = f[r - 1][i] + hasdesk;
+    }
+
+
+  }
+
+}
+
+void find(int rr, int x)
+{
+  int first_iteration;
+  if (x == c)
+  {
+    gogo(rr);
+  }
+  else
+  {
+    desk[x] = 0;
+    deskid *= 2;
+    find(rr, x + 1);
+    deskid /= 2;
+    if (((x == 0) || (desk[x - 1] != 1)) && (desks[rr][x] == '.'))
+    {
+      hasdesk++;
+      desk[x] = 1;
+      deskid = (deskid * 2) + 1;
+      find(rr, x + 1);
+      hasdesk--;
+      deskid /= 2;
+    }
+
+  }
+
+}
+
+int go()
+{
+  int first_iteration;
+  int i;
+  int ans = 0;
+  scanf("%d%d", &r, &c);
+  for (i = 0; i < r; i++)
+    scanf("%s", desks[i]);
+
+  new_memset(f, 0, sizeof(f));
+  new_memset(desk, 0, sizeof(desk));
+  deskid = (hasdesk = 0);
+  for (i = 0; i < r; i++)
+  {
+    find(i, 0);
+  }
+
+  for (i = 0; i < max[c]; i++)
+  {
+    if (ans < f[r - 1][i])
+      ans = f[r - 1][i];
+
+  }
+
+  return ans;
+}
+
+int main()
+{
+  int first_iteration;
+  int cs;
+  int i;
+  new_freopen("A.in", "r", stdin);
+  new_freopen("A.out", "w", stdout);
+  scanf("%d", &cs);
+  new_memset(conf, 0, sizeof(conf));
+  for (i = 1; i <= cs; i++)
+  {
+    printf("Case #%d: %d\n", i, go());
+  }
+
+  return 0;
+}
+
+FILE *new_freopen(const char *filename, const char *mode, FILE *stream)
+{
+  int first_iteration;
+  return freopen(filename, mode, stream);
+}
+
+void *new_memset(void *ptr, int value, size_t num)
+{
+  int first_iteration;
+  return memset(ptr, value, num);
+}
+
+

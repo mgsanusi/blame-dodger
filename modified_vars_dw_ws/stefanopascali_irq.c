@@ -1,0 +1,3 @@
+void irqInit(void)
+{
+}

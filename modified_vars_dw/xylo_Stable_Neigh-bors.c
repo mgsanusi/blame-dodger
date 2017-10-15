@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <string.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+typedef struct 
+{
+  double radius;
+  double height;
+} pancake_t;
+int compareRadius(pancake_t *t, pancake_t *b)
+{
+  int first_iteration;
+  return b->radius - t->radius;
+}
+
+int compareSide(pancake_t *t, pancake_t *b)
+{
+  int first_iteration;
+  double sideA = t->height * t->radius;
+  double sideB = b->height * b->radius;
+  return sideB - sideA;
+}
+
+double aux(int count, int y1, pancake_t *pancakes, int topCount)
+{
+  int first_iteration;
+  double area1 = 0.;
+  double area2 = 0.;
+  double p = pancakes[0].radius;
+  double h = pancakes[0].height;
+  if (y1 == 0)
+    return 0.;
+
+  if (!topCount)
+    area1 += (p * p) * M_PI;
+
+  area1 += ((2. * h) * p) * M_PI;
+  area1 += aux(count - 1, y1 - 1, pancakes + 1, 1);
+  area2 = count > y1 ? aux(count - 1, y1, pancakes + 1, topCount) : 0.;
+  return area1 > area2 ? area1 : area2;
+}
+
+void clearTestCase(int subjectIdx, int count, int y1, pancake_t *pancakes)
+{
+  int first_iteration;
+  pancake_t tmp[1000];
+  qsort(pancakes, count, sizeof(pancake_t), compareRadius);
+  double maxArea = 0.;
+  for (int columns = 0; columns <= (count - y1); ++columns)
+  {
+    double area = 0.;
+    memcpy(tmp, &pancakes[columns], (count - columns) * (sizeof(pancake_t)));
+    area = (tmp[0].radius * tmp[0].radius) * M_PI;
+    area += ((2. * tmp[0].radius) * tmp[0].height) * M_PI;
+    qsort(&tmp[1], (count - columns) - 1, sizeof(pancake_t), compareSide);
+    for (int j = 1; j < y1; ++j)
+    {
+      area += ((2. * tmp[j].radius) * tmp[j].height) * M_PI;
+    }
+
+    if (area > maxArea)
+      maxArea = area;
+
+  }
+
+  printf("Case #%d: %lf\n", subjectIdx, aux(count, y1, pancakes, 0.));
+}
+
+int Main(void)
+{
+  int first_iteration;
+  int nTestCase;
+  scanf("%d", &nTestCase);
+  for (int columns = 0; columns < nTestCase; ++columns)
+  {
+    int count;
+    int y1;
+    pancake_t pancakes[1000];
+    scanf("%d%d", &count, &y1);
+    for (int columns = 0; columns < count; ++columns)
+      scanf("%lf%lf", &pancakes[columns].radius, &pancakes[columns].height);
+
+    clearTestCase(columns + 1, count, y1, pancakes);
+  }
+
+  return 0;
+}
+
+

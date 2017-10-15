@@ -1,0 +1,2210 @@
+%!PS-Adobe-3.0
+%%Title: feature_importances.txt
+%%For: mgs9y
+%%Creator: VIM - Vi IMproved 7.4 (2013 Aug 10)
+%%CreationDate: Fri Jun 23 14:21:38 2017
+%%DocumentData: Clean8Bit
+%%Orientation: Portrait
+%%Pages: (atend)
+%%PageOrder: Ascend
+%%BoundingBox: 61 42 577 752
+%%DocumentMedia: letter 612 792 0 () ()
+%%DocumentNeededResources: font Courier
+%%+ font Courier-Bold
+%%+ font Courier-Oblique
+%%+ font Courier-BoldOblique
+%%DocumentSuppliedResources: procset VIM-Prolog 1.4 1
+%%+ encoding VIM-latin1 1.0 0
+%%Requirements: duplex collate
+%%EndComments
+%%BeginDefaults
+%%PageResources: font Courier
+%%+ font Courier-Bold
+%%+ font Courier-Oblique
+%%+ font Courier-BoldOblique
+%%PageMedia: letter
+%%EndDefaults
+%%BeginProlog
+%%BeginResource: procset VIM-Prolog
+%%BeginDocument: /usr/share/vim/vim74/print/prolog.ps
+%!PS-Adobe-3.0 Resource-ProcSet
+%%Title: VIM-Prolog
+%%Version: 1.4 1
+%%EndComments
+% Editing of this file is NOT RECOMMENDED.  You run a very good risk of causing
+% all PostScript printing from VIM failing if you do.  PostScript is not called
+% a write-only language for nothing!
+/packedarray where not{userdict begin/setpacking/pop load def/currentpacking
+false def end}{pop}ifelse/CP currentpacking def true setpacking
+/bd{bind def}bind def/ld{load def}bd/ed{exch def}bd/d/def ld
+/db{dict begin}bd/cde{currentdict end}bd
+/T true d/F false d
+/SO null d/sv{/SO save d}bd/re{SO restore}bd
+/L2 systemdict/languagelevel 2 copy known{get exec}{pop pop 1}ifelse 2 ge d
+/m/moveto ld/s/show ld /ms{m s}bd /g/setgray ld/r/setrgbcolor ld/sp{showpage}bd
+/gs/gsave ld/gr/grestore ld/cp/currentpoint ld
+/ul{gs UW setlinewidth cp UO add 2 copy newpath m 3 1 roll add exch lineto
+stroke gr}bd
+/bg{gs r cp BO add 4 -2 roll rectfill gr}bd
+/sl{90 rotate 0 exch translate}bd
+L2{
+/sspd{mark exch{setpagedevice}stopped cleartomark}bd
+/nc{1 db/NumCopies ed cde sspd}bd
+/sps{3 db/Orientation ed[3 1 roll]/PageSize ed/ImagingBBox null d cde sspd}bd
+/dt{2 db/Tumble ed/Duplex ed cde sspd}bd
+/c{1 db/Collate ed cde sspd}bd
+}{
+/nc{/#copies ed}bd
+/sps{statusdict/setpage get exec}bd
+/dt{statusdict/settumble 2 copy known{get exec}{pop pop pop}ifelse
+statusdict/setduplexmode 2 copy known{get exec}{pop pop pop}ifelse}bd
+/c{pop}bd
+}ifelse
+/ffs{findfont exch scalefont d}bd/sf{setfont}bd
+/ref{1 db findfont dup maxlength dict/NFD ed{exch dup/FID ne{exch NFD 3 1 roll
+put}{pop pop}ifelse}forall/Encoding findresource dup length 256 eq{NFD/Encoding
+3 -1 roll put}{pop}ifelse NFD dup/FontType get 3 ne{/CharStrings}{/CharProcs}
+ifelse 2 copy known{2 copy get dup maxlength dict copy[/questiondown/space]{2
+copy known{2 copy get 2 index/.notdef 3 -1 roll put pop exit}if pop}forall put
+}{pop pop}ifelse dup NFD/FontName 3 -1 roll put NFD definefont pop end}bd
+CP setpacking
+(\004)cvn{}bd
+% vim:ff=unix:
+%%EOF
+%%EndDocument
+%%EndResource
+%%BeginResource: encoding VIM-latin1
+%%BeginDocument: /usr/share/vim/vim74/print/latin1.ps
+%!PS-Adobe-3.0 Resource-Encoding
+%%Title: VIM-latin1
+%%Version: 1.0 0
+%%EndComments
+/VIM-latin1[
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quotesingle
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash
+/zero /one /two /three /four /five /six /seven
+/eight /nine /colon /semicolon /less /equal /greater /question
+/at /A /B /C /D /E /F /G
+/H /I /J /K /L /M /N /O
+/P /Q /R /S /T /U /V /W
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore
+/grave /a /b /c /d /e /f /g
+/h /i /j /k /l /m /n /o
+/p /q /r /s /t /u /v /w
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /periodcentered
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis]
+/Encoding defineresource pop
+% vim:ff=unix:
+%%EOF
+%%EndDocument
+%%EndResource
+%%EndProlog
+%%BeginSetup
+612 792 0 sps
+1 nc
+T F dt
+T c
+%%IncludeResource: font Courier
+/_F0 /VIM-latin1 /Courier ref
+/F0 10 /_F0 ffs
+%%IncludeResource: font Courier-Bold
+/_F1 /VIM-latin1 /Courier-Bold ref
+/F1 10 /_F1 ffs
+%%IncludeResource: font Courier-Oblique
+/_F2 /VIM-latin1 /Courier-Oblique ref
+/F2 10 /_F2 ffs
+%%IncludeResource: font Courier-BoldOblique
+/_F3 /VIM-latin1 /Courier-BoldOblique ref
+/F3 10 /_F3 ffs
+/UO -1 d
+/UW 0.5 d
+/BO -2.5 d
+%%EndSetup
+%%Page: 1 1
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                         Page 1)61.2 744.9 ms
+F0 sf
+(s4                   0.127516883997      )61.2 724.9 ms
+(s6                   0.0916428214483     )61.2 714.9 ms
+(percent empty lines  0.0870923346594     )61.2 704.9 ms
+(avg line length      0.0811965774048     )61.2 694.9 ms
+(for                  0.0488842258309     )61.2 684.9 ms
+(typedef              0.0452471815904     )61.2 674.9 ms
+(printf               0.0332047040591     )61.2 664.9 ms
+(scanf                0.0315533690328     )61.2 654.9 ms
+(VAR: i               0.0295654633119     )61.2 644.9 ms
+(VAR: n               0.0221469806147     )61.2 634.9 ms
+(VAR: k               0.0182816562488     )61.2 624.9 ms
+(fopen                0.0104717221906     )61.2 614.9 ms
+(VAR: argc            0.0102622950494     )61.2 604.9 ms
+(VAR: argv            0.0102147799575     )61.2 594.9 ms
+(VAR: a               0.00922319209864    )61.2 584.9 ms
+(freopen              0.00898940098786    )61.2 574.9 ms
+(VAR: j               0.00823082965421    )61.2 564.9 ms
+(VAR: t               0.00823029861604    )61.2 554.9 ms
+(while                0.00793617744975    )61.2 544.9 ms
+(VAR: c               0.00659649341563    )61.2 534.9 ms
+(VAR: ti              0.00602909533204    )61.2 524.9 ms
+(VAR: x               0.00566993202423    )61.2 514.9 ms
+(VAR: cases           0.0055574434241     )61.2 504.9 ms
+(VAR: caseno          0.00516091763816    )61.2 494.9 ms
+(VAR: b               0.00489029667735    )61.2 484.9 ms
+(VAR: s               0.00468899300661    )61.2 474.9 ms
+(VAR: count           0.00412495158792    )61.2 464.9 ms
+(puts                 0.00396010935631    )61.2 454.9 ms
+(VAR: l               0.00384044803503    )61.2 444.9 ms
+(VAR: r               0.00382590882705    )61.2 434.9 ms
+(fclose               0.0036616672928     )61.2 424.9 ms
+(malloc               0.0035553409594     )61.2 414.9 ms
+(VAR: m               0.00353492591355    )61.2 404.9 ms
+(VAR: y               0.00349260753171    )61.2 394.9 ms
+(VAR: d               0.0034494378896     )61.2 384.9 ms
+(VAR: p               0.00343015697763    )61.2 374.9 ms
+(ternary              0.00341992132742    )61.2 364.9 ms
+(VAR: ans             0.00319417305371    )61.2 354.9 ms
+(VAR: num             0.00304455562284    )61.2 344.9 ms
+(memset               0.00300632844302    )61.2 334.9 ms
+(VAR: 2               0.00289071569294    )61.2 324.9 ms
+(VAR: cs              0.00288982453547    )61.2 314.9 ms
+(VAR: buf             0.00272839840423    )61.2 304.9 ms
+(VAR: tc              0.00263036863208    )61.2 294.9 ms
+(VAR: test            0.00257309467879    )61.2 284.9 ms
+(VAR: size            0.002515919425      )61.2 274.9 ms
+(fprintf              0.00237220713661    )61.2 264.9 ms
+(VAR: w               0.00235187214816    )61.2 254.9 ms
+(VAR: res             0.00232493587025    )61.2 244.9 ms
+(VAR: 1               0.00228611904257    )61.2 234.9 ms
+(VAR: f               0.00226543597468    )61.2 224.9 ms
+(VAR: case            0.00218326521886    )61.2 214.9 ms
+(strlen               0.00217340052612    )61.2 204.9 ms
+(VAR:                 0.00217021139808    )61.2 194.9 ms
+(VAR: v               0.00213506589913    )61.2 184.9 ms
+(VAR: tn              0.00204950670821    )61.2 174.9 ms
+(VAR: tmp             0.00204095598631    )61.2 164.9 ms
+(fscanf               0.00182991804452    )61.2 154.9 ms
+(VAR: dp              0.00182973828702    )61.2 144.9 ms
+(VAR: no              0.00182012715064    )61.2 134.9 ms
+(VAR: q               0.00179862158543    )61.2 124.9 ms
+(VAR: g               0.00171369451913    )61.2 114.9 ms
+(exit                 0.00170927281291    )61.2 104.9 ms
+(VAR: e               0.00169883127325    )61.2 94.9 ms
+(qsort                0.00164018659767    )61.2 84.9 ms
+(VAR: tt              0.00163330884507    )61.2 74.9 ms
+(VAR: h               0.00161787939981    )61.2 64.9 ms
+(putchar              0.00150512124718    )61.2 54.9 ms
+(VAR: len             0.00149652296704    )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 2 2
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                         Page 2)61.2 744.9 ms
+F0 sf
+(VAR: best            0.00149457239188    )61.2 724.9 ms
+(VAR: sum             0.00148892039591    )61.2 714.9 ms
+(fgets                0.00148717165201    )61.2 704.9 ms
+(VAR: ret             0.0014542775824     )61.2 694.9 ms
+(VAR: max             0.00137774525821    )61.2 684.9 ms
+(VAR: cnt             0.00136933423557    )61.2 674.9 ms
+(assert               0.00135512600587    )61.2 664.9 ms
+(VAR: map             0.00131519382993    )61.2 654.9 ms
+(VAR: temp            0.00130306067115    )61.2 644.9 ms
+(VAR: str             0.00128803382129    )61.2 634.9 ms
+(VAR: o               0.00124149463564    )61.2 624.9 ms
+(sscanf               0.00123116131213    )61.2 614.9 ms
+(VAR: min             0.00120136470491    )61.2 604.9 ms
+(VAR: cas             0.00118804337858    )61.2 594.9 ms
+(abs                  0.0011560784053     )61.2 584.9 ms
+(VAR: st              0.00113465836494    )61.2 574.9 ms
+(VAR: in              0.00110620846541    )61.2 564.9 ms
+(VAR: pg              0.00108847841393    )61.2 554.9 ms
+(VAR: next            0.00107450915893    )61.2 544.9 ms
+(VAR: cur             0.00103316097356    )61.2 534.9 ms
+(read                 0.00101880348064    )61.2 524.9 ms
+(VAR: dx              0.000996567844781   )61.2 514.9 ms
+(VAR: cc              0.000985044901218   )61.2 504.9 ms
+(VAR: result          0.000979534183547   )61.2 494.9 ms
+(VAR: out             0.00097317809672    )61.2 484.9 ms
+(VAR: pos             0.000970291849448   )61.2 474.9 ms
+(VAR: length          0.00094188039957    )61.2 464.9 ms
+(VAR: dy              0.000909764942005   )61.2 454.9 ms
+(atoi                 0.000906235561626   )61.2 444.9 ms
+(VAR: file            0.00090206098159    )61.2 434.9 ms
+(VAR: total           0.000884768196538   )61.2 424.9 ms
+(VAR: fin             0.00085393590387    )61.2 414.9 ms
+(VAR: pd              0.000853905888366   )61.2 404.9 ms
+(VAR: data            0.000853158053685   )61.2 394.9 ms
+(VAR: flag            0.000832213875792   )61.2 384.9 ms
+(VAR: fp              0.0008317951241     )61.2 374.9 ms
+(VAR: z               0.000809557100211   )61.2 364.9 ms
+(VAR: now             0.000809485866061   )61.2 354.9 ms
+(VAR: ok              0.000769401185309   )61.2 344.9 ms
+(sqrt                 0.000764806150706   )61.2 334.9 ms
+(VAR: arr             0.000744143396385   )61.2 324.9 ms
+(VAR: owp             0.000742537039443   )61.2 314.9 ms
+(VAR: taken           0.000735553502838   )61.2 304.9 ms
+(VAR: fout            0.000726038512054   )61.2 294.9 ms
+(VAR: u               0.000721563504059   )61.2 284.9 ms
+(VAR: time            0.000719845615536   )61.2 274.9 ms
+(VAR: base            0.000694451254395   )61.2 264.9 ms
+(dowhile              0.000687437638175   )61.2 254.9 ms
+(VAR: index           0.000666668922446   )61.2 244.9 ms
+(VAR: nc              0.000656002653566   )61.2 234.9 ms
+(VAR: itest           0.000655098573437   )61.2 224.9 ms
+(case                 0.000625463866164   )61.2 214.9 ms
+(VAR: id              0.000623430801651   )61.2 204.9 ms
+(VAR: mask            0.000607141911816   )61.2 194.9 ms
+(VAR: ii              0.00060535078419    )61.2 184.9 ms
+(VAR: start           0.000595568184088   )61.2 174.9 ms
+(VAR: fo              0.000582865995464   )61.2 164.9 ms
+(strcmp               0.000569124218997   )61.2 154.9 ms
+(getchar              0.000568311326264   )61.2 144.9 ms
+(VAR: input           0.000564735559355   )61.2 134.9 ms
+(VAR: tid             0.000560124014923   )61.2 124.9 ms
+(VAR: grid            0.00055882211818    )61.2 114.9 ms
+(free                 0.000555732421528   )61.2 104.9 ms
+(sprintf              0.000544182800535   )61.2 94.9 ms
+(VAR: add             0.00053769778946    )61.2 84.9 ms
+(VAR: casos           0.000515627642182   )61.2 74.9 ms
+(VAR: used            0.000513298892291   )61.2 64.9 ms
+(VAR: at              0.000507941604486   )61.2 54.9 ms
+(VAR: 0               0.00050724183281    )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 3 3
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                         Page 3)61.2 744.9 ms
+F0 sf
+(VAR: level           0.000504754841006   )61.2 724.9 ms
+(VAR: key             0.000500120263048   )61.2 714.9 ms
+(VAR: bb              0.00048296158319    )61.2 704.9 ms
+(VAR: bits            0.00046882513063    )61.2 694.9 ms
+(VAR: caso            0.000465991735918   )61.2 684.9 ms
+(VAR: ix              0.000462842446207   )61.2 674.9 ms
+(VAR: oowp            0.000461801559519   )61.2 664.9 ms
+(VAR: ntest           0.000459868282673   )61.2 654.9 ms
+(VAR: left            0.000456299495428   )61.2 644.9 ms
+(VAR: ss              0.000449545179193   )61.2 634.9 ms
+(VAR: wp              0.000448606907946   )61.2 624.9 ms
+(VAR: mid             0.000441637266272   )61.2 614.9 ms
+(VAR: end             0.000439704302467   )61.2 604.9 ms
+(VAR: last            0.000437164450782   )61.2 594.9 ms
+(VAR: fg              0.000434043555696   )61.2 584.9 ms
+(VAR: dataset         0.000433313439948   )61.2 574.9 ms
+(VAR: tcases          0.000433079940332   )61.2 564.9 ms
+(VAR: foo             0.000432621334765   )61.2 554.9 ms
+(VAR: idx             0.000418641302033   )61.2 544.9 ms
+(strcpy               0.000418157247337   )61.2 534.9 ms
+(VAR: 3               0.00040960897204    )61.2 524.9 ms
+(VAR: use             0.000407365676415   )61.2 514.9 ms
+(VAR: first           0.000393748910975   )61.2 504.9 ms
+(VAR: mx              0.000393100603568   )61.2 494.9 ms
+(memcpy               0.000387681735104   )61.2 484.9 ms
+(VAR: board           0.000386971172796   )61.2 474.9 ms
+(VAR: all             0.000386581086277   )61.2 464.9 ms
+(VAR: line            0.00038330210441    )61.2 454.9 ms
+(VAR: counter         0.000378596818576   )61.2 444.9 ms
+(VAR: maxp            0.000377685924233   )61.2 434.9 ms
+(VAR: tcase           0.000375743875786   )61.2 424.9 ms
+(VAR: tot             0.000375152174754   )61.2 414.9 ms
+(VAR: list            0.000371182500211   )61.2 404.9 ms
+(VAR: amo             0.000369748497784   )61.2 394.9 ms
+(VAR: target          0.000365056858063   )61.2 384.9 ms
+(VAR: mem             0.00036495594844    )61.2 374.9 ms
+(VAR: pp              0.000359960233895   )61.2 364.9 ms
+(VAR: opt             0.000355687713264   )61.2 354.9 ms
+(VAR: dist            0.000342937826122   )61.2 344.9 ms
+(fabs                 0.000339391255598   )61.2 334.9 ms
+(VAR: ac              0.000339335491539   )61.2 324.9 ms
+(VAR: name            0.000328954432172   )61.2 314.9 ms
+(VAR: cert            0.000326590418237   )61.2 304.9 ms
+(VAR: sn              0.000316296863941   )61.2 294.9 ms
+(VAR: cache           0.000312266311769   )61.2 284.9 ms
+(VAR: ar              0.000309932488349   )61.2 274.9 ms
+(VAR: ptr             0.00030840759572    )61.2 264.9 ms
+(VAR: rr              0.00030824698829    )61.2 254.9 ms
+(VAR: cons            0.000308001676451   )61.2 244.9 ms
+(VAR: diff            0.000307381184226   )61.2 234.9 ms
+(VAR: lo              0.000307144147447   )61.2 224.9 ms
+(VAR: visited         0.00030420262876    )61.2 214.9 ms
+(VAR: byte            0.00029840492825    )61.2 204.9 ms
+(VAR: per             0.00029009411888    )61.2 194.9 ms
+(VAR: to              0.000289631897882   )61.2 184.9 ms
+(VAR: lim             0.000289220954835   )61.2 174.9 ms
+(strchr               0.000287480822441   )61.2 164.9 ms
+(VAR: prev            0.00028364526863    )61.2 154.9 ms
+(VAR: page            0.000283630790402   )61.2 144.9 ms
+(VAR: deg             0.00028329003712    )61.2 134.9 ms
+(VAR: current         0.000282311264436   )61.2 124.9 ms
+(VAR: envp            0.000282152873596   )61.2 114.9 ms
+(VAR: ca              0.000279948333016   )61.2 104.9 ms
+(VAR: kk              0.000279636842766   )61.2 94.9 ms
+(VAR: newval          0.000276896721292   )61.2 84.9 ms
+(VAR: set             0.000275873004396   )61.2 74.9 ms
+(VAR: found           0.000272173136931   )61.2 64.9 ms
+(VAR: flottant        0.000270496652877   )61.2 54.9 ms
+(VAR: val             0.00026973385653    )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 4 4
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                         Page 4)61.2 744.9 ms
+F0 sf
+(VAR: ny              0.000269386865894   )61.2 724.9 ms
+(VAR: stack           0.000266206585631   )61.2 714.9 ms
+(VAR: rp              0.000265061501796   )61.2 704.9 ms
+(VAR: table           0.000264428464493   )61.2 694.9 ms
+(VAR: rc              0.000261358236878   )61.2 684.9 ms
+(VAR: cx              0.000259922451698   )61.2 674.9 ms
+(VAR: eq              0.000257526427306   )61.2 664.9 ms
+(VAR: score           0.000257275219773   )61.2 654.9 ms
+(VAR: sy              0.000254523189813   )61.2 644.9 ms
+(VAR: iii             0.000252124156856   )61.2 634.9 ms
+(VAR: token           0.000247258585044   )61.2 624.9 ms
+(VAR: mul             0.000241282881457   )61.2 614.9 ms
+(VAR: dir             0.000236956410332   )61.2 604.9 ms
+(VAR: trans           0.00023634036114    )61.2 594.9 ms
+(VAR: ind             0.00023581774546    )61.2 584.9 ms
+(VAR: up              0.000235163508391   )61.2 574.9 ms
+(VAR: act             0.000233903059691   )61.2 564.9 ms
+(VAR: right           0.000232214750777   )61.2 554.9 ms
+(VAR: col             0.000231442956866   )61.2 544.9 ms
+(VAR: aa              0.000228807275094   )61.2 534.9 ms
+(VAR: si              0.000228265616683   )61.2 524.9 ms
+(VAR: match           0.000227625005028   )61.2 514.9 ms
+(VAR: correct         0.000222069688703   )61.2 504.9 ms
+(VAR: fd              0.000221494083487   )61.2 494.9 ms
+(VAR: msg             0.000220026994871   )61.2 484.9 ms
+(VAR: levels          0.000219776148307   )61.2 474.9 ms
+(memcmp               0.000219665383893   )61.2 464.9 ms
+(VAR: dis             0.000219417272315   )61.2 454.9 ms
+(VAR: top             0.000217263224192   )61.2 444.9 ms
+(VAR: from            0.000217235477678   )61.2 434.9 ms
+(VAR: number          0.000216525064732   )61.2 424.9 ms
+(VAR: sx              0.000215993631371   )61.2 414.9 ms
+(VAR: is              0.000215694850769   )61.2 404.9 ms
+(VAR: children        0.000215401405405   )61.2 394.9 ms
+(VAR: on              0.00021379088284    )61.2 384.9 ms
+(VAR: ch              0.000213080020084   )61.2 374.9 ms
+(VAR: app             0.000212741072746   )61.2 364.9 ms
+(VAR: gain            0.000212518754942   )61.2 354.9 ms
+(strtol               0.000212204129648   )61.2 344.9 ms
+(VAR: vx              0.000211565570107   )61.2 334.9 ms
+(VAR: node            0.000210866999045   )61.2 324.9 ms
+(VAR: inv             0.00020293517218    )61.2 314.9 ms
+(VAR: typed           0.00020242639531    )61.2 304.9 ms
+(VAR: duty            0.000201940895266   )61.2 294.9 ms
+(VAR: qs              0.000200292588085   )61.2 284.9 ms
+(VAR: cell            0.00020006172556    )61.2 274.9 ms
+(VAR: orig            0.000199231796311   )61.2 264.9 ms
+(VAR: ed              0.000199062753084   )61.2 254.9 ms
+(VAR: ib              0.000198052397241   )61.2 244.9 ms
+(VAR: hi              0.000197864482567   )61.2 234.9 ms
+(VAR: bit             0.000197669565777   )61.2 224.9 ms
+(VAR: second          0.000197667001847   )61.2 214.9 ms
+(VAR: bn              0.000197262114343   )61.2 204.9 ms
+(VAR: digits          0.000197132125252   )61.2 194.9 ms
+(VAR: ia              0.000196856656507   )61.2 184.9 ms
+(VAR: high            0.000196673950658   )61.2 174.9 ms
+(VAR: pi              0.000196597151141   )61.2 164.9 ms
+(VAR: devices         0.000190532241445   )61.2 154.9 ms
+(VAR: string          0.00018883567118    )61.2 144.9 ms
+(VAR: opp             0.000186664383463   )61.2 134.9 ms
+(VAR: pin             0.000185279776016   )61.2 124.9 ms
+(VAR: seen            0.000185205744945   )61.2 114.9 ms
+(VAR: array           0.000184519268204   )61.2 104.9 ms
+(VAR: win             0.00018366362814    )61.2 94.9 ms
+(VAR: need            0.000183495188417   )61.2 84.9 ms
+(VAR: pla             0.000182183197572   )61.2 74.9 ms
+(VAR: nx              0.000182001300919   )61.2 64.9 ms
+(VAR: char            0.000181920926547   )61.2 54.9 ms
+(VAR: en              0.000181768759391   )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 5 5
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                         Page 5)61.2 744.9 ms
+F0 sf
+(VAR: combine         0.000180611755222   )61.2 724.9 ms
+(VAR: non             0.00017963477261    )61.2 714.9 ms
+(VAR: stn             0.00017906448394    )61.2 704.9 ms
+(VAR: low             0.000177922485562   )61.2 694.9 ms
+(VAR: dd              0.000177665782062   )61.2 684.9 ms
+(VAR: sp              0.000177467900238   )61.2 674.9 ms
+(VAR: ep              0.000177415372311   )61.2 664.9 ms
+(VAR: oe              0.000175522843787   )61.2 654.9 ms
+(VAR: go              0.000173294605111   )61.2 644.9 ms
+(VAR: make            0.000173109732764   )61.2 634.9 ms
+(VAR: bc              0.000173027681414   )61.2 624.9 ms
+(VAR: version         0.000172783634169   )61.2 614.9 ms
+(VAR: keys            0.000172643826684   )61.2 604.9 ms
+(VAR: gg              0.000172284313546   )61.2 594.9 ms
+(VAR: qe              0.000172092973744   )61.2 584.9 ms
+(VAR: try             0.000170549340916   )61.2 574.9 ms
+(VAR: speed           0.000170087877493   )61.2 564.9 ms
+(VAR: tm              0.000169626344646   )61.2 554.9 ms
+(VAR: verbose         0.000169133148204   )61.2 544.9 ms
+(VAR: pb              0.000168209746245   )61.2 534.9 ms
+(VAR: 4               0.000167905626635   )61.2 524.9 ms
+(rand                 0.000167110025916   )61.2 514.9 ms
+(VAR: jj              0.000166662180446   )61.2 504.9 ms
+(VAR: int             0.00016569109185    )61.2 494.9 ms
+(VAR: gcd             0.000164209565865   )61.2 484.9 ms
+(VAR: type            0.000163234839905   )61.2 474.9 ms
+(VAR: emp             0.000163140003446   )61.2 464.9 ms
+(VAR: place           0.000163055209323   )61.2 454.9 ms
+(VAR: happy           0.000160476404393   )61.2 444.9 ms
+(VAR: done            0.000160332534203   )61.2 434.9 ms
+(VAR: casenum         0.000159830451289   )61.2 424.9 ms
+(VAR: cut             0.000159813608998   )61.2 414.9 ms
+(VAR: bases           0.000159783806965   )61.2 404.9 ms
+(VAR: acc             0.000159583663652   )61.2 394.9 ms
+(VAR: nums            0.000159112408374   )61.2 384.9 ms
+(VAR: new             0.000158863443828   )61.2 374.9 ms
+(VAR: graph           0.000157842329369   )61.2 364.9 ms
+(VAR: nb              0.000157114359462   )61.2 354.9 ms
+(VAR: nn              0.000157069713749   )61.2 344.9 ms
+(VAR: mutex           0.000155238083712   )61.2 334.9 ms
+(VAR: pa              0.000155126836176   )61.2 324.9 ms
+(VAR: close           0.000154046679851   )61.2 314.9 ms
+(VAR: na              0.000153679046256   )61.2 304.9 ms
+(VAR: sizes           0.000153125633293   )61.2 294.9 ms
+(VAR: word            0.000151836737153   )61.2 284.9 ms
+(VAR: qq              0.000151145296976   )61.2 274.9 ms
+(VAR: mod             0.000150879169141   )61.2 264.9 ms
+(VAR: run             0.000150253881927   )61.2 254.9 ms
+(VAR: pass            0.000149505069918   )61.2 244.9 ms
+(VAR: ni              0.000149074286187   )61.2 234.9 ms
+(VAR: cost            0.000148293645427   )61.2 224.9 ms
+(VAR: assist          0.000148076980014   )61.2 214.9 ms
+(VAR: mass            0.000146485759723   )61.2 204.9 ms
+(VAR: hash            0.000146473462556   )61.2 194.9 ms
+(VAR: matrix          0.000146254852839   )61.2 184.9 ms
+(VAR: iy              0.00014539013975    )61.2 174.9 ms
+(VAR: mp              0.000145319681122   )61.2 164.9 ms
+(VAR: unhappy         0.000144988610753   )61.2 154.9 ms
+(VAR: bananas         0.000144525345659   )61.2 144.9 ms
+(VAR: previous        0.00014373476001    )61.2 134.9 ms
+(VAR: path            0.000143577754452   )61.2 124.9 ms
+(VAR: fir             0.000142281329219   )61.2 114.9 ms
+(VAR: step            0.000142122381025   )61.2 104.9 ms
+(VAR: lr              0.000141084552262   )61.2 94.9 ms
+(VAR: bestd           0.000139951041143   )61.2 84.9 ms
+(VAR: outa            0.000139794184235   )61.2 74.9 ms
+(VAR: least           0.000139645756944   )61.2 64.9 ms
+(VAR: te              0.000139092053429   )61.2 54.9 ms
+(VAR: tmpg            0.000137969536227   )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 6 6
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                         Page 6)61.2 744.9 ms
+F0 sf
+(VAR: rate            0.000137672323576   )61.2 724.9 ms
+(VAR: atx             0.000137411323423   )61.2 714.9 ms
+(VAR: lb              0.000137156930188   )61.2 704.9 ms
+(VAR: gnulib          0.000137058912134   )61.2 694.9 ms
+(VAR: roots           0.000136582324839   )61.2 684.9 ms
+(VAR: mat             0.000135127900713   )61.2 674.9 ms
+(VAR: walk            0.000134406026375   )61.2 664.9 ms
+(VAR: cy              0.000134390744397   )61.2 654.9 ms
+(VAR: decry           0.000134356863502   )61.2 644.9 ms
+(VAR: mode            0.000134224718338   )61.2 634.9 ms
+(VAR: db              0.000132914779308   )61.2 624.9 ms
+(VAR: se              0.000132882452939   )61.2 614.9 ms
+(VAR: cake            0.000130973673278   )61.2 604.9 ms
+(VAR: status          0.000130755238811   )61.2 594.9 ms
+(VAR: xy              0.000130082817912   )61.2 584.9 ms
+(VAR: vz              0.000128891573917   )61.2 574.9 ms
+(VAR: enter           0.000128668680658   )61.2 564.9 ms
+(VAR: group           0.000128552249553   )61.2 554.9 ms
+(VAR: lineno          0.000128422129598   )61.2 544.9 ms
+(VAR: rd              0.000127009506591   )61.2 534.9 ms
+(VAR: th              0.000126925337404   )61.2 524.9 ms
+(VAR: buffer          0.000126401119663   )61.2 514.9 ms
+(VAR: testc           0.000125988512361   )61.2 504.9 ms
+(VAR: row             0.000125163746866   )61.2 494.9 ms
+(VAR: answer          0.000124890512054   )61.2 484.9 ms
+(VAR: sc              0.000124303746465   )61.2 474.9 ms
+(VAR: scores          0.000124198682568   )61.2 464.9 ms
+(VAR: lose            0.000124173998275   )61.2 454.9 ms
+(VAR: width           0.000122788570098   )61.2 444.9 ms
+(VAR: bl              0.000120701652831   )61.2 434.9 ms
+(VAR: pm              0.000119699417899   )61.2 424.9 ms
+(VAR: bs              0.000119581981433   )61.2 414.9 ms
+(VAR: yy              0.000119452678771   )61.2 404.9 ms
+(VAR: pow             0.000119395038455   )61.2 394.9 ms
+(VAR: won             0.000118934664632   )61.2 384.9 ms
+(VAR: fc              0.000117977346333   )61.2 374.9 ms
+(VAR: good            0.000117719982557   )61.2 364.9 ms
+(VAR: tr              0.000117705895037   )61.2 354.9 ms
+(VAR: car             0.000117626978499   )61.2 344.9 ms
+(VAR: extra           0.000117444664145   )61.2 334.9 ms
+(VAR: bmove           0.000117280155673   )61.2 324.9 ms
+(VAR: patrick         0.000117221340424   )61.2 314.9 ms
+(VAR: firsterr        0.000117131209206   )61.2 304.9 ms
+(VAR: value           0.000116890329711   )61.2 294.9 ms
+(VAR: po              0.000116787117404   )61.2 284.9 ms
+(VAR: room            0.00011646586544    )61.2 274.9 ms
+(VAR: xx              0.000115929396503   )61.2 264.9 ms
+(VAR: heap            0.000115858450543   )61.2 254.9 ms
+(time                 0.000115399972296   )61.2 244.9 ms
+(VAR: root            0.000115066011378   )61.2 234.9 ms
+(VAR: point           0.000114279436643   )61.2 224.9 ms
+(VAR: uart            0.000114132932696   )61.2 214.9 ms
+(VAR: stp             0.000113876537596   )61.2 204.9 ms
+(VAR: round           0.000113423563534   )61.2 194.9 ms
+(VAR: dict            0.00011224585659    )61.2 184.9 ms
+(VAR: xor             0.000111641578222   )61.2 174.9 ms
+(VAR: skip            0.000111483195549   )61.2 164.9 ms
+(VAR: label           0.00011122364416    )61.2 154.9 ms
+(VAR: pairx           0.00011115776471    )61.2 144.9 ms
+(VAR: ksk             0.000111053072098   )61.2 134.9 ms
+(VAR: bitmask         0.000110496500914   )61.2 124.9 ms
+(VAR: ent             0.00011013435128    )61.2 114.9 ms
+(VAR: newdiam         0.000110111880961   )61.2 104.9 ms
+(VAR: dest            0.00010954378447    )61.2 94.9 ms
+(VAR: digs            0.000109517471923   )61.2 84.9 ms
+(VAR: des             0.000109386654867   )61.2 74.9 ms
+(VAR: localname       0.000109222785943   )61.2 64.9 ms
+(VAR: eee             0.00010835260087    )61.2 54.9 ms
+(VAR: by              0.000107993831829   )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 7 7
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                         Page 7)61.2 744.9 ms
+F0 sf
+(VAR: dif             0.00010686389358    )61.2 724.9 ms
+(VAR: cycle           0.000106566906162   )61.2 714.9 ms
+(VAR: off             0.000105854660269   )61.2 704.9 ms
+(realloc              0.000105635590629   )61.2 694.9 ms
+(VAR: fans            0.000105263292053   )61.2 684.9 ms
+(VAR: ra              0.000104997676236   )61.2 674.9 ms
+(VAR: saved           0.000104916158663   )61.2 664.9 ms
+(VAR: hs              0.000104646174648   )61.2 654.9 ms
+(VAR: dim             0.000104418971514   )61.2 644.9 ms
+(VAR: hnamebuf        0.000104089914493   )61.2 634.9 ms
+(VAR: np              0.00010405476206    )61.2 624.9 ms
+(VAR: chk             0.00010380714646    )61.2 614.9 ms
+(VAR: area            0.000103037367117   )61.2 604.9 ms
+(VAR: vis             0.000102719083774   )61.2 594.9 ms
+(VAR: iprime          0.000102448898149   )61.2 584.9 ms
+(VAR: ax              0.000101994777814   )61.2 574.9 ms
+(VAR: popcount        0.00010171512969    )61.2 564.9 ms
+(VAR: flips           0.000101527355683   )61.2 554.9 ms
+(VAR: atmp            9.96619969789e-05   )61.2 544.9 ms
+(VAR: patt            9.89571856747e-05   )61.2 534.9 ms
+(VAR: possible        9.88557141495e-05   )61.2 524.9 ms
+(VAR: malted          9.8845146685e-05    )61.2 514.9 ms
+(VAR: strs            9.87921478029e-05   )61.2 504.9 ms
+(VAR: swapchair       9.82678640937e-05   )61.2 494.9 ms
+(VAR: pw              9.80446830132e-05   )61.2 484.9 ms
+(VAR: hostname        9.78353347887e-05   )61.2 474.9 ms
+(VAR: wires           9.77485690426e-05   )61.2 464.9 ms
+(VAR: sz              9.77209154953e-05   )61.2 454.9 ms
+(calloc               9.76447856643e-05   )61.2 444.9 ms
+(VAR: guest           9.76254675412e-05   )61.2 434.9 ms
+(VAR: has             9.75610950915e-05   )61.2 424.9 ms
+(VAR: wants           9.75604090938e-05   )61.2 414.9 ms
+(VAR: px              9.71786638632e-05   )61.2 404.9 ms
+(VAR: can             9.698550697e-05     )61.2 394.9 ms
+(VAR: mt              9.59746294269e-05   )61.2 384.9 ms
+(VAR: loops           9.59359756885e-05   )61.2 374.9 ms
+(VAR: bin             9.58813043685e-05   )61.2 364.9 ms
+(VAR: ay              9.57016100144e-05   )61.2 354.9 ms
+(VAR: tar             9.56198734318e-05   )61.2 344.9 ms
+(VAR: cb              9.55953220485e-05   )61.2 334.9 ms
+(VAR: mb              9.53801374152e-05   )61.2 324.9 ms
+(VAR: xn              9.4639289074e-05    )61.2 314.9 ms
+(VAR: comb            9.45229433506e-05   )61.2 304.9 ms
+(VAR: alpha           9.37426371358e-05   )61.2 294.9 ms
+(VAR: ork             9.37421649873e-05   )61.2 284.9 ms
+(VAR: paths           9.3477192749e-05    )61.2 274.9 ms
+(VAR: globus          9.34336722012e-05   )61.2 264.9 ms
+(VAR: server          9.30902629124e-05   )61.2 254.9 ms
+(VAR: encry           9.30327901942e-05   )61.2 244.9 ms
+(VAR: un              9.28838268726e-05   )61.2 234.9 ms
+(pow                  9.27111068721e-05   )61.2 224.9 ms
+(VAR: mn              9.25094814743e-05   )61.2 214.9 ms
+(VAR: reach           9.19570846037e-05   )61.2 204.9 ms
+(VAR: besta           9.15366187948e-05   )61.2 194.9 ms
+(isspace              9.11131056598e-05   )61.2 184.9 ms
+(VAR: da              9.09172479563e-05   )61.2 174.9 ms
+(VAR: bot             9.09056399792e-05   )61.2 164.9 ms
+(VAR: period          9.08306963202e-05   )61.2 154.9 ms
+(VAR: tnum            9.06028662329e-05   )61.2 144.9 ms
+(VAR: exp             9.047965397e-05     )61.2 134.9 ms
+(VAR: dh              8.99795444998e-05   )61.2 124.9 ms
+(VAR: xu              8.96810490729e-05   )61.2 114.9 ms
+(VAR: let             8.9353257352e-05    )61.2 104.9 ms
+(VAR: handler         8.91769357378e-05   )61.2 94.9 ms
+(VAR: smax            8.83120780282e-05   )61.2 84.9 ms
+(VAR: leftpos         8.8206033113e-05    )61.2 74.9 ms
+(VAR: tyu             8.81973502939e-05   )61.2 64.9 ms
+(VAR: py              8.79420677099e-05   )61.2 54.9 ms
+(VAR: ba              8.74656397577e-05   )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 8 8
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                         Page 8)61.2 744.9 ms
+F0 sf
+(VAR: my              8.69958631332e-05   )61.2 724.9 ms
+(VAR: curmy           8.69532430587e-05   )61.2 714.9 ms
+(VAR: require         8.68953571949e-05   )61.2 704.9 ms
+(VAR: cmy             8.64633725675e-05   )61.2 694.9 ms
+(VAR: ux              8.63773137169e-05   )61.2 684.9 ms
+(VAR: an              8.6274059615e-05    )61.2 674.9 ms
+(VAR: sean            8.54708047853e-05   )61.2 664.9 ms
+(VAR: ma              8.52506080959e-05   )61.2 654.9 ms
+(VAR: sol             8.5225795424e-05    )61.2 644.9 ms
+(VAR: 10              8.52257199911e-05   )61.2 634.9 ms
+(VAR: expect          8.52113602174e-05   )61.2 624.9 ms
+(VAR: cap             8.51851608719e-05   )61.2 614.9 ms
+(VAR: chance          8.50412385241e-05   )61.2 604.9 ms
+(VAR: tall            8.48979953084e-05   )61.2 594.9 ms
+(VAR: prod            8.42600537454e-05   )61.2 584.9 ms
+(VAR: color           8.37747375166e-05   )61.2 574.9 ms
+(VAR: fold            8.37528821426e-05   )61.2 564.9 ms
+(VAR: primes          8.35364913117e-05   )61.2 554.9 ms
+(VAR: bd              8.32898433736e-05   )61.2 544.9 ms
+(VAR: price           8.23859906531e-05   )61.2 534.9 ms
+(VAR: ken             8.22845686996e-05   )61.2 524.9 ms
+(VAR: digit           8.22726136647e-05   )61.2 514.9 ms
+(VAR: sw              8.20387490694e-05   )61.2 504.9 ms
+(VAR: times           8.16420343272e-05   )61.2 494.9 ms
+(VAR: fr              8.14759051657e-05   )61.2 484.9 ms
+(VAR: pr              8.10288931522e-05   )61.2 474.9 ms
+(VAR: rs              8.05521101905e-05   )61.2 464.9 ms
+(VAR: skipval         8.04371123013e-05   )61.2 454.9 ms
+(VAR: mapa            7.97885485092e-05   )61.2 444.9 ms
+(VAR: star            7.95677898264e-05   )61.2 434.9 ms
+(VAR: protable        7.92955199448e-05   )61.2 424.9 ms
+(VAR: imp             7.92613912065e-05   )61.2 414.9 ms
+(VAR: bp              7.90578078008e-05   )61.2 404.9 ms
+(VAR: yyu             7.86978150475e-05   )61.2 394.9 ms
+(VAR: people          7.82881068078e-05   )61.2 384.9 ms
+(VAR: travel          7.81206028639e-05   )61.2 374.9 ms
+(VAR: nick            7.80814307229e-05   )61.2 364.9 ms
+(VAR: currfarm        7.80350471665e-05   )61.2 354.9 ms
+(VAR: vv              7.80252519907e-05   )61.2 344.9 ms
+(VAR: sup             7.79594158924e-05   )61.2 334.9 ms
+(VAR: legal           7.77717249628e-05   )61.2 324.9 ms
+(VAR: di              7.77568213542e-05   )61.2 314.9 ms
+(VAR: ct              7.73059043197e-05   )61.2 304.9 ms
+(VAR: ll              7.70172098215e-05   )61.2 294.9 ms
+(VAR: aj              7.66670065626e-05   )61.2 284.9 ms
+(VAR: down            7.6481708511e-05    )61.2 274.9 ms
+(VAR: wl              7.63844825191e-05   )61.2 264.9 ms
+(VAR: vy              7.62074512568e-05   )61.2 254.9 ms
+(VAR: dpt             7.61454462598e-05   )61.2 244.9 ms
+(VAR: played          7.5974991204e-05    )61.2 234.9 ms
+(VAR: lk              7.59631729699e-05   )61.2 224.9 ms
+(VAR: ai              7.58932876285e-05   )61.2 214.9 ms
+(VAR: successful      7.58561806013e-05   )61.2 204.9 ms
+(VAR: dep             7.58072374891e-05   )61.2 194.9 ms
+(VAR: ts              7.5722467786e-05    )61.2 184.9 ms
+(VAR: groups          7.54560060379e-05   )61.2 174.9 ms
+(VAR: smallest        7.53807872556e-05   )61.2 164.9 ms
+(VAR: dic             7.53674243506e-05   )61.2 154.9 ms
+(VAR: nj              7.53209175537e-05   )61.2 144.9 ms
+(isdigit              7.52847491688e-05   )61.2 134.9 ms
+(VAR: gaps            7.4995825397e-05    )61.2 124.9 ms
+(VAR: values          7.49079142865e-05   )61.2 114.9 ms
+(VAR: lower           7.48989563887e-05   )61.2 104.9 ms
+(VAR: prc             7.47530208577e-05   )61.2 94.9 ms
+(VAR: inputs          7.46982712382e-05   )61.2 84.9 ms
+(VAR: cn              7.46977121675e-05   )61.2 74.9 ms
+(VAR: prob            7.45553317225e-05   )61.2 64.9 ms
+(VAR: forms           7.41887316707e-05   )61.2 54.9 ms
+(VAR: day             7.4149607283e-05    )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 9 9
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                         Page 9)61.2 744.9 ms
+F0 sf
+(VAR: check           7.39652275713e-05   )61.2 724.9 ms
+(VAR: uh              7.39166716794e-05   )61.2 714.9 ms
+(VAR: anstmp          7.38813389383e-05   )61.2 704.9 ms
+(strncpy              7.38726367549e-05   )61.2 694.9 ms
+(VAR: uncompleted     7.38575411786e-05   )61.2 684.9 ms
+(VAR: pre             7.36219115229e-05   )61.2 674.9 ms
+(VAR: rpi             7.34641802139e-05   )61.2 664.9 ms
+(VAR: secs            7.31706062638e-05   )61.2 654.9 ms
+(VAR: lowest          7.31122677087e-05   )61.2 644.9 ms
+(VAR: rem             7.2624129861e-05    )61.2 634.9 ms
+(VAR: counted         7.25986762034e-05   )61.2 624.9 ms
+(VAR: sbuf            7.25056155583e-05   )61.2 614.9 ms
+(VAR: cha             7.24652035684e-05   )61.2 604.9 ms
+(VAR: nt              7.24143949175e-05   )61.2 594.9 ms
+(VAR: cont            7.1911835366e-05    )61.2 584.9 ms
+(VAR: ava             7.17852306101e-05   )61.2 574.9 ms
+(VAR: mark            7.16393704505e-05   )61.2 564.9 ms
+(VAR: bla             7.12205843558e-05   )61.2 554.9 ms
+(VAR: plain           7.10854100132e-05   )61.2 544.9 ms
+(VAR: lf              7.01719058166e-05   )61.2 534.9 ms
+(VAR: blah            6.99299331132e-05   )61.2 524.9 ms
+(VAR: din             6.96895426932e-05   )61.2 514.9 ms
+(VAR: stringp         6.94945824422e-05   )61.2 504.9 ms
+(VAR: destroy         6.87744897788e-05   )61.2 494.9 ms
+(VAR: tx              6.85795601833e-05   )61.2 484.9 ms
+(VAR: phrase          6.83985943773e-05   )61.2 474.9 ms
+(VAR: exit            6.82325473135e-05   )61.2 464.9 ms
+(VAR: mrc             6.82035486406e-05   )61.2 454.9 ms
+(VAR: org             6.82011908081e-05   )61.2 444.9 ms
+(VAR: sums            6.7591401905e-05    )61.2 434.9 ms
+(VAR: bak             6.71534835387e-05   )61.2 424.9 ms
+(VAR: dat             6.66780089833e-05   )61.2 414.9 ms
+(VAR: state           6.65739849342e-05   )61.2 404.9 ms
+(VAR: hit             6.65132761465e-05   )61.2 394.9 ms
+(VAR: rnd             6.61726580192e-05   )61.2 384.9 ms
+(VAR: ansc            6.61049137808e-05   )61.2 374.9 ms
+(VAR: unsaved         6.57598374417e-05   )61.2 364.9 ms
+(VAR: empty           6.55715803669e-05   )61.2 354.9 ms
+(VAR: move            6.54571087815e-05   )61.2 344.9 ms
+(VAR: fy              6.53897643885e-05   )61.2 334.9 ms
+(VAR: mult            6.45830140441e-05   )61.2 324.9 ms
+(VAR: most            6.4565135428e-05    )61.2 314.9 ms
+(VAR: something       6.44992526161e-05   )61.2 304.9 ms
+(VAR: occ             6.44341407216e-05   )61.2 294.9 ms
+(VAR: ins             6.43486871015e-05   )61.2 284.9 ms
+(VAR: exx             6.42782997233e-05   )61.2 274.9 ms
+(VAR: delta           6.36290186359e-05   )61.2 264.9 ms
+(VAR: pairs           6.34552640836e-05   )61.2 254.9 ms
+(VAR: ds              6.29397093399e-05   )61.2 244.9 ms
+(VAR: sumz            6.27676915041e-05   )61.2 234.9 ms
+(VAR: pro             6.2751448235e-05    )61.2 224.9 ms
+(VAR: rv              6.25084473358e-05   )61.2 214.9 ms
+(VAR: letter          6.24610802922e-05   )61.2 204.9 ms
+(VAR: fail            6.23474393017e-05   )61.2 194.9 ms
+(VAR: distance        6.23308781749e-05   )61.2 184.9 ms
+(VAR: cp              6.22551237602e-05   )61.2 174.9 ms
+(VAR: points          6.2245175163e-05    )61.2 164.9 ms
+(VAR: flg             6.17791857061e-05   )61.2 154.9 ms
+(VAR: lc              6.16437235596e-05   )61.2 144.9 ms
+(VAR: minimal         6.16308484341e-05   )61.2 134.9 ms
+(VAR: outlets         6.15385126914e-05   )61.2 124.9 ms
+(VAR: rez             6.14691467117e-05   )61.2 114.9 ms
+(VAR: ex              6.11472234748e-05   )61.2 104.9 ms
+(VAR: sgn             6.11316176449e-05   )61.2 94.9 ms
+(VAR: pt              6.08953758652e-05   )61.2 84.9 ms
+(VAR: dig             6.06584232605e-05   )61.2 74.9 ms
+(VAR: valid           6.0653656664e-05    )61.2 64.9 ms
+(VAR: names           6.05211046317e-05   )61.2 54.9 ms
+(VAR: targetp         6.04203484824e-05   )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 10 10
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                        Page 10)61.2 744.9 ms
+F0 sf
+(VAR: pagesize        6.04193757785e-05   )61.2 724.9 ms
+(VAR: who             6.02068371184e-05   )61.2 714.9 ms
+(VAR: rides           6.0107164452e-05    )61.2 704.9 ms
+(VAR: orgb            6.00693218713e-05   )61.2 694.9 ms
+(VAR: loca            6.00372663628e-05   )61.2 684.9 ms
+(VAR: dynamic         5.99859032289e-05   )61.2 674.9 ms
+(VAR: tres            5.98797093476e-05   )61.2 664.9 ms
+(VAR: numbers         5.9819300559e-05    )61.2 654.9 ms
+(VAR: wall            5.97707351814e-05   )61.2 644.9 ms
+(VAR: lv              5.96469267249e-05   )61.2 634.9 ms
+(VAR: seanxor         5.93814684152e-05   )61.2 624.9 ms
+(VAR: tb              5.87357241778e-05   )61.2 614.9 ms
+(VAR: queue           5.8556905831e-05    )61.2 604.9 ms
+(VAR: robo            5.82624526686e-05   )61.2 594.9 ms
+(VAR: outb            5.82323040453e-05   )61.2 584.9 ms
+(VAR: action          5.82080549412e-05   )61.2 574.9 ms
+(VAR: swaps           5.81396901376e-05   )61.2 564.9 ms
+(VAR: rcnt            5.78756684802e-05   )61.2 554.9 ms
+(VAR: op              5.78662825605e-05   )61.2 544.9 ms
+(VAR: eps             5.77525987106e-05   )61.2 534.9 ms
+(VAR: conf            5.77330162938e-05   )61.2 524.9 ms
+(VAR: mintime         5.74786064284e-05   )61.2 514.9 ms
+(VAR: hot             5.71846531907e-05   )61.2 504.9 ms
+(VAR: bins            5.6973523135e-05    )61.2 494.9 ms
+(VAR: tiles           5.68852267791e-05   )61.2 484.9 ms
+(VAR: 1779            5.67655687743e-05   )61.2 474.9 ms
+(VAR: mm              5.67341319228e-05   )61.2 464.9 ms
+(VAR: inrad           5.66763242444e-05   )61.2 454.9 ms
+(VAR: two             5.6628274535e-05    )61.2 444.9 ms
+(VAR: http            5.6313580174e-05    )61.2 434.9 ms
+(VAR: tg              5.62976965099e-05   )61.2 424.9 ms
+(VAR: maxtime         5.62291244614e-05   )61.2 414.9 ms
+(VAR: middle          5.6100623978e-05    )61.2 404.9 ms
+(VAR: curl            5.60353559614e-05   )61.2 394.9 ms
+(VAR: beg             5.60222275867e-05   )61.2 384.9 ms
+(VAR: ty              5.59745094753e-05   )61.2 374.9 ms
+(VAR: what            5.59535860852e-05   )61.2 364.9 ms
+(VAR: gate            5.58060137914e-05   )61.2 354.9 ms
+(VAR: rb              5.57788190643e-05   )61.2 344.9 ms
+(VAR: mins            5.56840365035e-05   )61.2 334.9 ms
+(VAR: bad             5.5560631652e-05    )61.2 324.9 ms
+(VAR: ee              5.53868571261e-05   )61.2 314.9 ms
+(VAR: edge            5.53809849078e-05   )61.2 304.9 ms
+(VAR: ms              5.53411322905e-05   )61.2 294.9 ms
+(VAR: ncase           5.49774989506e-05   )61.2 284.9 ms
+(VAR: tyl             5.4965724932e-05    )61.2 274.9 ms
+(VAR: rsl             5.47895917675e-05   )61.2 264.9 ms
+(VAR: pwd             5.46424165827e-05   )61.2 254.9 ms
+(VAR: produce         5.46195766268e-05   )61.2 244.9 ms
+(VAR: xsum            5.43866090715e-05   )61.2 234.9 ms
+(VAR: jt              5.43831190936e-05   )61.2 224.9 ms
+(VAR: digmul          5.42309513642e-05   )61.2 214.9 ms
+(VAR: kc              5.39487469534e-05   )61.2 204.9 ms
+(VAR: irp             5.36411782066e-05   )61.2 194.9 ms
+(VAR: outlet          5.36386618522e-05   )61.2 184.9 ms
+(VAR: nedge           5.3338910965e-05    )61.2 174.9 ms
+(VAR: ab              5.32925916271e-05   )61.2 164.9 ms
+(VAR: perm            5.29142783349e-05   )61.2 154.9 ms
+(VAR: bx              5.28010059453e-05   )61.2 144.9 ms
+(bzero                5.2776438948e-05    )61.2 134.9 ms
+(VAR: for             5.26882432151e-05   )61.2 124.9 ms
+(VAR: like            5.2667106094e-05    )61.2 114.9 ms
+(VAR: cells           5.24954064103e-05   )61.2 104.9 ms
+(VAR: device          5.24178688272e-05   )61.2 94.9 ms
+(VAR: minc            5.23662479153e-05   )61.2 84.9 ms
+(VAR: lt              5.2330825115e-05    )61.2 74.9 ms
+(VAR: ps              5.23132875363e-05   )61.2 64.9 ms
+(VAR: ebits           5.22965263389e-05   )61.2 54.9 ms
+(VAR: wa              5.2259338085e-05    )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 11 11
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                        Page 11)61.2 744.9 ms
+F0 sf
+(VAR: jp              5.1940494744e-05    )61.2 724.9 ms
+(VAR: interval        5.19404425165e-05   )61.2 714.9 ms
+(VAR: prime           5.13248906084e-05   )61.2 704.9 ms
+(VAR: dummy           5.13151707278e-05   )61.2 694.9 ms
+(VAR: jscore          5.1118914434e-05    )61.2 684.9 ms
+(VAR: cumulative      5.10873463802e-05   )61.2 674.9 ms
+(VAR: leftptr         5.09151605009e-05   )61.2 664.9 ms
+(VAR: med             5.07308794919e-05   )61.2 654.9 ms
+(VAR: ary             5.0724529194e-05    )61.2 644.9 ms
+(VAR: elem            5.03990266923e-05   )61.2 634.9 ms
+(VAR: semua           5.03543670717e-05   )61.2 624.9 ms
+(VAR: qx              5.02667872747e-05   )61.2 614.9 ms
+(VAR: timejump        5.02174632457e-05   )61.2 604.9 ms
+(VAR: uy              4.99114767627e-05   )61.2 594.9 ms
+(VAR: pushed          4.98552449923e-05   )61.2 584.9 ms
+(VAR: unhap           4.96752710315e-05   )61.2 574.9 ms
+(VAR: lab             4.95282661593e-05   )61.2 564.9 ms
+(VAR: drink           4.94902821941e-05   )61.2 554.9 ms
+(VAR: oc              4.94521139568e-05   )61.2 544.9 ms
+(VAR: neg             4.94324336049e-05   )61.2 534.9 ms
+(VAR: signum          4.92723981221e-05   )61.2 524.9 ms
+(VAR: fields          4.89015285896e-05   )61.2 514.9 ms
+(VAR: change          4.88056332644e-05   )61.2 504.9 ms
+(VAR: deskid          4.85159007818e-05   )61.2 494.9 ms
+(VAR: local           4.83892116552e-05   )61.2 484.9 ms
+(VAR: par             4.83696219487e-05   )61.2 474.9 ms
+(VAR: imported        4.82287034234e-05   )61.2 464.9 ms
+(VAR: hd              4.81833271002e-05   )61.2 454.9 ms
+(VAR: stars           4.8134608204e-05    )61.2 444.9 ms
+(VAR: xnext           4.81129751554e-05   )61.2 434.9 ms
+(VAR: finishcnt       4.80863169135e-05   )61.2 424.9 ms
+(VAR: nk              4.78753560812e-05   )61.2 414.9 ms
+(VAR: draw            4.78735591921e-05   )61.2 404.9 ms
+(VAR: norm            4.77047512989e-05   )61.2 394.9 ms
+(VAR: tz              4.75267758763e-05   )61.2 384.9 ms
+(VAR: heapn           4.75087955853e-05   )61.2 374.9 ms
+(VAR: sudah           4.74575133755e-05   )61.2 364.9 ms
+(VAR: exy             4.74540220598e-05   )61.2 354.9 ms
+(VAR: 1000            4.74474653418e-05   )61.2 344.9 ms
+(VAR: mix             4.71808192699e-05   )61.2 334.9 ms
+(VAR: explode         4.70365257125e-05   )61.2 324.9 ms
+(VAR: bpos            4.69496784148e-05   )61.2 314.9 ms
+(VAR: rcpt            4.68533660727e-05   )61.2 304.9 ms
+(VAR: loop            4.6743151851e-05    )61.2 294.9 ms
+(VAR: tail            4.67141195857e-05   )61.2 284.9 ms
+(VAR: cm              4.66510031293e-05   )61.2 274.9 ms
+(VAR: some            4.65473393371e-05   )61.2 264.9 ms
+(VAR: qn              4.65155410934e-05   )61.2 254.9 ms
+(VAR: refx            4.64965867035e-05   )61.2 244.9 ms
+(VAR: account         4.64499595564e-05   )61.2 234.9 ms
+(VAR: symb            4.64179038071e-05   )61.2 224.9 ms
+(VAR: lastword        4.63879115713e-05   )61.2 214.9 ms
+(VAR: minabs          4.63610041315e-05   )61.2 204.9 ms
+(VAR: hogege          4.62401610019e-05   )61.2 194.9 ms
+(VAR: msd             4.62270890621e-05   )61.2 184.9 ms
+(VAR: sym             4.61384134349e-05   )61.2 174.9 ms
+(VAR: drop            4.60759150543e-05   )61.2 164.9 ms
+(VAR: rad             4.58977113091e-05   )61.2 154.9 ms
+(VAR: nodo            4.5843645251e-05    )61.2 144.9 ms
+(VAR: goal            4.58379026308e-05   )61.2 134.9 ms
+(VAR: ill             4.58303508411e-05   )61.2 124.9 ms
+(VAR: xl              4.58156422792e-05   )61.2 114.9 ms
+(VAR: es              4.58146499542e-05   )61.2 104.9 ms
+(VAR: oddpow          4.56309687126e-05   )61.2 94.9 ms
+(VAR: elements        4.54493726534e-05   )61.2 84.9 ms
+(VAR: only            4.53589785332e-05   )61.2 74.9 ms
+(VAR: css             4.52787024228e-05   )61.2 64.9 ms
+(VAR: grp             4.50660348659e-05   )61.2 54.9 ms
+(VAR: fname           4.5013024198e-05    )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 12 12
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                        Page 12)61.2 744.9 ms
+F0 sf
+(VAR: hasdesk         4.50128826411e-05   )61.2 724.9 ms
+(VAR: cl              4.4887553014e-05    )61.2 714.9 ms
+(fgetc                4.48803776137e-05   )61.2 704.9 ms
+(VAR: ns              4.47768337758e-05   )61.2 694.9 ms
+(VAR: split           4.46698540915e-05   )61.2 684.9 ms
+(VAR: position        4.46383898342e-05   )61.2 674.9 ms
+(VAR: tl              4.46377203794e-05   )61.2 664.9 ms
+(VAR: yes             4.45921877556e-05   )61.2 654.9 ms
+(VAR: lastt           4.45457252123e-05   )61.2 644.9 ms
+(VAR: ff              4.43944100274e-05   )61.2 634.9 ms
+(VAR: yl              4.43240599778e-05   )61.2 624.9 ms
+(VAR: sets            4.42254039717e-05   )61.2 614.9 ms
+(VAR: linep           4.41852032329e-05   )61.2 604.9 ms
+(VAR: 6               4.37438155335e-05   )61.2 594.9 ms
+(VAR: oku             4.36466126499e-05   )61.2 584.9 ms
+(VAR: euro            4.36221704001e-05   )61.2 574.9 ms
+(VAR: required        4.34452068128e-05   )61.2 564.9 ms
+(VAR: lcm             4.34333618333e-05   )61.2 554.9 ms
+(VAR: skipper         4.34039327331e-05   )61.2 544.9 ms
+(VAR: sec             4.33492446357e-05   )61.2 534.9 ms
+(VAR: ap              4.31480018088e-05   )61.2 524.9 ms
+(VAR: bprob           4.31202524694e-05   )61.2 514.9 ms
+(VAR: freq            4.29074946414e-05   )61.2 504.9 ms
+(VAR: rightptr        4.28820931039e-05   )61.2 494.9 ms
+(VAR: source          4.27179049759e-05   )61.2 484.9 ms
+(VAR: acnt            4.25433391146e-05   )61.2 474.9 ms
+(VAR: mi              4.24757764724e-05   )61.2 464.9 ms
+(VAR: stream          4.24475819302e-05   )61.2 454.9 ms
+(VAR: nowc            4.23684776868e-05   )61.2 444.9 ms
+(VAR: aaa             4.23472678447e-05   )61.2 434.9 ms
+(VAR: nodes           4.23373850459e-05   )61.2 424.9 ms
+(VAR: dj              4.23122125756e-05   )61.2 414.9 ms
+(VAR: ta              4.22584813959e-05   )61.2 404.9 ms
+(VAR: robot           4.21504627406e-05   )61.2 394.9 ms
+(VAR: bbb             4.20682214322e-05   )61.2 384.9 ms
+(VAR: cntb            4.20664819301e-05   )61.2 374.9 ms
+(VAR: results         4.20027571619e-05   )61.2 364.9 ms
+(VAR: exponent        4.17787947849e-05   )61.2 354.9 ms
+(VAR: cntk            4.17140938971e-05   )61.2 344.9 ms
+(VAR: linea           4.16506552674e-05   )61.2 334.9 ms
+(VAR: bletch          4.15609713615e-05   )61.2 324.9 ms
+(VAR: ten             4.15268628981e-05   )61.2 314.9 ms
+(VAR: curr            4.15072801339e-05   )61.2 304.9 ms
+(VAR: md              4.14823559142e-05   )61.2 294.9 ms
+(VAR: rooms           4.14402773446e-05   )61.2 284.9 ms
+(VAR: code            4.14316253042e-05   )61.2 274.9 ms
+(VAR: earn            4.13328306143e-05   )61.2 264.9 ms
+(VAR: answers         4.12973088557e-05   )61.2 254.9 ms
+(VAR: small           4.11111191545e-05   )61.2 244.9 ms
+(VAR: child           4.0968704213e-05    )61.2 234.9 ms
+(VAR: shang           4.09607771603e-05   )61.2 224.9 ms
+(VAR: cmps            4.09212686301e-05   )61.2 214.9 ms
+(VAR: invoke          4.08385626541e-05   )61.2 204.9 ms
+(VAR: ngraph          4.0783142446e-05    )61.2 194.9 ms
+(VAR: gm              4.07426407238e-05   )61.2 184.9 ms
+(VAR: xc              4.07210735973e-05   )61.2 174.9 ms
+(VAR: ei              4.06865281442e-05   )61.2 164.9 ms
+(VAR: stakk           4.06515242532e-05   )61.2 154.9 ms
+(VAR: depth           4.05239127037e-05   )61.2 144.9 ms
+(VAR: addpos          4.0470253608e-05    )61.2 134.9 ms
+(VAR: cnta            4.03885929822e-05   )61.2 124.9 ms
+(VAR: li              4.03712895265e-05   )61.2 114.9 ms
+(VAR: hints           4.03260096799e-05   )61.2 104.9 ms
+(VAR: opos            4.02902943169e-05   )61.2 94.9 ms
+(VAR: pot             4.02678909443e-05   )61.2 84.9 ms
+(VAR: take            4.02422849077e-05   )61.2 74.9 ms
+(VAR: store           4.02342460333e-05   )61.2 64.9 ms
+(VAR: ev              4.01885534007e-05   )61.2 54.9 ms
+(VAR: stop            4.01410522095e-05   )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 13 13
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                        Page 13)61.2 744.9 ms
+F0 sf
+(VAR: have            4.0101837851e-05    )61.2 724.9 ms
+(VAR: sbg             4.00831141557e-05   )61.2 714.9 ms
+(VAR: func            4.00214049505e-05   )61.2 704.9 ms
+(VAR: aft             3.99319093575e-05   )61.2 694.9 ms
+(VAR: motes           3.98859080741e-05   )61.2 684.9 ms
+(VAR: works           3.98668628945e-05   )61.2 674.9 ms
+(VAR: aty             3.9852209578e-05    )61.2 664.9 ms
+(VAR: midr            3.97244049909e-05   )61.2 654.9 ms
+(VAR: guests          3.94757802291e-05   )61.2 644.9 ms
+(VAR: sta             3.93247435414e-05   )61.2 634.9 ms
+(VAR: free            3.93126873959e-05   )61.2 624.9 ms
+(VAR: sinrad          3.92302754713e-05   )61.2 614.9 ms
+(VAR: join            3.9170405164e-05    )61.2 604.9 ms
+(VAR: tvz             3.91436875958e-05   )61.2 594.9 ms
+(VAR: sdx             3.91067069613e-05   )61.2 584.9 ms
+(VAR: tem             3.91053401362e-05   )61.2 574.9 ms
+(VAR: head            3.90278173051e-05   )61.2 564.9 ms
+(VAR: outlen          3.88860648474e-05   )61.2 554.9 ms
+(VAR: upper           3.88441970676e-05   )61.2 544.9 ms
+(VAR: drain           3.86854853958e-05   )61.2 534.9 ms
+(VAR: thresh          3.86702267506e-05   )61.2 524.9 ms
+(VAR: task            3.8638788688e-05    )61.2 514.9 ms
+(VAR: flags           3.86090933503e-05   )61.2 504.9 ms
+(VAR: tvx             3.85640327572e-05   )61.2 494.9 ms
+(VAR: destination     3.85380012221e-05   )61.2 484.9 ms
+(VAR: niz             3.85181749427e-05   )61.2 474.9 ms
+(VAR: tile            3.85076656756e-05   )61.2 464.9 ms
+(VAR: blue            3.84974789305e-05   )61.2 454.9 ms
+(VAR: avg             3.84274207378e-05   )61.2 444.9 ms
+(VAR: needed          3.82935904823e-05   )61.2 434.9 ms
+(VAR: outstr          3.82800404051e-05   )61.2 424.9 ms
+(VAR: aaaa            3.80217047329e-05   )61.2 414.9 ms
+(VAR: qy              3.80184412539e-05   )61.2 404.9 ms
+(VAR: disks           3.79746099665e-05   )61.2 394.9 ms
+(VAR: nbitmask        3.79264080495e-05   )61.2 384.9 ms
+(VAR: cust            3.77455000615e-05   )61.2 374.9 ms
+(VAR: rec             3.75514811824e-05   )61.2 364.9 ms
+(VAR: oppo            3.75095885859e-05   )61.2 354.9 ms
+(VAR: switch          3.73890396211e-05   )61.2 344.9 ms
+(VAR: be              3.68748649651e-05   )61.2 334.9 ms
+(VAR: lx              3.6786646137e-05    )61.2 324.9 ms
+(VAR: dc              3.64291712244e-05   )61.2 314.9 ms
+(VAR: ukupno          3.63828124037e-05   )61.2 304.9 ms
+(VAR: clapping        3.63635714304e-05   )61.2 294.9 ms
+(VAR: massy           3.63587305611e-05   )61.2 284.9 ms
+(VAR: pid             3.63036217328e-05   )61.2 274.9 ms
+(VAR: rx              3.62996083466e-05   )61.2 264.9 ms
+(VAR: newline         3.62919046272e-05   )61.2 254.9 ms
+(VAR: comp            3.61071172698e-05   )61.2 244.9 ms
+(VAR: vist            3.60841994459e-05   )61.2 234.9 ms
+(VAR: pairy           3.59518621505e-05   )61.2 224.9 ms
+(VAR: minb            3.58560528918e-05   )61.2 214.9 ms
+(VAR: okay            3.58096249321e-05   )61.2 204.9 ms
+(VAR: skipcount       3.57808523847e-05   )61.2 194.9 ms
+(VAR: pans            3.57697633332e-05   )61.2 184.9 ms
+(VAR: maks            3.55249422074e-05   )61.2 174.9 ms
+(VAR: toh             3.54791104953e-05   )61.2 164.9 ms
+(VAR: bno             3.5470141651e-05    )61.2 154.9 ms
+(VAR: mididx          3.52164787776e-05   )61.2 144.9 ms
+(VAR: massx           3.5206630528e-05    )61.2 134.9 ms
+(VAR: mfg             3.50599157484e-05   )61.2 124.9 ms
+(VAR: con             3.47013954371e-05   )61.2 114.9 ms
+(VAR: begin           3.46778457786e-05   )61.2 104.9 ms
+(VAR: midtime         3.46537708058e-05   )61.2 94.9 ms
+(VAR: ulen            3.46456989267e-05   )61.2 84.9 ms
+(VAR: single          3.46105518352e-05   )61.2 74.9 ms
+(VAR: nu              3.45453279552e-05   )61.2 64.9 ms
+(VAR: qcnt            3.4483963121e-05    )61.2 54.9 ms
+(VAR: dpleft          3.44748254786e-05   )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 14 14
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                        Page 14)61.2 744.9 ms
+F0 sf
+(VAR: var             3.44455905688e-05   )61.2 724.9 ms
+(VAR: zero            3.42235902624e-05   )61.2 714.9 ms
+(VAR: delim           3.42130841847e-05   )61.2 704.9 ms
+(VAR: columns         3.4101205651e-05    )61.2 694.9 ms
+(VAR: lastmax         3.40387538337e-05   )61.2 684.9 ms
+(VAR: normalcost      3.39106418851e-05   )61.2 674.9 ms
+(VAR: minor           3.38517457137e-05   )61.2 664.9 ms
+(VAR: zip             3.38506323575e-05   )61.2 654.9 ms
+(VAR: tohc            3.36849396574e-05   )61.2 644.9 ms
+(VAR: keyboard        3.35305236876e-05   )61.2 634.9 ms
+(VAR: dv              3.33850709733e-05   )61.2 624.9 ms
+(VAR: pv              3.33647120253e-05   )61.2 614.9 ms
+(VAR: filename        3.32707595588e-05   )61.2 604.9 ms
+(VAR: moves           3.32697383245e-05   )61.2 594.9 ms
+(VAR: locmax          3.32178369753e-05   )61.2 584.9 ms
+(VAR: card            3.31814727626e-05   )61.2 574.9 ms
+(VAR: sort            3.31648200285e-05   )61.2 564.9 ms
+(VAR: bi              3.31000358582e-05   )61.2 554.9 ms
+(VAR: curmx           3.29291996313e-05   )61.2 544.9 ms
+(VAR: loss            3.27773186695e-05   )61.2 534.9 ms
+(VAR: colon           3.27625552229e-05   )61.2 524.9 ms
+(VAR: pas             3.26067312953e-05   )61.2 514.9 ms
+(VAR: attack          3.25924307644e-05   )61.2 504.9 ms
+(VAR: gn              3.2459641615e-05    )61.2 494.9 ms
+(VAR: reserve         3.22734913667e-05   )61.2 484.9 ms
+(VAR: hr              3.22681132417e-05   )61.2 474.9 ms
+(VAR: maxr            3.22520544611e-05   )61.2 464.9 ms
+(VAR: tab             3.22238022706e-05   )61.2 454.9 ms
+(VAR: rrr             3.21625387397e-05   )61.2 444.9 ms
+(VAR: owps            3.21603385279e-05   )61.2 434.9 ms
+(VAR: password        3.21555107362e-05   )61.2 424.9 ms
+(VAR: oppose          3.21496854543e-05   )61.2 414.9 ms
+(VAR: refresh         3.21137736982e-05   )61.2 404.9 ms
+(VAR: tiempo          3.20899712781e-05   )61.2 394.9 ms
+(VAR: flow            3.20311315693e-05   )61.2 384.9 ms
+(VAR: radius          3.19984772466e-05   )61.2 374.9 ms
+(VAR: pts             3.19056426273e-05   )61.2 364.9 ms
+(VAR: acount          3.16799934517e-05   )61.2 354.9 ms
+(VAR: minuts          3.16706676116e-05   )61.2 344.9 ms
+(VAR: dess            3.16041621098e-05   )61.2 334.9 ms
+(VAR: tens            3.15459162036e-05   )61.2 324.9 ms
+(VAR: cou             3.13186104511e-05   )61.2 314.9 ms
+(VAR: foob            3.13030372759e-05   )61.2 304.9 ms
+(VAR: choice          3.12855866068e-05   )61.2 294.9 ms
+(VAR: evoke           3.11638862957e-05   )61.2 284.9 ms
+(VAR: hix             3.10817545973e-05   )61.2 274.9 ms
+(VAR: testtime        3.07653972839e-05   )61.2 264.9 ms
+(VAR: fincnt          3.07377989083e-05   )61.2 254.9 ms
+(VAR: aux             3.07052306934e-05   )61.2 244.9 ms
+(VAR: lend            3.06924803753e-05   )61.2 234.9 ms
+(VAR: frac            3.06166494451e-05   )61.2 224.9 ms
+(VAR: debuffs         3.05985628192e-05   )61.2 214.9 ms
+(VAR: cps             3.0523235855e-05    )61.2 204.9 ms
+(VAR: checked         3.05131478413e-05   )61.2 194.9 ms
+(VAR: canuse          3.05012199156e-05   )61.2 184.9 ms
+(VAR: healed          3.03706584847e-05   )61.2 174.9 ms
+(VAR: bt              3.03642873018e-05   )61.2 164.9 ms
+(VAR: diamond         3.03624331581e-05   )61.2 154.9 ms
+(VAR: shouldload      3.02858925869e-05   )61.2 144.9 ms
+(VAR: agent           3.02352379174e-05   )61.2 134.9 ms
+(VAR: ynext           3.01733220337e-05   )61.2 124.9 ms
+(VAR: clear           3.01146960534e-05   )61.2 114.9 ms
+(VAR: fur             3.01116824701e-05   )61.2 104.9 ms
+(VAR: del             3.00764764839e-05   )61.2 94.9 ms
+(VAR: mae             3.00323736806e-05   )61.2 84.9 ms
+(VAR: gabriel         2.99867268386e-05   )61.2 74.9 ms
+(VAR: rk              2.97918540308e-05   )61.2 64.9 ms
+(VAR: divt            2.9682937632e-05    )61.2 54.9 ms
+(VAR: uu              2.96456849695e-05   )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 15 15
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                        Page 15)61.2 744.9 ms
+F0 sf
+(VAR: orange          2.95965915773e-05   )61.2 724.9 ms
+(srand                2.94878048528e-05   )61.2 714.9 ms
+(VAR: dictionary      2.94649824138e-05   )61.2 704.9 ms
+(VAR: ck              2.93774608389e-05   )61.2 694.9 ms
+(VAR: gin             2.92555608645e-05   )61.2 684.9 ms
+(VAR: power           2.90810113169e-05   )61.2 674.9 ms
+(VAR: bio             2.90319655898e-05   )61.2 664.9 ms
+(VAR: om              2.90156881954e-05   )61.2 654.9 ms
+(VAR: oldmax          2.89627936327e-05   )61.2 644.9 ms
+(VAR: bound           2.88776325772e-05   )61.2 634.9 ms
+(VAR: little          2.88432995707e-05   )61.2 624.9 ms
+(VAR: runleft         2.86784348173e-05   )61.2 614.9 ms
+(VAR: vn              2.86762887873e-05   )61.2 604.9 ms
+(VAR: ot              2.8650748347e-05    )61.2 594.9 ms
+(VAR: crnl            2.85427221382e-05   )61.2 584.9 ms
+(VAR: inh             2.8488719496e-05    )61.2 574.9 ms
+(VAR: sign            2.84871410104e-05   )61.2 564.9 ms
+(VAR: decimal         2.84749611836e-05   )61.2 554.9 ms
+(VAR: sink            2.84570705644e-05   )61.2 544.9 ms
+(VAR: printed         2.82199500237e-05   )61.2 534.9 ms
+(VAR: turns           2.81848899605e-05   )61.2 524.9 ms
+(VAR: currrate        2.8165775253e-05    )61.2 514.9 ms
+(VAR: save            2.80077271125e-05   )61.2 504.9 ms
+(VAR: button          2.79722055696e-05   )61.2 494.9 ms
+(VAR: pick            2.79417167592e-05   )61.2 484.9 ms
+(VAR: applauding      2.79195789087e-05   )61.2 474.9 ms
+(VAR: vel             2.78942998003e-05   )61.2 464.9 ms
+(VAR: stdout          2.78801311431e-05   )61.2 454.9 ms
+(VAR: checkn          2.78533329526e-05   )61.2 444.9 ms
+(VAR: linecapp        2.78352970395e-05   )61.2 434.9 ms
+(VAR: msk             2.78324074228e-05   )61.2 424.9 ms
+(VAR: yu              2.77279747295e-05   )61.2 414.9 ms
+(VAR: red             2.76684672719e-05   )61.2 404.9 ms
+(VAR: less            2.76586171751e-05   )61.2 394.9 ms
+(VAR: rcp             2.75875434854e-05   )61.2 384.9 ms
+(VAR: miny            2.75722716815e-05   )61.2 374.9 ms
+(VAR: fac             2.7544529967e-05    )61.2 364.9 ms
+(VAR: pancakes        2.74897036908e-05   )61.2 354.9 ms
+(VAR: phone           2.74315203531e-05   )61.2 344.9 ms
+(VAR: sq              2.73081176336e-05   )61.2 334.9 ms
+(VAR: nr              2.72825971158e-05   )61.2 324.9 ms
+(VAR: instr           2.72647476733e-05   )61.2 314.9 ms
+(VAR: rsc             2.72385783808e-05   )61.2 304.9 ms
+(VAR: front           2.71983900362e-05   )61.2 294.9 ms
+(VAR: tmps            2.7146153006e-05    )61.2 284.9 ms
+(VAR: error           2.70858073427e-05   )61.2 274.9 ms
+(VAR: nw              2.70826442642e-05   )61.2 264.9 ms
+(VAR: ban             2.695623963e-05     )61.2 254.9 ms
+(VAR: mini            2.68945802489e-05   )61.2 244.9 ms
+(VAR: output          2.68528006637e-05   )61.2 234.9 ms
+(VAR: ln              2.68367459472e-05   )61.2 224.9 ms
+(VAR: inversions      2.67628195344e-05   )61.2 214.9 ms
+(VAR: rpc             2.6753609005e-05    )61.2 204.9 ms
+(VAR: you             2.66859779326e-05   )61.2 194.9 ms
+(VAR: barber          2.65166320186e-05   )61.2 184.9 ms
+(VAR: rot             2.64713332665e-05   )61.2 174.9 ms
+(VAR: jmp             2.63734533936e-05   )61.2 164.9 ms
+(VAR: arrp            2.63216399771e-05   )61.2 154.9 ms
+(VAR: frag            2.63059417914e-05   )61.2 144.9 ms
+(VAR: totalc          2.62851457544e-05   )61.2 134.9 ms
+(VAR: ht              2.62055961079e-05   )61.2 124.9 ms
+(VAR: jn              2.61984710396e-05   )61.2 114.9 ms
+(VAR: hei             2.60839888873e-05   )61.2 104.9 ms
+(VAR: patr            2.59488773731e-05   )61.2 94.9 ms
+(VAR: other           2.594449993e-05     )61.2 84.9 ms
+(VAR: altitude        2.58897006664e-05   )61.2 74.9 ms
+(VAR: ri              2.58437687668e-05   )61.2 64.9 ms
+(VAR: posa            2.58420327681e-05   )61.2 54.9 ms
+(VAR: io              2.5825958348e-05    )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 16 16
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                        Page 16)61.2 744.9 ms
+F0 sf
+(VAR: sav             2.57482126787e-05   )61.2 724.9 ms
+(VAR: iscorner        2.57222117934e-05   )61.2 714.9 ms
+(VAR: horse           2.56637375043e-05   )61.2 704.9 ms
+(VAR: pn              2.5646926989e-05    )61.2 694.9 ms
+(VAR: lambda          2.56359220779e-05   )61.2 684.9 ms
+(VAR: parties         2.55256318767e-05   )61.2 674.9 ms
+(VAR: juy             2.55116841605e-05   )61.2 664.9 ms
+(VAR: mida            2.5471263146e-05    )61.2 654.9 ms
+(VAR: arrs            2.54061246044e-05   )61.2 644.9 ms
+(VAR: trial           2.53857867833e-05   )61.2 634.9 ms
+(VAR: qt              2.53191038411e-05   )61.2 624.9 ms
+(VAR: errstring       2.52336928403e-05   )61.2 614.9 ms
+(VAR: derange         2.51739946695e-05   )61.2 604.9 ms
+(VAR: nd              2.51523144823e-05   )61.2 594.9 ms
+(VAR: googlerese      2.51073616826e-05   )61.2 584.9 ms
+(VAR: src             2.50059188186e-05   )61.2 574.9 ms
+(VAR: maps            2.49927250765e-05   )61.2 564.9 ms
+(VAR: flipcount       2.48367672558e-05   )61.2 554.9 ms
+(VAR: changed         2.47456126636e-05   )61.2 544.9 ms
+(VAR: dtime           2.47156495967e-05   )61.2 534.9 ms
+(VAR: parent          2.46155566913e-05   )61.2 524.9 ms
+(VAR: caseindex       2.46143185045e-05   )61.2 514.9 ms
+(VAR: lang            2.45801183478e-05   )61.2 504.9 ms
+(VAR: divisors        2.45683665184e-05   )61.2 494.9 ms
+(VAR: mail            2.45633254504e-05   )61.2 484.9 ms
+(VAR: hand            2.45054843035e-05   )61.2 474.9 ms
+(VAR: this            2.44324432229e-05   )61.2 464.9 ms
+(VAR: badeps          2.44062256286e-05   )61.2 454.9 ms
+(VAR: nopath          2.42765294105e-05   )61.2 444.9 ms
+(VAR: equalise        2.42204987307e-05   )61.2 434.9 ms
+(VAR: gap             2.41055837737e-05   )61.2 424.9 ms
+(VAR: equal           2.4088349705e-05    )61.2 414.9 ms
+(VAR: side            2.40774048765e-05   )61.2 404.9 ms
+(VAR: flgs            2.39995690852e-05   )61.2 394.9 ms
+(VAR: marked          2.39779556279e-05   )61.2 384.9 ms
+(isalpha              2.39718524534e-05   )61.2 374.9 ms
+(VAR: tvy             2.39152777034e-05   )61.2 364.9 ms
+(VAR: aprob           2.38961969265e-05   )61.2 354.9 ms
+(VAR: largest         2.38339703353e-05   )61.2 344.9 ms
+(VAR: pseudo          2.37182346462e-05   )61.2 334.9 ms
+(VAR: lastride        2.36736371699e-05   )61.2 324.9 ms
+(VAR: bufsize         2.36648423988e-05   )61.2 314.9 ms
+(VAR: smtp            2.36171986024e-05   )61.2 304.9 ms
+(VAR: jm              2.35092524699e-05   )61.2 294.9 ms
+(VAR: batch           2.34263994692e-05   )61.2 284.9 ms
+(VAR: minx            2.34160284592e-05   )61.2 274.9 ms
+(VAR: quot            2.33565557779e-05   )61.2 264.9 ms
+(isupper              2.33424831993e-05   )61.2 254.9 ms
+(VAR: baarrs          2.33352374042e-05   )61.2 244.9 ms
+(VAR: activity        2.30757687027e-05   )61.2 234.9 ms
+(VAR: isp             2.30467444505e-05   )61.2 224.9 ms
+(VAR: yet             2.30418445339e-05   )61.2 214.9 ms
+(VAR: lastfarm        2.30294826954e-05   )61.2 204.9 ms
+(VAR: range           2.29924045862e-05   )61.2 194.9 ms
+(VAR: hikers          2.29796289768e-05   )61.2 184.9 ms
+(VAR: rim             2.29454306536e-05   )61.2 174.9 ms
+(VAR: segs            2.28917976804e-05   )61.2 164.9 ms
+(VAR: cd              2.28175516198e-05   )61.2 154.9 ms
+(VAR: takenm          2.28123012327e-05   )61.2 144.9 ms
+(VAR: eaten           2.2729664774e-05    )61.2 134.9 ms
+(VAR: press           2.24879238008e-05   )61.2 124.9 ms
+(VAR: bff             2.2384439312e-05    )61.2 114.9 ms
+(VAR: ctcpcrnl        2.2338449508e-05    )61.2 104.9 ms
+(VAR: assigned        2.2010213033e-05    )61.2 94.9 ms
+(VAR: ishappy         2.19604793565e-05   )61.2 84.9 ms
+(VAR: farest          2.19397985828e-05   )61.2 74.9 ms
+(VAR: play            2.189784429e-05     )61.2 64.9 ms
+(VAR: latest          2.18840332601e-05   )61.2 54.9 ms
+(VAR: iter            2.1879667058e-05    )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 17 17
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                        Page 17)61.2 744.9 ms
+F0 sf
+(VAR: allsnds         2.18234036893e-05   )61.2 724.9 ms
+(VAR: read            2.18128822646e-05   )61.2 714.9 ms
+(VAR: tests           2.17935571964e-05   )61.2 704.9 ms
+(VAR: posb            2.17175551282e-05   )61.2 694.9 ms
+(VAR: setpostn        2.15979409446e-05   )61.2 684.9 ms
+(VAR: partition       2.15832528369e-05   )61.2 674.9 ms
+(VAR: nall            2.15108345969e-05   )61.2 664.9 ms
+(VAR: pan             2.14701714665e-05   )61.2 654.9 ms
+(VAR: selected        2.14185078726e-05   )61.2 644.9 ms
+(VAR: lado            2.14139639431e-05   )61.2 634.9 ms
+(VAR: attacks         2.1335668732e-05    )61.2 624.9 ms
+(VAR: lawn            2.13091783568e-05   )61.2 614.9 ms
+(VAR: userid          2.1286614734e-05    )61.2 604.9 ms
+(VAR: cak             2.12476385576e-05   )61.2 594.9 ms
+(VAR: ls              2.1178064657e-05    )61.2 584.9 ms
+(VAR: cdel            2.11779891678e-05   )61.2 574.9 ms
+(VAR: imax            2.11204190961e-05   )61.2 564.9 ms
+(VAR: violet          2.10642638637e-05   )61.2 554.9 ms
+(VAR: ull             2.10319702637e-05   )61.2 544.9 ms
+(VAR: rela            2.1025163726e-05    )61.2 534.9 ms
+(VAR: old             2.10190242914e-05   )61.2 524.9 ms
+(VAR: tosort          2.10079148735e-05   )61.2 514.9 ms
+(VAR: vi              2.09778606461e-05   )61.2 504.9 ms
+(VAR: sh              2.09304346187e-05   )61.2 494.9 ms
+(VAR: prfl            2.07109263252e-05   )61.2 484.9 ms
+(VAR: ibase           2.07087114231e-05   )61.2 474.9 ms
+(VAR: err             2.06237291665e-05   )61.2 464.9 ms
+(VAR: rightpos        2.06048590428e-05   )61.2 454.9 ms
+(VAR: dll             2.06033542379e-05   )61.2 444.9 ms
+(VAR: tfree           2.05461840039e-05   )61.2 434.9 ms
+(VAR: cold            2.04642686905e-05   )61.2 424.9 ms
+(VAR: kl              2.04407753375e-05   )61.2 414.9 ms
+(VAR: ansx            2.03962861013e-05   )61.2 404.9 ms
+(VAR: sdy             2.03286728272e-05   )61.2 394.9 ms
+(VAR: big             2.02971330339e-05   )61.2 384.9 ms
+(VAR: multi           2.02609063804e-05   )61.2 374.9 ms
+(VAR: default         2.01461227458e-05   )61.2 364.9 ms
+(VAR: part            2.00991137177e-05   )61.2 354.9 ms
+(VAR: gid             2.00892529472e-05   )61.2 344.9 ms
+(VAR: helo            2.00729258704e-05   )61.2 334.9 ms
+(VAR: party           2.00020801372e-05   )61.2 324.9 ms
+(VAR: welcome         1.99084093379e-05   )61.2 314.9 ms
+(VAR: auth            1.98787274335e-05   )61.2 304.9 ms
+(VAR: belts           1.98470176367e-05   )61.2 294.9 ms
+(VAR: types           1.98318819851e-05   )61.2 284.9 ms
+(VAR: dw              1.9824505103e-05    )61.2 274.9 ms
+(VAR: ccnt            1.96628015866e-05   )61.2 264.9 ms
+(VAR: abarrs          1.96520496604e-05   )61.2 254.9 ms
+(VAR: misc            1.96340086491e-05   )61.2 244.9 ms
+(VAR: sen             1.96234989167e-05   )61.2 234.9 ms
+(VAR: carry           1.9622251852e-05    )61.2 224.9 ms
+(VAR: query           1.96206304955e-05   )61.2 214.9 ms
+(VAR: ant             1.95379993654e-05   )61.2 204.9 ms
+(VAR: trip            1.95373171583e-05   )61.2 194.9 ms
+(VAR: senators        1.95065485417e-05   )61.2 184.9 ms
+(VAR: flipper         1.95029992962e-05   )61.2 174.9 ms
+(VAR: fooc            1.94888411348e-05   )61.2 164.9 ms
+(VAR: ansa            1.93919831736e-05   )61.2 154.9 ms
+(VAR: desks           1.93738736012e-05   )61.2 144.9 ms
+(VAR: coef            1.93515732543e-05   )61.2 134.9 ms
+(VAR: limit           1.93410834878e-05   )61.2 124.9 ms
+(VAR: order           1.92323623551e-05   )61.2 114.9 ms
+(VAR: fdz             1.91939799491e-05   )61.2 104.9 ms
+(VAR: geterr          1.90905641173e-05   )61.2 94.9 ms
+(VAR: curlist         1.90722394446e-05   )61.2 84.9 ms
+(VAR: curj            1.90185734806e-05   )61.2 74.9 ms
+(VAR: js              1.89964404204e-05   )61.2 64.9 ms
+(VAR: sdz             1.89876106527e-05   )61.2 54.9 ms
+(VAR: fact            1.88166773479e-05   )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 18 18
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                        Page 18)61.2 744.9 ms
+F0 sf
+(VAR: rep             1.85590188895e-05   )61.2 724.9 ms
+(VAR: candies         1.85223770397e-05   )61.2 714.9 ms
+(VAR: nwp             1.8481036371e-05    )61.2 704.9 ms
+(VAR: buff            1.84279193001e-05   )61.2 694.9 ms
+(VAR: re              1.84021919686e-05   )61.2 684.9 ms
+(VAR: powa            1.83957867075e-05   )61.2 674.9 ms
+(VAR: sorted          1.83644048254e-05   )61.2 664.9 ms
+(VAR: men             1.83345009557e-05   )61.2 654.9 ms
+(VAR: far             1.83312827681e-05   )61.2 644.9 ms
+(VAR: roomn           1.83114476877e-05   )61.2 634.9 ms
+(VAR: fdy             1.83009306502e-05   )61.2 624.9 ms
+(VAR: minus           1.82326720411e-05   )61.2 614.9 ms
+(VAR: qtde            1.82134937066e-05   )61.2 604.9 ms
+(VAR: fx              1.8199819601e-05    )61.2 594.9 ms
+(VAR: today           1.81403251214e-05   )61.2 584.9 ms
+(VAR: symbname        1.80985791235e-05   )61.2 574.9 ms
+(VAR: gi              1.80732324251e-05   )61.2 564.9 ms
+(VAR: runtime         1.8064252674e-05    )61.2 554.9 ms
+(VAR: sl              1.79396236979e-05   )61.2 544.9 ms
+(VAR: ry              1.79215505522e-05   )61.2 534.9 ms
+(VAR: 220             1.78980153375e-05   )61.2 524.9 ms
+(VAR: knight          1.78096160002e-05   )61.2 514.9 ms
+(VAR: mten            1.78090404181e-05   )61.2 504.9 ms
+(VAR: finish          1.77101033333e-05   )61.2 494.9 ms
+(VAR: turn            1.76108004186e-05   )61.2 484.9 ms
+(VAR: ndel            1.76047700198e-05   )61.2 474.9 ms
+(VAR: ver             1.75759262015e-05   )61.2 464.9 ms
+(VAR: qv              1.74676247065e-05   )61.2 454.9 ms
+(VAR: alo             1.74208610433e-05   )61.2 444.9 ms
+(VAR: arrcpy          1.73930603835e-05   )61.2 434.9 ms
+(VAR: nq              1.72945419932e-05   )61.2 424.9 ms
+(VAR: full            1.7273462524e-05    )61.2 414.9 ms
+(VAR: added           1.71599035848e-05   )61.2 404.9 ms
+(VAR: initiator       1.71358300637e-05   )61.2 394.9 ms
+(VAR: we              1.70618754019e-05   )61.2 384.9 ms
+(VAR: curm            1.69709016366e-05   )61.2 374.9 ms
+(VAR: pal             1.68894067199e-05   )61.2 364.9 ms
+(VAR: oznaka          1.68498896053e-05   )61.2 354.9 ms
+(VAR: am              1.6830118905e-05    )61.2 344.9 ms
+(VAR: sa              1.68227292854e-05   )61.2 334.9 ms
+(VAR: firstgr         1.67886544563e-05   )61.2 324.9 ms
+(VAR: inline          1.6609839368e-05    )61.2 314.9 ms
+(VAR: naj             1.6574184762e-05    )61.2 304.9 ms
+(VAR: addr            1.64769143959e-05   )61.2 294.9 ms
+(VAR: which           1.63516130254e-05   )61.2 284.9 ms
+(VAR: arrj            1.63428230172e-05   )61.2 274.9 ms
+(VAR: yyl             1.62068632586e-05   )61.2 264.9 ms
+(VAR: xpos            1.6199704053e-05    )61.2 254.9 ms
+(VAR: term            1.61666053268e-05   )61.2 244.9 ms
+(VAR: plus            1.61555387074e-05   )61.2 234.9 ms
+(VAR: games           1.61136215105e-05   )61.2 224.9 ms
+(VAR: qr              1.61108580922e-05   )61.2 214.9 ms
+(VAR: richard         1.60874715123e-05   )61.2 204.9 ms
+(VAR: block           1.60631486463e-05   )61.2 194.9 ms
+(VAR: reversed        1.603592446e-05     )61.2 184.9 ms
+(VAR: judge           1.60246970749e-05   )61.2 174.9 ms
+(VAR: rown            1.60164749398e-05   )61.2 164.9 ms
+(VAR: elapsed         1.59127611207e-05   )61.2 154.9 ms
+(VAR: buttons         1.58367426487e-05   )61.2 144.9 ms
+(VAR: nm              1.57708030068e-05   )61.2 134.9 ms
+(tolower              1.57513094068e-05   )61.2 124.9 ms
+(VAR: reached         1.5749680202e-05    )61.2 114.9 ms
+(VAR: tag             1.56796701731e-05   )61.2 104.9 ms
+(VAR: ws              1.56721449742e-05   )61.2 94.9 ms
+(VAR: dots            1.56657540861e-05   )61.2 84.9 ms
+(VAR: words           1.56630383775e-05   )61.2 74.9 ms
+(VAR: dump            1.55670468471e-05   )61.2 64.9 ms
+(VAR: adj             1.55552357569e-05   )61.2 54.9 ms
+(VAR: user            1.55451323435e-05   )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 19 19
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                        Page 19)61.2 744.9 ms
+F0 sf
+(VAR: why             1.54607831464e-05   )61.2 724.9 ms
+(VAR: freep           1.52233346695e-05   )61.2 714.9 ms
+(VAR: rel             1.52119362637e-05   )61.2 704.9 ms
+(VAR: bishopf         1.51852014798e-05   )61.2 694.9 ms
+(VAR: alps            1.51491527021e-05   )61.2 684.9 ms
+(VAR: 20              1.5147025078e-05    )61.2 674.9 ms
+(VAR: inlen           1.50507564557e-05   )61.2 664.9 ms
+(VAR: curnum          1.49773593661e-05   )61.2 654.9 ms
+(VAR: cmx             1.49498553087e-05   )61.2 644.9 ms
+(VAR: hn              1.48894167637e-05   )61.2 634.9 ms
+(VAR: rn              1.47599377722e-05   )61.2 624.9 ms
+(VAR: happyn          1.47550605493e-05   )61.2 614.9 ms
+(VAR: dirs            1.47425055165e-05   )61.2 604.9 ms
+(VAR: oset            1.47348580517e-05   )61.2 594.9 ms
+(VAR: cmpt            1.46956626718e-05   )61.2 584.9 ms
+(VAR: coor            1.46940553713e-05   )61.2 574.9 ms
+(VAR: pack            1.46077488628e-05   )61.2 564.9 ms
+(VAR: la              1.45892500521e-05   )61.2 554.9 ms
+(VAR: compiler        1.45747216975e-05   )61.2 544.9 ms
+(VAR: banner          1.45718059845e-05   )61.2 534.9 ms
+(VAR: cscore          1.45521707476e-05   )61.2 524.9 ms
+(VAR: english         1.45191686827e-05   )61.2 514.9 ms
+(VAR: vals            1.45002335292e-05   )61.2 504.9 ms
+(VAR: friends         1.44676582976e-05   )61.2 494.9 ms
+(VAR: alatt           1.44607785744e-05   )61.2 484.9 ms
+(VAR: cols            1.43757812413e-05   )61.2 474.9 ms
+(VAR: tmat            1.43336918271e-05   )61.2 464.9 ms
+(VAR: npat            1.43332738122e-05   )61.2 454.9 ms
+(VAR: shift           1.41544575383e-05   )61.2 444.9 ms
+(VAR: dels            1.40936627556e-05   )61.2 434.9 ms
+(VAR: commsum         1.40577273546e-05   )61.2 424.9 ms
+(VAR: surprise        1.40436856073e-05   )61.2 414.9 ms
+(VAR: remaining       1.40378721311e-05   )61.2 404.9 ms
+(VAR: decode          1.40322364238e-05   )61.2 394.9 ms
+(VAR: bloca           1.39233097504e-05   )61.2 384.9 ms
+(VAR: threads         1.389658369e-05     )61.2 374.9 ms
+(VAR: put             1.38945392192e-05   )61.2 364.9 ms
+(VAR: rat             1.38661705082e-05   )61.2 354.9 ms
+(VAR: indices         1.38587118156e-05   )61.2 344.9 ms
+(VAR: bmr             1.38400623386e-05   )61.2 334.9 ms
+(VAR: pl              1.38383479405e-05   )61.2 324.9 ms
+(VAR: raddr           1.38359344089e-05   )61.2 314.9 ms
+(VAR: body            1.38055881129e-05   )61.2 304.9 ms
+(VAR: bestb           1.37498588913e-05   )61.2 294.9 ms
+(VAR: he              1.36480779258e-05   )61.2 284.9 ms
+(VAR: combined        1.36345738419e-05   )61.2 274.9 ms
+(VAR: where           1.3606080151e-05    )61.2 264.9 ms
+(VAR: getargs         1.36039894051e-05   )61.2 254.9 ms
+(VAR: tmpchar         1.35947776557e-05   )61.2 244.9 ms
+(VAR: dz              1.35825327614e-05   )61.2 234.9 ms
+(VAR: one             1.35788474615e-05   )61.2 224.9 ms
+(VAR: poss            1.34728100954e-05   )61.2 214.9 ms
+(VAR: rangex          1.33641236557e-05   )61.2 204.9 ms
+(VAR: charr           1.32818335233e-05   )61.2 194.9 ms
+(VAR: success         1.32766557987e-05   )61.2 184.9 ms
+(VAR: former          1.3173060823e-05    )61.2 174.9 ms
+(VAR: bf              1.31709746007e-05   )61.2 164.9 ms
+(VAR: yc              1.31571338806e-05   )61.2 154.9 ms
+(VAR: emem            1.30671414132e-05   )61.2 144.9 ms
+(VAR: apan            1.29879811016e-05   )61.2 134.9 ms
+(VAR: wrong           1.29871159813e-05   )61.2 124.9 ms
+(VAR: sbgi            1.29692507042e-05   )61.2 114.9 ms
+(VAR: 5               1.29657851156e-05   )61.2 104.9 ms
+(VAR: 8               1.29330766276e-05   )61.2 94.9 ms
+(VAR: lines           1.29094636522e-05   )61.2 84.9 ms
+(VAR: fz              1.29035898689e-05   )61.2 74.9 ms
+(getc                 1.28969982187e-05   )61.2 64.9 ms
+(VAR: person          1.27729476958e-05   )61.2 54.9 ms
+(VAR: ttt             1.27695082229e-05   )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 20 20
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                        Page 20)61.2 744.9 ms
+F0 sf
+(VAR: hp              1.26738364621e-05   )61.2 724.9 ms
+(VAR: eles            1.26399946783e-05   )61.2 714.9 ms
+(VAR: divisor         1.26113052494e-05   )61.2 704.9 ms
+(VAR: train           1.25783431051e-05   )61.2 694.9 ms
+(strcat               1.25766355316e-05   )61.2 684.9 ms
+(VAR: inc             1.24722805539e-05   )61.2 674.9 ms
+(VAR: rows            1.24505602211e-05   )61.2 664.9 ms
+(VAR: the             1.23179934844e-05   )61.2 654.9 ms
+(VAR: bpan            1.22992122391e-05   )61.2 644.9 ms
+(VAR: sspeed          1.22933798564e-05   )61.2 634.9 ms
+(VAR: work            1.22844831108e-05   )61.2 624.9 ms
+(VAR: rank            1.22429605992e-05   )61.2 614.9 ms
+(VAR: bishopput       1.21307973009e-05   )61.2 604.9 ms
+(VAR: marshal         1.21262562122e-05   )61.2 594.9 ms
+(VAR: temph           1.20898943131e-05   )61.2 584.9 ms
+(VAR: steps           1.20471021796e-05   )61.2 574.9 ms
+(VAR: earned          1.20010710676e-05   )61.2 564.9 ms
+(VAR: matches         1.18901813997e-05   )61.2 554.9 ms
+(VAR: cave            1.18826759003e-05   )61.2 544.9 ms
+(VAR: ki              1.18811140041e-05   )61.2 534.9 ms
+(VAR: fds             1.18764291185e-05   )61.2 524.9 ms
+(VAR: abort           1.17970864211e-05   )61.2 514.9 ms
+(VAR: rook            1.17328870071e-05   )61.2 504.9 ms
+(VAR: sub             1.16513054955e-05   )61.2 494.9 ms
+(VAR: rookput         1.16508311255e-05   )61.2 484.9 ms
+(VAR: os              1.16286561626e-05   )61.2 474.9 ms
+(VAR: jx              1.1555108924e-05    )61.2 464.9 ms
+(VAR: fdx             1.14686010147e-05   )61.2 454.9 ms
+(VAR: masks           1.14660146558e-05   )61.2 444.9 ms
+(VAR: loy             1.14019577314e-05   )61.2 434.9 ms
+(VAR: ratio           1.1378649285e-05    )61.2 424.9 ms
+(VAR: minu            1.13368408757e-05   )61.2 414.9 ms
+(VAR: mu              1.13288201684e-05   )61.2 404.9 ms
+(VAR: inf             1.1324111761e-05    )61.2 394.9 ms
+(VAR: elevation       1.13065666684e-05   )61.2 384.9 ms
+(strncmp              1.11815215154e-05   )61.2 374.9 ms
+(VAR: composite       1.11732190212e-05   )61.2 364.9 ms
+(VAR: ione            1.11258563652e-05   )61.2 354.9 ms
+(VAR: invn            1.10698114687e-05   )61.2 344.9 ms
+(VAR: double          1.10432115281e-05   )61.2 334.9 ms
+(VAR: lengths         1.08385895173e-05   )61.2 324.9 ms
+(VAR: com             1.08142857494e-05   )61.2 314.9 ms
+(VAR: amask           1.07715968269e-05   )61.2 304.9 ms
+(VAR: jval            1.07696476217e-05   )61.2 294.9 ms
+(VAR: deck            1.05341176889e-05   )61.2 284.9 ms
+(VAR: lol             1.05338185226e-05   )61.2 274.9 ms
+(VAR: teams           1.0384113419e-05    )61.2 264.9 ms
+(VAR: modname         1.0367056578e-05    )61.2 254.9 ms
+(VAR: yi              1.03335467998e-05   )61.2 244.9 ms
+(VAR: man             1.03292887793e-05   )61.2 234.9 ms
+(VAR: hashdata        1.03193441773e-05   )61.2 224.9 ms
+(VAR: totals          1.02978468951e-05   )61.2 214.9 ms
+(VAR: npath           1.02649459028e-05   )61.2 204.9 ms
+(VAR: mincost         1.01760146208e-05   )61.2 194.9 ms
+(VAR: pref            1.0069246402e-05    )61.2 184.9 ms
+(VAR: rest            9.94295631205e-06   )61.2 174.9 ms
+(VAR: solution        9.86580476329e-06   )61.2 164.9 ms
+(VAR: ini             9.84097561105e-06   )61.2 154.9 ms
+(VAR: lastval         9.80491764862e-06   )61.2 144.9 ms
+(VAR: enqcnt          9.79501185364e-06   )61.2 134.9 ms
+(VAR: direction       9.78379580254e-06   )61.2 124.9 ms
+(VAR: toff            9.76333086161e-06   )61.2 114.9 ms
+(VAR: hostbased       9.72845733946e-06   )61.2 104.9 ms
+(VAR: exist           9.68532975571e-06   )61.2 94.9 ms
+(VAR: ly              9.67247670608e-06   )61.2 84.9 ms
+(VAR: maxc            9.66820529498e-06   )61.2 74.9 ms
+(atof                 9.58629672595e-06   )61.2 64.9 ms
+(VAR: pat             9.51905446883e-06   )61.2 54.9 ms
+(VAR: ks              9.5143617322e-06    )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 21 21
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                        Page 21)61.2 744.9 ms
+F0 sf
+(VAR: mpx             9.30982012369e-06   )61.2 724.9 ms
+(VAR: rm              9.28830755217e-06   )61.2 714.9 ms
+(VAR: qh              9.22588848727e-06   )61.2 704.9 ms
+(VAR: ene             9.17346816276e-06   )61.2 694.9 ms
+(VAR: chr             9.11801304374e-06   )61.2 684.9 ms
+(VAR: eat             9.0743881546e-06    )61.2 674.9 ms
+(VAR: highest         8.94723370626e-06   )61.2 664.9 ms
+(VAR: midb            8.93039259421e-06   )61.2 654.9 ms
+(VAR: alloc           8.92707193604e-06   )61.2 644.9 ms
+(VAR: potential       8.80595967224e-06   )61.2 634.9 ms
+(VAR: itwo            8.78511199254e-06   )61.2 624.9 ms
+(VAR: ne              8.78223037602e-06   )61.2 614.9 ms
+(VAR: pcnt            8.75462056229e-06   )61.2 604.9 ms
+(VAR: bcnt            8.64948249507e-06   )61.2 594.9 ms
+(VAR: uglies          8.52084501347e-06   )61.2 584.9 ms
+(VAR: team            8.49792484948e-06   )61.2 574.9 ms
+(VAR: xia             8.48555550126e-06   )61.2 564.9 ms
+(VAR: zz              8.44159809801e-06   )61.2 554.9 ms
+(VAR: moze            8.44094096884e-06   )61.2 544.9 ms
+(VAR: stin            8.39736773727e-06   )61.2 534.9 ms
+(VAR: nsec            8.34326077261e-06   )61.2 524.9 ms
+(VAR: rowmax          8.34148797007e-06   )61.2 514.9 ms
+(VAR: conv            8.32335371286e-06   )61.2 504.9 ms
+(VAR: maximal         8.32137068188e-06   )61.2 494.9 ms
+(VAR: rowcol          8.25006870803e-06   )61.2 484.9 ms
+(VAR: lasti           8.24798588332e-06   )61.2 474.9 ms
+(VAR: kkk             8.24450768679e-06   )61.2 464.9 ms
+(VAR: maxn            8.2281638479e-06    )61.2 454.9 ms
+(VAR: opposed         8.22167658501e-06   )61.2 444.9 ms
+(VAR: xs              8.18778698446e-06   )61.2 434.9 ms
+(VAR: oo              8.18588985095e-06   )61.2 424.9 ms
+(VAR: spflg           8.14471738292e-06   )61.2 414.9 ms
+(VAR: tengah          8.12939909049e-06   )61.2 404.9 ms
+(VAR: kj              8.09286591413e-06   )61.2 394.9 ms
+(VAR: offset          8.09116026739e-06   )61.2 384.9 ms
+(VAR: sb              8.01616577053e-06   )61.2 374.9 ms
+(VAR: refy            7.99137704569e-06   )61.2 364.9 ms
+(VAR: nopp            7.9714389836e-06    )61.2 354.9 ms
+(VAR: splace          7.90591083897e-06   )61.2 344.9 ms
+(VAR: solved          7.83401684868e-06   )61.2 334.9 ms
+(VAR: isum            7.79169829804e-06   )61.2 324.9 ms
+(VAR: kb              7.74763421373e-06   )61.2 314.9 ms
+(VAR: hl              7.74532230526e-06   )61.2 304.9 ms
+(VAR: allv            7.67974632924e-06   )61.2 294.9 ms
+(VAR: pendingb        7.64561412333e-06   )61.2 284.9 ms
+(VAR: spe             7.6085989e-06       )61.2 274.9 ms
+(VAR: nv              7.49952146842e-06   )61.2 264.9 ms
+(VAR: height          7.4948270964e-06    )61.2 254.9 ms
+(VAR: modulo          7.42650939816e-06   )61.2 244.9 ms
+(VAR: minj            7.38767332137e-06   )61.2 234.9 ms
+(VAR: ctail           7.36033312792e-06   )61.2 224.9 ms
+(VAR: ready           7.3312301275e-06    )61.2 214.9 ms
+(VAR: nl              7.27795855512e-06   )61.2 204.9 ms
+(VAR: subtracted      7.24959625286e-06   )61.2 194.9 ms
+(VAR: rt              7.23338243822e-06   )61.2 184.9 ms
+(VAR: sss             7.07982961878e-06   )61.2 174.9 ms
+(VAR: destruction     7.06700246076e-06   )61.2 164.9 ms
+(VAR: freeres         7.0609591734e-06    )61.2 154.9 ms
+(VAR: aup             7.04383540046e-06   )61.2 144.9 ms
+(VAR: mincn           6.97881094587e-06   )61.2 134.9 ms
+(VAR: stalls          6.9363203658e-06    )61.2 124.9 ms
+(VAR: aud             6.83531645e-06      )61.2 114.9 ms
+(VAR: tim             6.7254758503e-06    )61.2 104.9 ms
+(VAR: handy           6.6688163921e-06    )61.2 94.9 ms
+(VAR: srcs            6.61972458847e-06   )61.2 84.9 ms
+(VAR: spend           6.5828821305e-06    )61.2 74.9 ms
+(VAR: profit          6.57141219617e-06   )61.2 64.9 ms
+(VAR: build           6.56894452925e-06   )61.2 54.9 ms
+(VAR: heights         6.56414989954e-06   )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 22 22
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                        Page 22)61.2 744.9 ms
+F0 sf
+(VAR: blocked         6.47697143678e-06   )61.2 724.9 ms
+(VAR: jux             6.4246382234e-06    )61.2 714.9 ms
+(VAR: dmin            6.41792516301e-06   )61.2 704.9 ms
+(VAR: nextlado        6.38647384788e-06   )61.2 694.9 ms
+(VAR: div             6.37344363711e-06   )61.2 684.9 ms
+(VAR: cum             6.37344363711e-06   )61.2 674.9 ms
+(VAR: costs           6.36381025805e-06   )61.2 664.9 ms
+(VAR: jtail           6.30690349863e-06   )61.2 654.9 ms
+(VAR: createrr        6.23889817269e-06   )61.2 644.9 ms
+(VAR: anstime         6.23420821014e-06   )61.2 634.9 ms
+(toupper              6.16750903024e-06   )61.2 624.9 ms
+(VAR: privmsg         6.13833706177e-06   )61.2 614.9 ms
+(VAR: oinhf           6.13729546806e-06   )61.2 604.9 ms
+(VAR: discs           6.08641264648e-06   )61.2 594.9 ms
+(VAR: pc              6.04145460803e-06   )61.2 584.9 ms
+(VAR: rookf           6.00488058635e-06   )61.2 574.9 ms
+(VAR: felga           5.99774256025e-06   )61.2 564.9 ms
+(VAR: pfs             5.95144395465e-06   )61.2 554.9 ms
+(VAR: broj            5.94716334513e-06   )61.2 544.9 ms
+(VAR: edges           5.93743837143e-06   )61.2 534.9 ms
+(VAR: 390             5.91795747452e-06   )61.2 524.9 ms
+(VAR: rxi             5.81747618465e-06   )61.2 514.9 ms
+(VAR: openssl         5.80300674177e-06   )61.2 504.9 ms
+(VAR: wd              5.79513367678e-06   )61.2 494.9 ms
+(VAR: dragon          5.78300625698e-06   )61.2 484.9 ms
+(VAR: koliko          5.73248048286e-06   )61.2 474.9 ms
+(VAR: alen            5.69055963341e-06   )61.2 464.9 ms
+(VAR: places          5.66386369503e-06   )61.2 454.9 ms
+(VAR: wordz           5.66239232544e-06   )61.2 444.9 ms
+(VAR: location        5.66063443176e-06   )61.2 434.9 ms
+(VAR: numcpy          5.65935923606e-06   )61.2 424.9 ms
+(VAR: aval            5.65935923606e-06   )61.2 414.9 ms
+(VAR: minjn           5.64700745425e-06   )61.2 404.9 ms
+(VAR: foundx          5.55772440584e-06   )61.2 394.9 ms
+(VAR: dr              5.4385823521e-06    )61.2 384.9 ms
+(VAR: quit            5.37550495214e-06   )61.2 374.9 ms
+(VAR: subject         5.35973419449e-06   )61.2 364.9 ms
+(VAR: ang             5.3392889828e-06    )61.2 354.9 ms
+(VAR: ha              5.2512289232e-06    )61.2 344.9 ms
+(VAR: pair            5.24679738489e-06   )61.2 334.9 ms
+(VAR: engines         5.22520101393e-06   )61.2 324.9 ms
+(VAR: oloca           5.21507971269e-06   )61.2 314.9 ms
+(VAR: maxhash         5.17782086855e-06   )61.2 304.9 ms
+(VAR: incr            5.1218872842e-06    )61.2 294.9 ms
+(VAR: foundy          4.97382135391e-06   )61.2 284.9 ms
+(VAR: yt              4.89852663558e-06   )61.2 274.9 ms
+(VAR: desk            4.88659721645e-06   )61.2 264.9 ms
+(VAR: bytes           4.82225689484e-06   )61.2 254.9 ms
+(VAR: xcap            4.77218387951e-06   )61.2 244.9 ms
+(VAR: original        4.72785048885e-06   )61.2 234.9 ms
+(VAR: usi             4.68338467848e-06   )61.2 224.9 ms
+(VAR: addrlen         4.66535804815e-06   )61.2 214.9 ms
+(VAR: krat            4.6288599896e-06    )61.2 204.9 ms
+(VAR: previst         4.56823884038e-06   )61.2 194.9 ms
+(VAR: robb            4.5077579522e-06    )61.2 184.9 ms
+(VAR: oinh            4.46353930849e-06   )61.2 174.9 ms
+(VAR: flavor          4.42850662719e-06   )61.2 164.9 ms
+(VAR: putbytes        4.35983397162e-06   )61.2 154.9 ms
+(VAR: green           4.34398592775e-06   )61.2 144.9 ms
+(VAR: light           4.32271032875e-06   )61.2 134.9 ms
+(VAR: global          4.29297226043e-06   )61.2 124.9 ms
+(VAR: seq             4.25942238444e-06   )61.2 114.9 ms
+(VAR: bef             4.24547582382e-06   )61.2 104.9 ms
+(VAR: 21              4.24451942704e-06   )61.2 94.9 ms
+(VAR: plugs           4.24451942704e-06   )61.2 84.9 ms
+(VAR: nz              4.00491225933e-06   )61.2 74.9 ms
+(VAR: lbeg            3.99698281796e-06   )61.2 64.9 ms
+(VAR: speeds          3.9161788733e-06    )61.2 54.9 ms
+(VAR: awal            3.90789862824e-06   )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 23 23
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                        Page 23)61.2 744.9 ms
+F0 sf
+(VAR: port            3.83225692028e-06   )61.2 724.9 ms
+(VAR: news            3.82736279875e-06   )61.2 714.9 ms
+(VAR: ansy            3.82518744491e-06   )61.2 704.9 ms
+(VAR: alr             3.80176723098e-06   )61.2 694.9 ms
+(VAR: em              3.77278500864e-06   )61.2 684.9 ms
+(VAR: choose          3.73027408272e-06   )61.2 674.9 ms
+(VAR: minsize         3.62198991108e-06   )61.2 664.9 ms
+(VAR: deprecated      3.61987439241e-06   )61.2 654.9 ms
+(VAR: omove           3.56964738476e-06   )61.2 644.9 ms
+(VAR: mindif          3.38917004807e-06   )61.2 634.9 ms
+(VAR: det             3.29437734706e-06   )61.2 624.9 ms
+(VAR: xdr             3.27230659219e-06   )61.2 614.9 ms
+(VAR: pendinga        3.25286367632e-06   )61.2 604.9 ms
+(VAR: znam            3.0966326178e-06    )61.2 594.9 ms
+(VAR: notice          3.07550315525e-06   )61.2 584.9 ms
+(VAR: cars            3.04362134297e-06   )61.2 574.9 ms
+(VAR: ak              3.00582239955e-06   )61.2 564.9 ms
+(VAR: mic             2.95511350862e-06   )61.2 554.9 ms
+(VAR: swp             2.95066835051e-06   )61.2 544.9 ms
+(VAR: visit           2.77980412023e-06   )61.2 534.9 ms
+(VAR: tenpow          2.73328048327e-06   )61.2 524.9 ms
+(VAR: rmb             2.58860066223e-06   )61.2 514.9 ms
+(VAR: alias           2.48209540042e-06   )61.2 504.9 ms
+(VAR: getlong         2.3585976799e-06    )61.2 494.9 ms
+(VAR: cntj            2.35209508932e-06   )61.2 484.9 ms
+(VAR: ncomb           2.34198170991e-06   )61.2 474.9 ms
+(VAR: integ           2.26495693018e-06   )61.2 464.9 ms
+(VAR: wins            2.26282821632e-06   )61.2 454.9 ms
+(VAR: ansb            2.16099742019e-06   )61.2 444.9 ms
+(VAR: sr              2.09147681568e-06   )61.2 434.9 ms
+(VAR: clntcred        2.01775411485e-06   )61.2 424.9 ms
+(VAR: rj              1.95244734104e-06   )61.2 414.9 ms
+(VAR: buffs           1.88403002597e-06   )61.2 404.9 ms
+(VAR: oact            1.86658587862e-06   )61.2 394.9 ms
+(VAR: pressed         1.76194790964e-06   )61.2 384.9 ms
+(VAR: ansn            1.70305969277e-06   )61.2 374.9 ms
+(VAR: game            1.63547795893e-06   )61.2 364.9 ms
+(VAR: subs            1.58152501638e-06   )61.2 354.9 ms
+(VAR: application     1.57968784235e-06   )61.2 344.9 ms
+(VAR: 11              1.55371172928e-06   )61.2 334.9 ms
+(VAR: hndl            1.54534580105e-06   )61.2 324.9 ms
+(VAR: outs            1.49339664543e-06   )61.2 314.9 ms
+(VAR: link            1.48642303651e-06   )61.2 304.9 ms
+(VAR: cities          1.4573050056e-06    )61.2 294.9 ms
+(VAR: starting        1.41921641064e-06   )61.2 284.9 ms
+(VAR: ein             1.41894650561e-06   )61.2 274.9 ms
+(VAR: language        1.41596592376e-06   )61.2 264.9 ms
+(VAR: pic             1.41596592376e-06   )61.2 254.9 ms
+(VAR: fnumber         1.41559808136e-06   )61.2 244.9 ms
+(VAR: bestans         1.4144945776e-06    )61.2 234.9 ms
+(VAR: xdigit          1.35966219194e-06   )61.2 224.9 ms
+(VAR: ypos            1.23504751238e-06   )61.2 214.9 ms
+(VAR: maxsize         1.17927393893e-06   )61.2 204.9 ms
+(VAR: jsum            1.11351595794e-06   )61.2 194.9 ms
+(VAR: xp              1.10478730725e-06   )61.2 184.9 ms
+(VAR: proc            1.10437645149e-06   )61.2 174.9 ms
+(VAR: frequency       1.07910156819e-06   )61.2 164.9 ms
+(VAR: nego            1.0640500215e-06    )61.2 154.9 ms
+(VAR: zuo             1.00157522143e-06   )61.2 144.9 ms
+(VAR: machname        9.93328445292e-07   )61.2 134.9 ms
+(VAR: sumx            9.68760346497e-07   )61.2 124.9 ms
+(VAR: cprev           9.09510671725e-07   )61.2 114.9 ms
+(VAR: ircc            8.49384592293e-07   )61.2 104.9 ms
+(VAR: pathes          7.53555985236e-07   )61.2 94.9 ms
+(VAR: ping            7.39994219533e-07   )61.2 84.9 ms
+(VAR: sofar           7.20667858883e-07   )61.2 74.9 ms
+(VAR: errno           7.19555489314e-07   )61.2 64.9 ms
+(VAR: anonymous       7.09366681002e-07   )61.2 54.9 ms
+(VAR: kpicked         7.0739718912e-07    )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 24 24
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                        Page 24)61.2 744.9 ms
+F0 sf
+(VAR: progress        6.30548160891e-07   )61.2 724.9 ms
+(VAR: worstans        6.16492196477e-07   )61.2 714.9 ms
+(VAR: optcost         6.13297309315e-07   )61.2 704.9 ms
+(VAR: then            6.06504527829e-07   )61.2 694.9 ms
+(VAR: others          5.98094417558e-07   )61.2 684.9 ms
+(VAR: hk              5.79108306011e-07   )61.2 674.9 ms
+(VAR: pomak           5.42066811586e-07   )61.2 664.9 ms
+(VAR: print           5.3965864122e-07    )61.2 654.9 ms
+(VAR: call            4.97529615425e-07   )61.2 644.9 ms
+(VAR: acceptor        4.85474031002e-07   )61.2 634.9 ms
+(VAR: so              4.85362624167e-07   )61.2 624.9 ms
+(VAR: svc             4.3370695543e-07    )61.2 614.9 ms
+(VAR: validate        4.32574428884e-07   )61.2 604.9 ms
+(VAR: pattern         3.83384603968e-07   )61.2 594.9 ms
+(VAR: nused           3.79538988498e-07   )61.2 584.9 ms
+(VAR: xdrs            3.77492821696e-07   )61.2 574.9 ms
+(VAR: alphabet        2.94992900783e-07   )61.2 564.9 ms
+(VAR: testi           2.58265671137e-07   )61.2 554.9 ms
+(VAR: xored           2.19241168271e-07   )61.2 544.9 ms
+(VAR: stat            2.09051211401e-07   )61.2 534.9 ms
+(VAR: bracket         2.06361216292e-07   )61.2 524.9 ms
+(VAR: endurances      2.02119972716e-07   )61.2 514.9 ms
+(VAR: cmb             1.91947246667e-07   )61.2 504.9 ms
+(VAR: wrap            1.87399978574e-07   )61.2 494.9 ms
+(VAR: laddrlen        1.7826784363e-07    )61.2 484.9 ms
+(VAR: wg              1.41564098715e-07   )61.2 474.9 ms
+(VAR: xt              1.40470856172e-07   )61.2 464.9 ms
+(VAR: sumy            1.397585665e-07     )61.2 454.9 ms
+(VAR: gr              1.32367612802e-07   )61.2 444.9 ms
+(VAR: null            1.24024182508e-07   )61.2 434.9 ms
+(VAR: newmask         9.17166085145e-08   )61.2 424.9 ms
+(VAR: replay          8.69721601229e-08   )61.2 414.9 ms
+(VAR: 9               8.57242649917e-08   )61.2 404.9 ms
+(VAR: crnlperiodcrnl  7.34981718968e-08   )61.2 394.9 ms
+(VAR: cbitmask        7.0960820532e-08    )61.2 384.9 ms
+(VAR: exists          5.05299931791e-08   )61.2 374.9 ms
+(VAR: accv            4.2561161141e-08    )61.2 364.9 ms
+(VAR: isfinish        3.53709952253e-08   )61.2 354.9 ms
+(VAR: actual          2.0938107013e-08    )61.2 344.9 ms
+(VAR: pasum           1.66844317101e-08   )61.2 334.9 ms
+(VAR: pers            1.36743277434e-08   )61.2 324.9 ms
+(VAR: yellow          8.90670984922e-09   )61.2 314.9 ms
+(VAR: dame            6.12150521668e-09   )61.2 304.9 ms
+(VAR: curi            4.39113988441e-09   )61.2 294.9 ms
+(VAR: dists           3.3704716223e-09    )61.2 284.9 ms
+(strerror             0.0                 )61.2 274.9 ms
+(snprintf             0.0                 )61.2 264.9 ms
+(strtoll              0.0                 )61.2 254.9 ms
+(atol                 0.0                 )61.2 244.9 ms
+(sqrtl                0.0                 )61.2 234.9 ms
+(powl                 0.0                 )61.2 224.9 ms
+(getline              0.0                 )61.2 214.9 ms
+(isalnum              0.0                 )61.2 204.9 ms
+(errno                0.0                 )61.2 194.9 ms
+(islower              0.0                 )61.2 184.9 ms
+(VAR: freeargs        0.0                 )61.2 174.9 ms
+(VAR: gssrpc          0.0                 )61.2 164.9 ms
+(VAR: init            0.0                 )61.2 154.9 ms
+(VAR: itok            0.0                 )61.2 144.9 ms
+(VAR: machine         0.0                 )61.2 134.9 ms
+(VAR: gids            0.0                 )61.2 124.9 ms
+(VAR: ru              0.0                 )61.2 114.9 ms
+(VAR: rq              0.0                 )61.2 104.9 ms
+(VAR: starti          0.0                 )61.2 94.9 ms
+(VAR: sockin          0.0                 )61.2 84.9 ms
+(VAR: xid             0.0                 )61.2 74.9 ms
+(VAR: service         0.0                 )61.2 64.9 ms
+(VAR: mine            0.0                 )61.2 54.9 ms
+(VAR: deleg           0.0                 )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 25 25
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                        Page 25)61.2 744.9 ms
+F0 sf
+(VAR: ebackspace      0.0                 )61.2 724.9 ms
+(VAR: blen            0.0                 )61.2 714.9 ms
+(VAR: addrtype        0.0                 )61.2 704.9 ms
+(VAR: cbindings       0.0                 )61.2 694.9 ms
+(VAR: updown          0.0                 )61.2 684.9 ms
+(VAR: hai             0.0                 )61.2 674.9 ms
+(VAR: ops             0.0                 )61.2 664.9 ms
+(VAR: stps            0.0                 )61.2 654.9 ms
+(VAR: laddr           0.0                 )61.2 644.9 ms
+(VAR: born            0.0                 )61.2 634.9 ms
+(VAR: queenf          0.0                 )61.2 624.9 ms
+(VAR: tlim            0.0                 )61.2 614.9 ms
+(VAR: myaddr          0.0                 )61.2 604.9 ms
+(VAR: versions        0.0                 )61.2 594.9 ms
+(VAR: update          0.0                 )61.2 584.9 ms
+(VAR: getpostn        0.0                 )61.2 574.9 ms
+(VAR: xprt            0.0                 )61.2 564.9 ms
+(VAR: reply           0.0                 )61.2 554.9 ms
+(VAR: rpcvers         0.0                 )61.2 544.9 ms
+(VAR: address         0.0                 )61.2 534.9 ms
+(VAR: maxfd           0.0                 )61.2 524.9 ms
+(VAR: oos             0.0                 )61.2 514.9 ms
+(VAR: spd             0.0                 )61.2 504.9 ms
+(VAR: sd              0.0                 )61.2 494.9 ms
+(VAR: nextverf        0.0                 )61.2 484.9 ms
+(VAR: not             0.0                 )61.2 474.9 ms
+(VAR: matched         0.0                 )61.2 464.9 ms
+(VAR: dflt            0.0                 )61.2 454.9 ms
+(VAR: space           0.0                 )61.2 444.9 ms
+(VAR: xi              0.0                 )61.2 434.9 ms
+(VAR: orga            0.0                 )61.2 424.9 ms
+(VAR: compress        0.0                 )61.2 414.9 ms
+(VAR: surp            0.0                 )61.2 404.9 ms
+(VAR: qop             0.0                 )61.2 394.9 ms
+(VAR: spaces          0.0                 )61.2 384.9 ms
+(VAR: get             0.0                 )61.2 374.9 ms
+(VAR: ja              0.0                 )61.2 364.9 ms
+(VAR: reaction        0.0                 )61.2 354.9 ms
+(VAR: cred            0.0                 )61.2 344.9 ms
+(VAR: wpj             0.0                 )61.2 334.9 ms
+(VAR: newstr          0.0                 )61.2 324.9 ms
+(VAR: oa              0.0                 )61.2 314.9 ms
+(VAR: kapa            0.0                 )61.2 304.9 ms
+(VAR: cval            0.0                 )61.2 294.9 ms
+(VAR: there           0.0                 )61.2 284.9 ms
+(VAR: uid             0.0                 )61.2 274.9 ms
+(VAR: ah              0.0                 )61.2 264.9 ms
+(VAR: as              0.0                 )61.2 254.9 ms
+(VAR: bishop          0.0                 )61.2 244.9 ms
+(VAR: denom           0.0                 )61.2 234.9 ms
+(VAR: rxj             0.0                 )61.2 224.9 ms
+(VAR: strings         0.0                 )61.2 214.9 ms
+(VAR: clntname        0.0                 )61.2 204.9 ms
+(VAR: vers            0.0                 )61.2 194.9 ms
+(VAR: verf            0.0                 )61.2 184.9 ms
+(VAR: past            0.0                 )61.2 174.9 ms
+(VAR: chair           0.0                 )61.2 164.9 ms
+(VAR: public          0.0                 )61.2 154.9 ms
+(VAR: nfactors        0.0                 )61.2 144.9 ms
+(VAR: svccred         0.0                 )61.2 134.9 ms
+(VAR: mapz            0.0                 )61.2 124.9 ms
+(VAR: fi              0.0                 )61.2 114.9 ms
+(VAR: lateral         0.0                 )61.2 104.9 ms
+(VAR: yx              0.0                 )61.2 94.9 ms
+(VAR: 7               0.0                 )61.2 84.9 ms
+(VAR: earliest        0.0                 )61.2 74.9 ms
+(VAR: recv            0.0                 )61.2 64.9 ms
+(VAR: getbytes        0.0                 )61.2 54.9 ms
+(VAR: major           0.0                 )61.2 44.9 ms
+re sp
+%%PageTrailer
+%%Page: 26 26
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(feature_importances.txt                                                        Page 26)61.2 744.9 ms
+F0 sf
+(VAR: tok             0.0                 )61.2 724.9 ms
+(VAR: abdeps          0.0                 )61.2 714.9 ms
+(VAR: chars           0.0                 )61.2 704.9 ms
+(VAR: putlong         0.0                 )61.2 694.9 ms
+(VAR: naomi           0.0                 )61.2 684.9 ms
+(VAR: factor          0.0                 )61.2 674.9 ms
+(VAR: rfc             0.0                 )61.2 664.9 ms
+(VAR: changable       0.0                 )61.2 654.9 ms
+(VAR: nchi            0.0                 )61.2 644.9 ms
+(VAR: anon            0.0                 )61.2 634.9 ms
+(VAR: ddel            0.0                 )61.2 624.9 ms
+(VAR: dgt             0.0                 )61.2 614.9 ms
+(VAR: gss             0.0                 )61.2 604.9 ms
+(VAR: concrete        0.0                 )61.2 594.9 ms
+(VAR: ad              0.0                 )61.2 584.9 ms
+(VAR: message         0.0                 )61.2 574.9 ms
+(VAR: back            0.0                 )61.2 564.9 ms
+(VAR: sight           0.0                 )61.2 554.9 ms
+(VAR: prot            0.0                 )61.2 544.9 ms
+(VAR: prog            0.0                 )61.2 534.9 ms
+(VAR: framed          0.0                 )61.2 524.9 ms
+(VAR: tada            0.0                 )61.2 514.9 ms
+(VAR: sock            0.0                 )61.2 504.9 ms
+(VAR: targ            0.0                 )61.2 494.9 ms
+(VAR: gc              0.0                 )61.2 484.9 ms
+(VAR: colmax          0.0                 )61.2 474.9 ms
+(VAR: nlen            0.0                 )61.2 464.9 ms
+(VAR: ctx             0.0                 )61.2 454.9 ms
+(VAR: private         0.0                 )61.2 444.9 ms
+(VAR: che             0.0                 )61.2 434.9 ms
+(VAR: chg             0.0                 )61.2 424.9 ms
+(VAR: escaped         0.0                 )61.2 414.9 ms
+(VAR: control         0.0                 )61.2 404.9 ms
+(VAR: sig             0.0                 )61.2 394.9 ms
+(VAR: element         0.0                 )61.2 384.9 ms
+(VAR: lg              0.0                 )61.2 374.9 ms
+(VAR: ld              0.0                 )61.2 364.9 ms
+(VAR: req             0.0                 )61.2 354.9 ms
+(VAR: temps           0.0                 )61.2 344.9 ms
+(VAR: que             0.0                 )61.2 334.9 ms
+(VAR: lineb           0.0                 )61.2 324.9 ms
+(VAR: facs            0.0                 )61.2 314.9 ms
+(VAR: akhir           0.0                 )61.2 304.9 ms
+(VAR: queries         0.0                 )61.2 294.9 ms
+(VAR: cf              0.0                 )61.2 284.9 ms
+(VAR: binsum          0.0                 )61.2 274.9 ms
+(VAR: mech            0.0                 )61.2 264.9 ms
+(VAR: glue            0.0                 )61.2 254.9 ms
+(VAR: adv             0.0                 )61.2 244.9 ms
+(VAR: candy           0.0                 )61.2 234.9 ms
+(VAR: export          0.0                 )61.2 224.9 ms
+(VAR: unwrap          0.0                 )61.2 214.9 ms
+(VAR: contiki         0.0                 )61.2 204.9 ms
+(VAR: factors         0.0                 )61.2 194.9 ms
+re sp
+%%PageTrailer
+%%Trailer
+%%Pages: 26
+%%EOF
+

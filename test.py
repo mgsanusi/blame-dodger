@@ -2,6 +2,7 @@ import os
 import sys
 
 filenames = os.listdir(sys.argv[1])
+os.system("mkdir toolong")
 longer = 0
 short = 0
 okfiles = []
@@ -11,9 +12,9 @@ for f in filenames:
     with open(sys.argv[1] + "/" + f) as fl:
       content = fl.readlines()
       if len(content) == 0: print(f)
-      if len(content) > 150:
+      if len(content) > 800:
         print("too long: " + f + " has " + str(len(content)) + " lines")
-        #os.system("rm " + sys.argv[1] + "/" + f)
+        #os.system("mv " + sys.argv[1] + "/" + f + " toolong")
         longer += 1
       else:
         short += 1

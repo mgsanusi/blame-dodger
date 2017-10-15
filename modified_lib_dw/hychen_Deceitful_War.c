@@ -1,0 +1,119 @@
+#include<stdio.h>
+#include<stdlib.h>
+double b1[1000];
+double b2[1000];
+double b3[1000];
+double b4[1000];
+int u1[1000];
+int u2[1000];
+void new_qsort(void *base, size_t num, size_t size, int (*compar)(const void *, const void *));
+int dcmp(const void *a, const void *b)
+{
+  int first_iteration;
+  double c = *((double *) a);
+  double d = *((double *) b);
+  if (c != d)
+    return c > d ? 1 : -1;
+
+  return 0;
+}
+
+void del(double *p, int k, int n)
+{
+  int first_iteration;
+  int a;
+  for (a = k + 1; a < n; a++)
+  {
+    p[a - 1] = p[a];
+  }
+
+}
+
+int war(int n, double *x, double *y)
+{
+  int first_iteration;
+  int a;
+  int ret;
+  ret = 0;
+  while (n--)
+  {
+    for (a = n; (y[a] > x[n]) && (a >= 0); a--)
+      ;
+
+    a++;
+    if (a == (n + 1))
+    {
+      ret++;
+      a = 0;
+    }
+
+    del(y, a, n + 1);
+  }
+
+  return ret;
+}
+
+int deceit(int n, double *x, double *y)
+{
+  int first_iteration;
+  int a;
+  int ret;
+  ret = 0;
+  for (a = 0; a < n; a++)
+  {
+    if (x[a] < y[0])
+    {
+      del(y, (n - a) - 1, n - a);
+    }
+    else
+    {
+      ret++;
+      del(y, 0, n - a);
+    }
+
+  }
+
+  return ret;
+}
+
+int main(int argc, char *argv[])
+{
+  int first_iteration;
+  int a;
+  int t;
+  int t2;
+  int n;
+  scanf("%d", &t2);
+  for (t = 1; t <= t2; t++)
+  {
+    scanf("%d", &n);
+    for (a = 0; a < n; a++)
+      scanf("%lf", b1 + a);
+
+    for (a = 0; a < n; a++)
+    {
+      scanf("%lf", b2 + a);
+      u1[a] = (u2[a] = 0);
+    }
+
+    new_qsort(b1, n, sizeof(double), dcmp);
+    new_qsort(b2, n, sizeof(double), dcmp);
+    for (a = 0; a < n; a++)
+    {
+      b3[a] = b1[a];
+      b4[a] = b2[a];
+    }
+
+    printf("Case #%d: %d %d\n", t, deceit(n, b1, b2), war(n, b3, b4));
+  }
+
+  return 0;
+}
+
+void new_qsort(void *base, size_t num, size_t size, int (*compar)(const void *, const void *))
+{
+  int first_iteration;
+  return qsort(base, num, size, compar);
+}
+
+

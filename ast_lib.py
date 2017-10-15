@@ -404,6 +404,7 @@ def get_functional(filename, ast):
   #ret.append(sv.count/float(file_len)) # struct
   #ret.append(iv.count/float(file_len))
   # end
+  if file_len == 0: file_len = 1
   ret.append(fv.count/float(file_len))
   ret.append(tdv.count/float(file_len))
   ret.append(dwv.count/float(file_len))
@@ -490,6 +491,7 @@ def get_ws(fname, gnu=False):
   orig_size = os.path.getsize(fname)
 
   if gnu:
+    if len(orig.strip()) == 0: return [0]
     gnu_name= "temp/" + basename + "_gnu.c"
     if not gnu_name in temp_contents:
       os.system("indent -gnu " + fname + " -o " + gnu_name)
@@ -498,6 +500,7 @@ def get_ws(fname, gnu=False):
     gnu = float(lcs(orig, gnu_content))/orig_size
     return [gnu]
   else:
+    if len(orig.strip()) == 0: return [0, 0]
     s4_name = "temp/" + basename + "_s4.c"
     s6_name = "temp/" + basename + "_s6.c"
 

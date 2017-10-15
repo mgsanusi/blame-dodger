@@ -1,0 +1,1 @@
+static int bletch_the_compiler_wants_something_non_empty;

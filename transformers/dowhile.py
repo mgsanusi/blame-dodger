@@ -177,7 +177,7 @@ def transform_dw(content):
     new_content = content.replace(match_content, new_while)
   return new_content
 
-def transform_it(filename, write_to_file):
+def transform_it(filename, target, write_to_file):
   includes = []
   basename = filename.split("/")[-1]
   with open(filename, 'r') as f:
@@ -191,6 +191,19 @@ def transform_it(filename, write_to_file):
         else:
           includes.append(line)
 
+  pruned_includes = []
+  last_line = False
+  for i, line in enumerate(includes):
+    # when it has "typedef struct"
+      # if it isn't the last line, no
+      # if it is the last line, ok
+    if "struct" in line.split() and i == len(includes)-1:
+      last_line = True
+    if "struct" in line.split() and i != len(includes)-1:
+      pass
+    else:
+      pruned_includes.append(line)
+      
   ast = parse_file(filename, use_cpp=True, cpp_path='gcc', 
                     cpp_args=['-E', '-c', '-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
   #ast.show()
@@ -199,7 +212,7 @@ def transform_it(filename, write_to_file):
 
   generator = c_generator.CGenerator()
   output = generator.visit(ast)
-  mod_output = "".join(includes)
+  mod_output = ""
   beginning = True
   for line in output.split("\n"):
     if line[0:7] == "typedef" and beginning:
@@ -210,21 +223,29 @@ def transform_it(filename, write_to_file):
       beginning = False
       mod_output += line + "\n"
 
-  if write_to_file:
-    with open("modified_vars/" + basename, "w") as f:
-      f.write(mod_output)
+  if mod_output.startswith("{"):
+    total_output = "".join(pruned_includes) + mod_output
+  elif last_line:
+    total_output = "".join(pruned_includes[:-1]) + mod_output
   else:
-    print(mod_output)
+    total_output = "".join(pruned_includes) + mod_output
+    
+  if write_to_file:
+    with open(target + "/" + basename, "w+") as f:
+      f.write(total_output)
+  else:
+    print(total_output)
 
 if __name__ == "__main__":
   #with open("sample_new.c", "w") as f:
   #  content = open("sample.c", "r").read()
   #  f.write(dowhile(content))
 
-  folder = "new_master"
+  folder = sys.argv[1]
+  target = sys.argv[2]
   folder_contents = os.listdir(folder)
   for filename in folder_contents:
-    transform_it(folder + "/" + filename, write_to_file=True)
+    transform_it(folder + "/" + filename, target, write_to_file=True)
 
   #transform_it(sys.argv[1], False)
 

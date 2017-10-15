@@ -1,0 +1,2 @@
+#include "c-strtod.c"
+

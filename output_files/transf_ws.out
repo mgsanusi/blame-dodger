@@ -1,0 +1,223 @@
+('Getting features from file....', 0.002424955368041992)
+70
+74
+('getting variable names...', 0.13208794593811035)
+HOUSTON WE HAVE A PROBLEM
+('calculating pairwise vectors...', 209.7176549434662)
+gcj gcj: 748476
+gcj gh: 2008584
+gh gh: 1345620
+65335 data pairs
+('Done calculating pairwise vectors...', 232.5247139930725)
+data: 65335 by 4907
+building tree 1 of 100
+building tree 2 of 100
+building tree 3 of 100
+building tree 4 of 100
+building tree 5 of 100
+building tree 6 of 100
+building tree 7 of 100
+building tree 8 of 100
+building tree 9 of 100
+building tree 10 of 100
+building tree 11 of 100
+building tree 12 of 100
+building tree 13 of 100
+building tree 14 of 100
+building tree 15 of 100
+building tree 16 of 100
+building tree 17 of 100
+building tree 18 of 100
+building tree 19 of 100
+building tree 20 of 100
+building tree 21 of 100
+building tree 22 of 100
+building tree 23 of 100
+building tree 24 of 100
+building tree 25 of 100
+building tree 26 of 100
+building tree 27 of 100
+building tree 28 of 100
+building tree 29 of 100
+building tree 30 of 100
+building tree 31 of 100
+building tree 32 of 100
+building tree 33 of 100
+building tree 34 of 100
+building tree 35 of 100
+building tree 36 of 100
+building tree 37 of 100
+building tree 38 of 100
+building tree 39 of 100
+building tree 40 of 100
+building tree 41 of 100
+building tree 42 of 100
+building tree 43 of 100
+building tree 44 of 100
+building tree 45 of 100
+building tree 46 of 100
+building tree 47 of 100
+building tree 48 of 100
+building tree 49 of 100
+building tree 50 of 100
+building tree 51 of 100
+building tree 52 of 100
+building tree 53 of 100
+building tree 54 of 100
+building tree 55 of 100
+building tree 56 of 100
+building tree 57 of 100
+building tree 58 of 100
+building tree 59 of 100
+building tree 60 of 100
+building tree 61 of 100
+building tree 62 of 100
+building tree 63 of 100
+building tree 64 of 100
+building tree 65 of 100
+building tree 66 of 100
+building tree 67 of 100
+building tree 68 of 100
+building tree 69 of 100
+building tree 70 of 100
+building tree 71 of 100
+building tree 72 of 100
+building tree 73 of 100
+building tree 74 of 100
+building tree 75 of 100
+building tree 76 of 100
+building tree 77 of 100
+building tree 78 of 100
+building tree 79 of 100
+building tree 80 of 100
+building tree 81 of 100
+building tree 82 of 100
+building tree 83 of 100
+building tree 84 of 100
+building tree 85 of 100
+building tree 86 of 100
+building tree 87 of 100
+building tree 88 of 100
+building tree 89 of 100
+building tree 90 of 100
+building tree 91 of 100
+building tree 92 of 100
+building tree 93 of 100
+building tree 94 of 100
+building tree 95 of 100
+building tree 96 of 100
+building tree 97 of 100
+building tree 98 of 100
+building tree 99 of 100
+building tree 100 of 100
+y pred: (should be i pres) [1 0 0 ..., 0 0 0]
+963 false positives
+751 false negatives
+237 FPs in GH-GH
+0 FNs in GH-GH
+2474 total in GH-GH
+dowhile*isalpha      0.0459584186593     
+dowhile*printf       0.0348408363556     
+casing*casing        0.0331740217709     
+dowhile*isdigit      0.03259300818       
+typedef*tolower      0.0324898158108     
+casing*while         0.0321607820027     
+dowhile*putchar      0.0316425516309     
+typedef*strcat       0.0308721558785     
+variable names*percent empty lines 0.0305777433837     
+variable names*gnu   0.0284217039034     
+casing*variable names 0.0276898074977     
+variable names*s4    0.0272205478167     
+casing*dowhile       0.0262245864548     
+typedef*toupper      0.0242549526347     
+typedef*fscanf       0.0237783547195     
+variable names*avg line length 0.0237048548007     
+variable names*variable names 0.0163608806207     
+variable names*jaccard 0.0160276387877     
+kl divergence*variable names 0.00839219758882    
+jaccard*strlen       0.00793138595038    
+atof*isdigit         0.00763513568269    
+jaccard*freopen      0.00762717040742    
+kl divergence*casing 0.00746263052291    
+casing*printf        0.00745193887399    
+dowhile*scanf        0.00709657795259    
+casing*kl divergence 0.00699453863573    
+typedef*strcpy       0.00674342405475    
+variable names*typedef 0.006694525388      
+gnu*malloc           0.00667007861862    
+casing*jaccard       0.00631495615036    
+typedef*strcmp       0.00620761791568    
+assert*time          0.00610634170306    
+while*ternary        0.00607000896819    
+variable names*powl  0.0058817049034     
+casing*sprintf       0.00568438970275    
+assert*tolower       0.00558145188356    
+atof*realloc         0.00557654699811    
+atof*bzero           0.00544500845391    
+atof*snprintf        0.00536096679827    
+casing*puts          0.00530101074924    
+atof*strncmp         0.00527548101849    
+jaccard*strchr       0.0052061999442     
+assert*toupper       0.00518830104528    
+dowhile*strtol       0.00512731080696    
+atof*qsort           0.00497917743236    
+assert*malloc        0.00493574289015    
+dowhile*fprintf      0.00492622830853    
+while*jaccard        0.00491172564073    
+variable names*for   0.00474215736108    
+jaccard*gnu          0.00473870943401    
+getchar*free         0.00473219531526    
+atof*fabs            0.00462409589417    
+getchar*abs          0.00462371703591    
+casing*getc          0.00462320530706    
+jaccard*s4           0.00452862704271    
+dowhile*for          0.00444084426514    
+jaccard*sscanf       0.00440446199987    
+jaccard*getline      0.00436817370148    
+gnu*sqrt             0.00422831008023    
+casing*fclose        0.00412630776927    
+kl divergence*srand  0.00402124322921    
+gnu*freopen          0.00396783434546    
+variable names*strcat 0.00396311932919    
+kl divergence*atoi   0.00391301658414    
+assert*islower       0.00387122799507    
+atof*strncpy         0.00386443881722    
+atof*read            0.00376955543072    
+jaccard*fopen        0.00372763342419    
+dowhile*strcat       0.00371426888471    
+casing*s4            0.0033660587824     
+assert*errno         0.00327012226222    
+jaccard*getc         0.0032603256967     
+gnu*fabs             0.0031278727037     
+typedef*isalpha      0.00309366704177    
+casing*memset        0.00307200988592    
+s4*strtoll           0.00294342296397    
+gnu*strlen           0.00289947219853    
+variable names*while 0.00287866578914    
+assert*fabs          0.00272624690983    
+gnu*isupper          0.00266690127037    
+gnu*pow              0.00253743505355    
+s4*strncmp           0.00230471857969    
+jaccard*casing       0.00218541379891    
+sqrt*puts            0.00129127225406    
+while*percent empty lines 0.00126002165146    
+variable names*strcpy 0.00120990743925    
+casing*scanf         0.00116433628261    
+putchar*tolower      0.00111551452553    
+strcpy*sprintf       0.00111500199318    
+getchar*avg line length 0.00108050067331    
+putchar*fscanf       0.00106776327663    
+putchar*strcat       0.00104921777793    
+variable names*fopen 0.00103344357579    
+jaccard*pow          0.0010256497193     
+atof*strcmp          0.00102518318933    
+putchar*toupper      0.000989386621947   
+casing*typedef       0.000989182564388   
+sscanf*freopen       0.000985413823639   
+s4*qsort             0.000975938134624   
+atof*sqrt            0.000966888883271   
+[[8882  963]
+ [ 751 5738]]
+precision: 0.922038824873
+recall: 0.90218384967
+fscore: 0.912003285758

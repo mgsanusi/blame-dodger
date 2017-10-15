@@ -15,6 +15,7 @@ def do_all(filenames, files, folder):
   lmtzr = WordNetLemmatizer()
   for fn, fl in zip(filenames, files):
   ## functional
+    print(fn)
     ast = parse_file(folder + "/" + fn, use_cpp=True, cpp_path='gcc', 
                       cpp_args=['-E', '-c', '-std=c99',  r'-I/home/mgs9y/pycparser/utils/fake_libc_include'])
     fl.fc_vec = get_functional(folder + "/" + fn, ast)
@@ -28,10 +29,14 @@ def do_all(filenames, files, folder):
         num_line += 1
         if len(line.strip()) == 0:
           empty += 1
-    fl.fc_vec.append(float(total_line)/num_line) # avg line length
-    fl.fc_vec.append(float(empty)/num_line) # % empty lines
+    avg_lines = 0 if num_line == 0 else float(total_line)/num_line
+    emp_lines = 0 if num_line == 0 else float(empty)/num_line
+    fl.fc_vec.append(avg_lines) # avg line length
+    fl.fc_vec.append(emp_lines) # % empty lines
   ## lib
     fl.lib_vec = get_lib(folder + "/" + fn, ast)
+    #lib_len = len(fl.lib_vec)
+    #fl.lib_vec = [0 for x in range(60)]
   ## varnames
     varnames = get_kmers(fn, folder, ast)
     words = []

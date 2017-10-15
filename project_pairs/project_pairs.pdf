@@ -1,0 +1,212 @@
+%!PS-Adobe-3.0
+%%Title: project_pairs.txt
+%%For: mgs9y
+%%Creator: VIM - Vi IMproved 7.4 (2013 Aug 10)
+%%CreationDate: Fri Jun 23 14:16:34 2017
+%%DocumentData: Clean8Bit
+%%Orientation: Portrait
+%%Pages: (atend)
+%%PageOrder: Ascend
+%%BoundingBox: 61 42 577 752
+%%DocumentMedia: letter 612 792 0 () ()
+%%DocumentNeededResources: font Courier
+%%+ font Courier-Bold
+%%+ font Courier-Oblique
+%%+ font Courier-BoldOblique
+%%DocumentSuppliedResources: procset VIM-Prolog 1.4 1
+%%+ encoding VIM-latin1 1.0 0
+%%Requirements: duplex collate
+%%EndComments
+%%BeginDefaults
+%%PageResources: font Courier
+%%+ font Courier-Bold
+%%+ font Courier-Oblique
+%%+ font Courier-BoldOblique
+%%PageMedia: letter
+%%EndDefaults
+%%BeginProlog
+%%BeginResource: procset VIM-Prolog
+%%BeginDocument: /usr/share/vim/vim74/print/prolog.ps
+%!PS-Adobe-3.0 Resource-ProcSet
+%%Title: VIM-Prolog
+%%Version: 1.4 1
+%%EndComments
+% Editing of this file is NOT RECOMMENDED.  You run a very good risk of causing
+% all PostScript printing from VIM failing if you do.  PostScript is not called
+% a write-only language for nothing!
+/packedarray where not{userdict begin/setpacking/pop load def/currentpacking
+false def end}{pop}ifelse/CP currentpacking def true setpacking
+/bd{bind def}bind def/ld{load def}bd/ed{exch def}bd/d/def ld
+/db{dict begin}bd/cde{currentdict end}bd
+/T true d/F false d
+/SO null d/sv{/SO save d}bd/re{SO restore}bd
+/L2 systemdict/languagelevel 2 copy known{get exec}{pop pop 1}ifelse 2 ge d
+/m/moveto ld/s/show ld /ms{m s}bd /g/setgray ld/r/setrgbcolor ld/sp{showpage}bd
+/gs/gsave ld/gr/grestore ld/cp/currentpoint ld
+/ul{gs UW setlinewidth cp UO add 2 copy newpath m 3 1 roll add exch lineto
+stroke gr}bd
+/bg{gs r cp BO add 4 -2 roll rectfill gr}bd
+/sl{90 rotate 0 exch translate}bd
+L2{
+/sspd{mark exch{setpagedevice}stopped cleartomark}bd
+/nc{1 db/NumCopies ed cde sspd}bd
+/sps{3 db/Orientation ed[3 1 roll]/PageSize ed/ImagingBBox null d cde sspd}bd
+/dt{2 db/Tumble ed/Duplex ed cde sspd}bd
+/c{1 db/Collate ed cde sspd}bd
+}{
+/nc{/#copies ed}bd
+/sps{statusdict/setpage get exec}bd
+/dt{statusdict/settumble 2 copy known{get exec}{pop pop pop}ifelse
+statusdict/setduplexmode 2 copy known{get exec}{pop pop pop}ifelse}bd
+/c{pop}bd
+}ifelse
+/ffs{findfont exch scalefont d}bd/sf{setfont}bd
+/ref{1 db findfont dup maxlength dict/NFD ed{exch dup/FID ne{exch NFD 3 1 roll
+put}{pop pop}ifelse}forall/Encoding findresource dup length 256 eq{NFD/Encoding
+3 -1 roll put}{pop}ifelse NFD dup/FontType get 3 ne{/CharStrings}{/CharProcs}
+ifelse 2 copy known{2 copy get dup maxlength dict copy[/questiondown/space]{2
+copy known{2 copy get 2 index/.notdef 3 -1 roll put pop exit}if pop}forall put
+}{pop pop}ifelse dup NFD/FontName 3 -1 roll put NFD definefont pop end}bd
+CP setpacking
+(\004)cvn{}bd
+% vim:ff=unix:
+%%EOF
+%%EndDocument
+%%EndResource
+%%BeginResource: encoding VIM-latin1
+%%BeginDocument: /usr/share/vim/vim74/print/latin1.ps
+%!PS-Adobe-3.0 Resource-Encoding
+%%Title: VIM-latin1
+%%Version: 1.0 0
+%%EndComments
+/VIM-latin1[
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quotesingle
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash
+/zero /one /two /three /four /five /six /seven
+/eight /nine /colon /semicolon /less /equal /greater /question
+/at /A /B /C /D /E /F /G
+/H /I /J /K /L /M /N /O
+/P /Q /R /S /T /U /V /W
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore
+/grave /a /b /c /d /e /f /g
+/h /i /j /k /l /m /n /o
+/p /q /r /s /t /u /v /w
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /periodcentered
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis]
+/Encoding defineresource pop
+% vim:ff=unix:
+%%EOF
+%%EndDocument
+%%EndResource
+%%EndProlog
+%%BeginSetup
+612 792 0 sps
+1 nc
+T F dt
+T c
+%%IncludeResource: font Courier
+/_F0 /VIM-latin1 /Courier ref
+/F0 10 /_F0 ffs
+%%IncludeResource: font Courier-Bold
+/_F1 /VIM-latin1 /Courier-Bold ref
+/F1 10 /_F1 ffs
+%%IncludeResource: font Courier-Oblique
+/_F2 /VIM-latin1 /Courier-Oblique ref
+/F2 10 /_F2 ffs
+%%IncludeResource: font Courier-BoldOblique
+/_F3 /VIM-latin1 /Courier-BoldOblique ref
+/F3 10 /_F3 ffs
+/UO -1 d
+/UW 0.5 d
+/BO -2.5 d
+%%EndSetup
+%%Page: 1 1
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(project_pairs.txt                                                               Page 1)61.2 744.9 ms
+F0 sf
+(Project1             Project2                         Accuracy          Total Pairs)61.2 724.9 ms
+(base                 base                                 0.93                 1110)61.2 714.9 ms
+(contiki              contiki                                 0                    0)61.2 704.9 ms
+(gcj                  gcj                                  0.85                 6085)61.2 694.9 ms
+(globus-toolkit       globus-toolkit                       0.73                   98)61.2 684.9 ms
+(gnulib               gnulib                               0.95                  466)61.2 674.9 ms
+(grpc                 grpc                                 0.92                  381)61.2 664.9 ms
+(mongoose-os          mongoose-os                          0.71                  205)61.2 654.9 ms
+(node-gnu-tools       node-gnu-tools                       0.97                 1432)61.2 644.9 ms
+(omi                  omi                                  0.92                  119)61.2 634.9 ms
+(pbis                 pbis                                 0.81                  731)61.2 624.9 ms
+(base                 omi                                  0.39                   33)61.2 614.9 ms
+(base                 mongoose-os                          0.38                   34)61.2 604.9 ms
+(base                 globus-toolkit                       0.56                   32)61.2 594.9 ms
+(base                 node-gnu-tools                        0.2                   80)61.2 584.9 ms
+(contiki              omi                                     0                    0)61.2 574.9 ms
+(contiki              grpc                                    0                    0)61.2 564.9 ms
+(contiki              globus-toolkit                          0                    0)61.2 554.9 ms
+(contiki              base                                    0                    0)61.2 544.9 ms
+(contiki              gnulib                                  0                    0)61.2 534.9 ms
+(contiki              node-gnu-tools                          0                    0)61.2 524.9 ms
+(contiki              pbis                                    0                    0)61.2 514.9 ms
+(contiki              mongoose-os                             0                    0)61.2 504.9 ms
+(gcj                  gnulib                                1.0                  340)61.2 494.9 ms
+(gcj                  omi                                   1.0                  194)61.2 484.9 ms
+(gcj                  node-gnu-tools                        1.0                  630)61.2 474.9 ms
+(gcj                  contiki                                 0                    0)61.2 464.9 ms
+(gcj                  grpc                                  1.0                  526)61.2 454.9 ms
+(gcj                  pbis                                  1.0                  608)61.2 444.9 ms
+(gcj                  globus-toolkit                       0.96                  220)61.2 434.9 ms
+(gcj                  base                                  1.0                  749)61.2 424.9 ms
+(gcj                  mongoose-os                           1.0                  299)61.2 414.9 ms
+(globus-toolkit       mongoose-os                          0.43                    7)61.2 404.9 ms
+(globus-toolkit       omi                                  0.36                   11)61.2 394.9 ms
+(gnulib               mongoose-os                          0.63                   24)61.2 384.9 ms
+(gnulib               grpc                                 0.44                   27)61.2 374.9 ms
+(gnulib               base                                 0.33                   46)61.2 364.9 ms
+(gnulib               omi                                  0.33                   12)61.2 354.9 ms
+(gnulib               node-gnu-tools                       0.15                   39)61.2 344.9 ms
+(gnulib               pbis                                 0.43                   28)61.2 334.9 ms
+(gnulib               globus-toolkit                        0.7                   10)61.2 324.9 ms
+(grpc                 omi                                  0.38                   13)61.2 314.9 ms
+(grpc                 base                                 0.32                   66)61.2 304.9 ms
+(grpc                 node-gnu-tools                       0.43                   54)61.2 294.9 ms
+(grpc                 mongoose-os                          0.18                   17)61.2 284.9 ms
+(grpc                 globus-toolkit                       0.44                   18)61.2 274.9 ms
+(mongoose-os          omi                                   0.4                   10)61.2 264.9 ms
+(node-gnu-tools       mongoose-os                          0.59                   29)61.2 254.9 ms
+(node-gnu-tools       globus-toolkit                        0.5                   18)61.2 244.9 ms
+(node-gnu-tools       omi                                  0.38                   16)61.2 234.9 ms
+(pbis                 grpc                                  0.2                   49)61.2 224.9 ms
+(pbis                 node-gnu-tools                       0.33                   69)61.2 214.9 ms
+(pbis                 base                                 0.28                   79)61.2 204.9 ms
+(pbis                 omi                                  0.19                   21)61.2 194.9 ms
+(pbis                 globus-toolkit                       0.32                   25)61.2 184.9 ms
+(pbis                 mongoose-os                          0.42                   31)61.2 174.9 ms
+re sp
+%%PageTrailer
+%%Trailer
+%%Pages: 1
+%%EOF
+

@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+double car[123][2];
+double a;
+int n;
+int A;
+double d;
+double new_sqrt(double x);
+int main()
+{
+  int first_iteration;
+  int Case = 0;
+  int t;
+  int i;
+  int j;
+  int k;
+  double ans;
+  double temp;
+  scanf("%d", &t);
+  while (t--)
+  {
+    scanf("%lf %d %d", &d, &n, &A);
+    for (i = 0; i < n; ++i)
+    {
+      scanf("%lf %lf", &car[i][0], &car[i][1]);
+    }
+
+    --n;
+    printf("Case #%d:\n", ++Case);
+    for (i = 0; i < A; ++i)
+    {
+      scanf("%lf", &a);
+      ans = new_sqrt((2 * d) / a);
+      temp = (d - car[n - 1][1]) / ((car[n][1] - car[n - 1][1]) / (car[n][0] - car[n - 1][0]));
+      if (ans < temp)
+        ans = temp;
+
+      printf("%lf\n", ans);
+    }
+
+  }
+
+  return 0;
+}
+
+double new_sqrt(double x)
+{
+  int first_iteration;
+  return sqrt(x);
+}
+
+

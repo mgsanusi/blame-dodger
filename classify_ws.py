@@ -10,7 +10,7 @@ import numpy
 
 def one_pair(f):
   print f.name + "...",
-  f.ws_vec = get_ws(f.folder + "/" + f.name, gnu=True) #gcj
+  f.ws_vec = get_ws(f.folder + "/" + f.name, gnu=True) 
   print "finished" 
   return f
   
