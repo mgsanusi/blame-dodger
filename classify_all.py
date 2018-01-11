@@ -33,7 +33,7 @@ time0 = 0
 from collections import Mapping, Container
 from sys import getsizeof
 
-f_labels = ["for", "typedef", "dowhile", "while", "case", "ternary", "avg line length", "percent empty lines"]
+f_labels = ["avg method length", "nested", "params to methods", "struct", "for", "typedef", "dowhile", "while", "case", "ternary", "avg line length", "percent empty lines"]
 #f_labels = ["avg meth length", "avg num params", "struct", "while", "case", "ternary", "avg line length", "percent empty lines"]
 l_labels = ["abs", "strtol", "qsort", "bzero", "strncmp", "strncpy", "strerror", "read", "memcmp", "free", "snprintf", "realloc", "atoi", "strtoll", "exit", "fgets", "sscanf", "memcpy", "atof", "atol", "puts", "srand", "fgetc", "sqrtl", "powl", "getline", "assert", "getchar", "putchar", "printf", "fprintf", "scanf", "fscanf", "strcat", "strcmp", "strcpy", "isdigit", "isalpha", "isalnum", "isspace", "toupper", "tolower", "errno", "islower", "isupper", "fabs", "pow", "sqrt", "time", "malloc", "calloc", "rand", "strlen", "freopen", "fopen", "strchr", "sprintf", "getc", "fclose", "memset"] 
  
@@ -51,8 +51,6 @@ def get_transformed_test(folder, test_programs):
   print("getting whitespace features...")
   whitespace = do_whitespace(test_programs, files, folder) # 5 features? 1 feature?
   for f, ws in zip(files, whitespace):
-    lib_len = len(f.lib_vec)
-    f.lib_vec = [0 for x in range(lib_len)]
     f.vec = ws.ws_vec + f.fc_vec + f.lib_vec 
     # assuming cosine similarity
   return files, file_dict
@@ -227,7 +225,7 @@ def get_authors_projects():
         projects.append(folder_author[0])
   return author_dataset, projects
 
-def run_main(folder, new_folder, from_csv=True, write_csv=False, cos=True, barplot=False, generate_chart=False):
+def run_main(folder, new_folder, from_csv=True, write_csv=False, cos=True, barplot=False, generate_chart=False, write=False):
   global time0
   global f_labels
   global l_labels
@@ -240,8 +238,9 @@ def run_main(folder, new_folder, from_csv=True, write_csv=False, cos=True, barpl
   modified = os.listdir(new_folder)
   allfiles = [x for x in original if x in modified]
   train_programs_names, test_programs_names = model_selection.train_test_split(allfiles)
-  with open("test_programs.txt", "w+") as f:
-    f.write(",".join(test_programs_names))
+  if write:
+    with open("test_programs.txt", "w+") as f:
+      f.write(",".join(test_programs_names))
   # 2) Put aside testing data
 
   # move lines 183 - 221 here
@@ -269,15 +268,16 @@ def run_main(folder, new_folder, from_csv=True, write_csv=False, cos=True, barpl
 
   # 3b) compute pairwise difference between training programs
   # get file subsets
-  train_programs = [file_dict[x] for x in train_programs_names]
-  test_programs = [file_dict[x] for x in test_programs_names]
+  train_programs = [file_dict[x] for x in train_programs_names if x in file_dict]
+  test_programs = [file_dict[x] for x in test_programs_names if x in file_dict]
   # get pairwise differences
 
   # 3 and 4) Compute pairwise difference, and throw out samples to balance them
   training_pairs = get_balanced_pairs(train_programs, author_dataset)
   testing_pairs = get_balanced_pairs(test_programs, author_dataset)
-  with open("test_pairs.pkl", "wb") as f:
-    pickle.dump(testing_pairs, f)
+  if write:
+    with open("test_pairs.pkl", "wb") as f:
+      pickle.dump(testing_pairs, f)
 
   training_df, len_vec1 = get_pairwise_difference(training_pairs, file_dict, True)
   testing_df, len_vec2 = get_pairwise_difference(testing_pairs, file_dict, True)
@@ -286,20 +286,21 @@ def run_main(folder, new_folder, from_csv=True, write_csv=False, cos=True, barpl
   y_test = testing_df.iloc[:,-3] # -1
   scaler = preprocessing.StandardScaler()
   X_train = scaler.fit_transform(training_df.ix[:, :len_vec1-4])
-  joblib.dump(scaler, "scaler.pkl")
+  if write:
+    joblib.dump(scaler, "scaler.pkl")
   X_test = scaler.transform(testing_df.ix[:, :len_vec2-4])
 
   # 4) feed into classifier for training
   classifier = ensemble.RandomForestClassifier(verbose=3, n_estimators=100)
   classifier.fit(X_train, y_train)
-  joblib.dump(classifier, "classifier.pkl")
+  if write:
+    joblib.dump(classifier, "classifier.pkl")
 
-  return classify_old_new(classifier, X_test, y_test, test_programs_names, testing_pairs, file_dict, scaler, len_vec2)
+  return classify_old_new(new_folder, classifier, X_test, y_test, test_programs_names, testing_pairs, file_dict, scaler, len_vec2, labels)
 
 # test_programs.txt
 def classify_from_pkl(folder, new_folder, pkl_file, test_file, cos=True):
   test_programs_names = open(test_file, "r").read().split(",")
-  #file_dict, files, filenames, labels = populate_files_now(folder, cos, test_programs_names)
   author_dataset, projects = get_authors_projects()
   classifier = joblib.load("classifier.pkl") 
   with open("test_pairs.pkl", "rb") as f:
@@ -327,6 +328,15 @@ def classify_old_new(new_folder, classifier, X_test, y_test, test_programs_names
   X_transf_test = scaler.transform(transformed_testing_df.ix[:, :len_vec2-4])
 
   y_transf_pred = classifier.predict(X_transf_test)
+
+  # Let's store accuracy by file
+  #-----------------------------
+  accurate = ["1" if pred == actual else "0" for pred,actual in zip(y_transf_pred, y_transf_test)]
+  with open("accurate_ws.csv", "w") as f:
+    f.write(",".join(test_programs_names) + "\n")
+    f.write(",".join(accurate)) 
+  #----------------------------
+
   transformed_performance = metrics.precision_recall_fscore_support(y_transf_test, y_transf_pred)
 
   importances = classifier.feature_importances_
@@ -556,7 +566,7 @@ if __name__ == "__main__":
   new_folder = sys.argv[2]
   for i in range(1):
     baseline, transformed = classify_from_pkl(folder, new_folder, "classifier.pkl", "test_programs.txt", cos=True)
-    #baseline, transformed = run_main(folder, new_folder, from_csv=False, cos=True, barplot=True, generate_chart=False)
+    #baseline, transformed = run_main(folder, new_folder, from_csv=False, cos=True, barplot=False, generate_chart=False, write=True)
     p, r, f, s = baseline
     prec += p[0]
     rec += r[0]
